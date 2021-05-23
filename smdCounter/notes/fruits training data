@@ -1,0 +1,926 @@
+hagane@MT-desktop:~$ cd jetson-inference/
+hagane@MT-desktop:~/jetson-inference$ docker/run.sh
+reading L4T version from /etc/nv_tegra_release
+L4T BSP Version:  L4T R32.5.1
+[sudo] password for hagane: 
+size of data/networks:  570950518 bytes
+CONTAINER:     dustynv/jetson-inference:r32.5.0
+DATA_VOLUME:   --volume /home/hagane/jetson-inference/data:/jetson-inference/data --volume /home/hagane/jetson-inference/python/training/classification/data:/jetson-inference/python/training/classification/data --volume /home/hagane/jetson-inference/python/training/classification/models:/jetson-inference/python/training/classification/models --volume /home/hagane/jetson-inference/python/training/detection/ssd/data:/jetson-inference/python/training/detection/ssd/data --volume /home/hagane/jetson-inference/python/training/detection/ssd/models:/jetson-inference/python/training/detection/ssd/models
+USER_VOLUME:   
+USER_COMMAND:  
+V4L2_DEVICES:    --device /dev/video0 
+localuser:root being added to access control list
+root@MT-desktop:/jetson-inference# cd python/training/detection/ssd
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# ls
+LICENSE    eval_ssd.py     open_images_classes.txt    run_ssd_example.py
+README.md  models          open_images_downloader.py  train_ssd.py
+data       onnx_export.py  requirements.txt           vision
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# $ python3 open_images_downloader.py --class-names "Apple,Orange,Banana,Strawberry,Grape,Pear,Pineapple,Watermelon" --data=data/fruit
+bash: $: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# ...
+bash: ...: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:20:42 - Starting to download 6360 images.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:20:42 - Downloaded 100 images.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:20:42 - Downloaded 200 images.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:20:42 - Downloaded 300 images.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:20:42 - Downloaded 400 images.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:20:42 - Downloaded 500 images.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:20:46 - Downloaded 600 images.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# ...
+bash: ...: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 2020-07-09 16:32:12 - Task Done.
+bash: 2020-07-09: command not found
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# python3 open_images_downloader.py --class-names "Apple,Orange,Banana,Strawberry,Grape,Pear,Pineapple,Watermelon" --data=data/fruit
+2021-05-21 16:36:11 - Download https://storage.googleapis.com/openimages/2018_04/class-descriptions-boxable.csv.
+2021-05-21 16:36:12 - Requested 8 classes, found 8 classes
+2021-05-21 16:36:12 - Download https://storage.googleapis.com/openimages/2018_04/train/train-annotations-bbox.csv.
+2021-05-21 16:37:00 - Read annotation file data/fruit/train-annotations-bbox.csv
+2021-05-21 16:39:48 - Available train images:  5145
+2021-05-21 16:39:48 - Available train boxes:   23539
+
+2021-05-21 16:39:48 - Download https://storage.googleapis.com/openimages/2018_04/validation/validation-annotations-bbox.csv.
+2021-05-21 16:39:50 - Read annotation file data/fruit/validation-annotations-bbox.csv
+2021-05-21 16:39:51 - Available validation images:  285
+2021-05-21 16:39:51 - Available validation boxes:   825
+
+2021-05-21 16:39:51 - Download https://storage.googleapis.com/openimages/2018_04/test/test-annotations-bbox.csv.
+2021-05-21 16:39:54 - Read annotation file data/fruit/test-annotations-bbox.csv
+2021-05-21 16:39:58 - Available test images:  930
+2021-05-21 16:39:58 - Available test boxes:   2824
+
+2021-05-21 16:39:58 - Total available images: 6360
+2021-05-21 16:39:58 - Total available boxes:  27188
+
+
+-------------------------------------
+ 'train' set statistics
+-------------------------------------
+  Image count:  5145
+  Bounding box count:  23539
+  Bounding box distribution: 
+    Strawberry:  7553/23539 = 0.32
+    Orange:  6186/23539 = 0.26
+    Apple:  3622/23539 = 0.15
+    Grape:  2560/23539 = 0.11
+    Banana:  1574/23539 = 0.07
+    Pear:  757/23539 = 0.03
+    Watermelon:  753/23539 = 0.03
+    Pineapple:  534/23539 = 0.02
+ 
+
+-------------------------------------
+ 'validation' set statistics
+-------------------------------------
+  Image count:  285
+  Bounding box count:  825
+  Bounding box distribution: 
+    Strawberry:  326/825 = 0.40
+    Grape:  153/825 = 0.19
+    Orange:  148/825 = 0.18
+    Apple:  102/825 = 0.12
+    Watermelon:  31/825 = 0.04
+    Pineapple:  25/825 = 0.03
+    Banana:  22/825 = 0.03
+    Pear:  18/825 = 0.02
+ 
+
+-------------------------------------
+ 'test' set statistics
+-------------------------------------
+  Image count:  930
+  Bounding box count:  2824
+  Bounding box distribution: 
+    Orange:  826/2824 = 0.29
+    Strawberry:  754/2824 = 0.27
+    Grape:  446/2824 = 0.16
+    Apple:  329/2824 = 0.12
+    Banana:  132/2824 = 0.05
+    Watermelon:  125/2824 = 0.04
+    Pear:  107/2824 = 0.04
+    Pineapple:  105/2824 = 0.04
+ 
+
+-------------------------------------
+ Overall statistics
+-------------------------------------
+  Image count:  6360
+  Bounding box count:  27188
+
+2021-05-21 16:39:58 - Saving 'train' data to data/fruit/sub-train-annotations-bbox.csv.
+2021-05-21 16:39:58 - Saving 'validation' data to data/fruit/sub-validation-annotations-bbox.csv.
+2021-05-21 16:39:58 - Saving 'test' data to data/fruit/sub-test-annotations-bbox.csv.
+2021-05-21 16:39:59 - Starting to download 6360 images.
+2021-05-21 16:40:05 - Downloaded 100 images.
+2021-05-21 16:40:09 - Downloaded 200 images.
+2021-05-21 16:40:13 - Downloaded 300 images.
+2021-05-21 16:40:18 - Downloaded 400 images.
+2021-05-21 16:40:23 - Downloaded 500 images.
+2021-05-21 16:40:28 - Downloaded 600 images.
+2021-05-21 16:40:33 - Downloaded 700 images.
+2021-05-21 16:40:38 - Downloaded 800 images.
+2021-05-21 16:40:42 - Downloaded 900 images.
+2021-05-21 16:40:47 - Downloaded 1000 images.
+2021-05-21 16:40:51 - Downloaded 1100 images.
+2021-05-21 16:40:55 - Downloaded 1200 images.
+2021-05-21 16:40:59 - Downloaded 1300 images.
+2021-05-21 16:41:03 - Downloaded 1400 images.
+2021-05-21 16:41:08 - Downloaded 1500 images.
+2021-05-21 16:41:12 - Downloaded 1600 images.
+2021-05-21 16:41:16 - Downloaded 1700 images.
+2021-05-21 16:41:20 - Downloaded 1800 images.
+2021-05-21 16:41:25 - Downloaded 1900 images.
+2021-05-21 16:41:29 - Downloaded 2000 images.
+2021-05-21 16:41:33 - Downloaded 2100 images.
+2021-05-21 16:41:37 - Downloaded 2200 images.
+2021-05-21 16:41:42 - Downloaded 2300 images.
+2021-05-21 16:41:47 - Downloaded 2400 images.
+2021-05-21 16:41:52 - Downloaded 2500 images.
+2021-05-21 16:41:57 - Downloaded 2600 images.
+2021-05-21 16:42:03 - Downloaded 2700 images.
+2021-05-21 16:42:08 - Downloaded 2800 images.
+2021-05-21 16:42:15 - Downloaded 2900 images.
+2021-05-21 16:42:20 - Downloaded 3000 images.
+2021-05-21 16:42:26 - Downloaded 3100 images.
+2021-05-21 16:42:31 - Downloaded 3200 images.
+2021-05-21 16:42:35 - Downloaded 3300 images.
+2021-05-21 16:42:40 - Downloaded 3400 images.
+2021-05-21 16:42:45 - Downloaded 3500 images.
+2021-05-21 16:42:49 - Downloaded 3600 images.
+2021-05-21 16:42:55 - Downloaded 3700 images.
+2021-05-21 16:43:01 - Downloaded 3800 images.
+2021-05-21 16:43:06 - Downloaded 3900 images.
+2021-05-21 16:43:10 - Downloaded 4000 images.
+2021-05-21 16:43:15 - Downloaded 4100 images.
+2021-05-21 16:43:20 - Downloaded 4200 images.
+2021-05-21 16:43:24 - Downloaded 4300 images.
+2021-05-21 16:43:29 - Downloaded 4400 images.
+2021-05-21 16:43:34 - Downloaded 4500 images.
+2021-05-21 16:43:39 - Downloaded 4600 images.
+2021-05-21 16:43:43 - Downloaded 4700 images.
+2021-05-21 16:43:48 - Downloaded 4800 images.
+2021-05-21 16:43:53 - Downloaded 4900 images.
+2021-05-21 16:43:58 - Downloaded 5000 images.
+2021-05-21 16:44:02 - Downloaded 5100 images.
+2021-05-21 16:44:07 - Downloaded 5200 images.
+2021-05-21 16:44:11 - Downloaded 5300 images.
+2021-05-21 16:44:16 - Downloaded 5400 images.
+2021-05-21 16:44:20 - Downloaded 5500 images.
+2021-05-21 16:44:23 - Downloaded 5600 images.
+2021-05-21 16:44:27 - Downloaded 5700 images.
+2021-05-21 16:44:33 - Downloaded 5800 images.
+2021-05-21 16:44:38 - Downloaded 5900 images.
+2021-05-21 16:44:44 - Downloaded 6000 images.
+2021-05-21 16:44:53 - Downloaded 6100 images.
+2021-05-21 16:45:06 - Downloaded 6200 images.
+2021-05-21 16:45:21 - Downloaded 6300 images.
+2021-05-21 16:45:33 - Task Done.
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# python3 train_ssd.py --data=data/fruit --model-dir=models/fruit --batch-size=2 --workers=1 --epochs=1
+2021-05-21 16:47:00 - Using CUDA...
+2021-05-21 16:47:00 - Namespace(balance_data=False, base_net=None, base_net_lr=0.001, batch_size=2, checkpoint_folder='models/fruit', dataset_type='open_images', datasets=['data/fruit'], debug_steps=10, extra_layers_lr=None, freeze_base_net=False, freeze_net=False, gamma=0.1, lr=0.01, mb2_width_mult=1.0, milestones='80,100', momentum=0.9, net='mb1-ssd', num_epochs=1, num_workers=1, pretrained_ssd='models/mobilenet-v1-ssd-mp-0_675.pth', resume=None, scheduler='cosine', t_max=100, use_cuda=True, validation_epochs=1, weight_decay=0.0005)
+2021-05-21 16:47:00 - Prepare training datasets.
+2021-05-21 16:47:00 - loading annotations from: data/fruit/sub-train-annotations-bbox.csv
+2021-05-21 16:47:00 - annotations loaded from:  data/fruit/sub-train-annotations-bbox.csv
+num images:  5145
+2021-05-21 16:47:15 - Dataset Summary:Number of Images: 5145
+Minimum Number of Images for a Class: -1
+Label Distribution:
+	Apple: 3622
+	Banana: 1574
+	Grape: 2560
+	Orange: 6186
+	Pear: 757
+	Pineapple: 534
+	Strawberry: 7553
+	Watermelon: 753
+2021-05-21 16:47:15 - Stored labels into file models/fruit/labels.txt.
+2021-05-21 16:47:15 - Train dataset size: 5145
+2021-05-21 16:47:15 - Prepare Validation datasets.
+2021-05-21 16:47:15 - loading annotations from: data/fruit/sub-test-annotations-bbox.csv
+2021-05-21 16:47:15 - annotations loaded from:  data/fruit/sub-test-annotations-bbox.csv
+num images:  930
+2021-05-21 16:47:18 - Dataset Summary:Number of Images: 930
+Minimum Number of Images for a Class: -1
+Label Distribution:
+	Apple: 329
+	Banana: 132
+	Grape: 446
+	Orange: 826
+	Pear: 107
+	Pineapple: 105
+	Strawberry: 754
+	Watermelon: 125
+2021-05-21 16:47:18 - Validation dataset size: 930
+2021-05-21 16:47:18 - Build network.
+2021-05-21 16:47:18 - Init from pretrained ssd models/mobilenet-v1-ssd-mp-0_675.pth
+2021-05-21 16:47:19 - Took 0.51 seconds to load the model.
+2021-05-21 16:47:33 - Learning rate: 0.01, Base net learning rate: 0.001, Extra Layers learning rate: 0.01.
+2021-05-21 16:47:33 - Uses CosineAnnealingLR scheduler.
+2021-05-21 16:47:33 - Start training from epoch 0.
+/usr/local/lib/python3.6/dist-packages/torch/optim/lr_scheduler.py:123: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+/usr/local/lib/python3.6/dist-packages/torch/nn/_reduction.py:44: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+2021-05-21 16:47:59 - Epoch: 0, Step: 10/2573, Avg Loss: 14.7514, Avg Regression Loss 4.2168, Avg Classification Loss: 10.5345
+2021-05-21 16:48:04 - Epoch: 0, Step: 20/2573, Avg Loss: 12.9386, Avg Regression Loss 6.2403, Avg Classification Loss: 6.6983
+2021-05-21 16:48:09 - Epoch: 0, Step: 30/2573, Avg Loss: 9.2819, Avg Regression Loss 3.2703, Avg Classification Loss: 6.0116
+2021-05-21 16:48:15 - Epoch: 0, Step: 40/2573, Avg Loss: 9.5501, Avg Regression Loss 3.6236, Avg Classification Loss: 5.9266
+2021-05-21 16:48:20 - Epoch: 0, Step: 50/2573, Avg Loss: 9.1901, Avg Regression Loss 3.1815, Avg Classification Loss: 6.0086
+2021-05-21 16:48:24 - Epoch: 0, Step: 60/2573, Avg Loss: 9.5625, Avg Regression Loss 4.2689, Avg Classification Loss: 5.2936
+2021-05-21 16:48:29 - Epoch: 0, Step: 70/2573, Avg Loss: 10.4536, Avg Regression Loss 4.8283, Avg Classification Loss: 5.6253
+2021-05-21 16:48:34 - Epoch: 0, Step: 80/2573, Avg Loss: 8.4332, Avg Regression Loss 3.5428, Avg Classification Loss: 4.8903
+2021-05-21 16:48:38 - Epoch: 0, Step: 90/2573, Avg Loss: 9.0713, Avg Regression Loss 3.9150, Avg Classification Loss: 5.1563
+2021-05-21 16:48:43 - Epoch: 0, Step: 100/2573, Avg Loss: 8.8427, Avg Regression Loss 3.9650, Avg Classification Loss: 4.8777
+2021-05-21 16:48:48 - Epoch: 0, Step: 110/2573, Avg Loss: 7.7526, Avg Regression Loss 2.9957, Avg Classification Loss: 4.7569
+2021-05-21 16:48:53 - Epoch: 0, Step: 120/2573, Avg Loss: 9.0052, Avg Regression Loss 3.6469, Avg Classification Loss: 5.3583
+2021-05-21 16:48:58 - Epoch: 0, Step: 130/2573, Avg Loss: 7.5074, Avg Regression Loss 2.8366, Avg Classification Loss: 4.6708
+2021-05-21 16:49:02 - Epoch: 0, Step: 140/2573, Avg Loss: 7.6244, Avg Regression Loss 2.4100, Avg Classification Loss: 5.2144
+2021-05-21 16:49:07 - Epoch: 0, Step: 150/2573, Avg Loss: 8.6315, Avg Regression Loss 3.7016, Avg Classification Loss: 4.9299
+2021-05-21 16:49:12 - Epoch: 0, Step: 160/2573, Avg Loss: 9.1547, Avg Regression Loss 4.2088, Avg Classification Loss: 4.9459
+2021-05-21 16:49:17 - Epoch: 0, Step: 170/2573, Avg Loss: 9.5683, Avg Regression Loss 4.6296, Avg Classification Loss: 4.9387
+2021-05-21 16:49:26 - Epoch: 0, Step: 180/2573, Avg Loss: 9.0043, Avg Regression Loss 4.0475, Avg Classification Loss: 4.9568
+2021-05-21 16:49:31 - Epoch: 0, Step: 190/2573, Avg Loss: 7.6459, Avg Regression Loss 2.7368, Avg Classification Loss: 4.9091
+2021-05-21 16:49:35 - Epoch: 0, Step: 200/2573, Avg Loss: 8.5234, Avg Regression Loss 3.2834, Avg Classification Loss: 5.2400
+2021-05-21 16:49:42 - Epoch: 0, Step: 210/2573, Avg Loss: 8.7790, Avg Regression Loss 3.2838, Avg Classification Loss: 5.4952
+2021-05-21 16:49:48 - Epoch: 0, Step: 220/2573, Avg Loss: 9.2025, Avg Regression Loss 3.5374, Avg Classification Loss: 5.6651
+2021-05-21 16:49:52 - Epoch: 0, Step: 230/2573, Avg Loss: 7.7839, Avg Regression Loss 2.7410, Avg Classification Loss: 5.0429
+2021-05-21 16:49:58 - Epoch: 0, Step: 240/2573, Avg Loss: 9.1812, Avg Regression Loss 4.4266, Avg Classification Loss: 4.7547
+2021-05-21 16:50:05 - Epoch: 0, Step: 250/2573, Avg Loss: 8.6324, Avg Regression Loss 3.5035, Avg Classification Loss: 5.1289
+2021-05-21 16:50:10 - Epoch: 0, Step: 260/2573, Avg Loss: 7.1034, Avg Regression Loss 2.4837, Avg Classification Loss: 4.6197
+2021-05-21 16:50:14 - Epoch: 0, Step: 270/2573, Avg Loss: 7.0680, Avg Regression Loss 2.4575, Avg Classification Loss: 4.6105
+2021-05-21 16:50:19 - Epoch: 0, Step: 280/2573, Avg Loss: 6.8771, Avg Regression Loss 2.2194, Avg Classification Loss: 4.6578
+2021-05-21 16:50:24 - Epoch: 0, Step: 290/2573, Avg Loss: 7.6491, Avg Regression Loss 2.8844, Avg Classification Loss: 4.7647
+2021-05-21 16:50:28 - Epoch: 0, Step: 300/2573, Avg Loss: 7.2673, Avg Regression Loss 2.7028, Avg Classification Loss: 4.5645
+2021-05-21 16:50:33 - Epoch: 0, Step: 310/2573, Avg Loss: 7.2556, Avg Regression Loss 2.9936, Avg Classification Loss: 4.2620
+2021-05-21 16:50:38 - Epoch: 0, Step: 320/2573, Avg Loss: 8.1229, Avg Regression Loss 3.4456, Avg Classification Loss: 4.6773
+2021-05-21 16:50:45 - Epoch: 0, Step: 330/2573, Avg Loss: 7.5004, Avg Regression Loss 2.7715, Avg Classification Loss: 4.7289
+2021-05-21 16:50:49 - Epoch: 0, Step: 340/2573, Avg Loss: 6.9618, Avg Regression Loss 2.0444, Avg Classification Loss: 4.9174
+2021-05-21 16:50:54 - Epoch: 0, Step: 350/2573, Avg Loss: 8.0236, Avg Regression Loss 3.1771, Avg Classification Loss: 4.8465
+2021-05-21 16:50:59 - Epoch: 0, Step: 360/2573, Avg Loss: 7.4510, Avg Regression Loss 2.8277, Avg Classification Loss: 4.6233
+2021-05-21 16:51:04 - Epoch: 0, Step: 370/2573, Avg Loss: 7.3164, Avg Regression Loss 2.7224, Avg Classification Loss: 4.5940
+2021-05-21 16:51:08 - Epoch: 0, Step: 380/2573, Avg Loss: 6.8192, Avg Regression Loss 2.3529, Avg Classification Loss: 4.4663
+2021-05-21 16:51:13 - Epoch: 0, Step: 390/2573, Avg Loss: 6.7298, Avg Regression Loss 2.2355, Avg Classification Loss: 4.4944
+2021-05-21 16:51:18 - Epoch: 0, Step: 400/2573, Avg Loss: 6.9440, Avg Regression Loss 2.5958, Avg Classification Loss: 4.3482
+2021-05-21 16:51:25 - Epoch: 0, Step: 410/2573, Avg Loss: 7.7181, Avg Regression Loss 2.8522, Avg Classification Loss: 4.8658
+2021-05-21 16:51:30 - Epoch: 0, Step: 420/2573, Avg Loss: 7.0330, Avg Regression Loss 2.3289, Avg Classification Loss: 4.7042
+2021-05-21 16:51:35 - Epoch: 0, Step: 430/2573, Avg Loss: 7.9943, Avg Regression Loss 3.3482, Avg Classification Loss: 4.6460
+2021-05-21 16:51:39 - Epoch: 0, Step: 440/2573, Avg Loss: 7.2503, Avg Regression Loss 2.6814, Avg Classification Loss: 4.5689
+2021-05-21 16:51:45 - Epoch: 0, Step: 450/2573, Avg Loss: 7.1265, Avg Regression Loss 2.3736, Avg Classification Loss: 4.7529
+2021-05-21 16:51:50 - Epoch: 0, Step: 460/2573, Avg Loss: 8.5075, Avg Regression Loss 3.7679, Avg Classification Loss: 4.7396
+2021-05-21 16:51:54 - Epoch: 0, Step: 470/2573, Avg Loss: 6.9514, Avg Regression Loss 2.4995, Avg Classification Loss: 4.4519
+2021-05-21 16:52:01 - Epoch: 0, Step: 480/2573, Avg Loss: 6.7661, Avg Regression Loss 2.1050, Avg Classification Loss: 4.6611
+2021-05-21 16:52:06 - Epoch: 0, Step: 490/2573, Avg Loss: 7.0749, Avg Regression Loss 2.6046, Avg Classification Loss: 4.4702
+2021-05-21 16:52:11 - Epoch: 0, Step: 500/2573, Avg Loss: 6.9567, Avg Regression Loss 2.3843, Avg Classification Loss: 4.5724
+2021-05-21 16:52:15 - Epoch: 0, Step: 510/2573, Avg Loss: 6.5974, Avg Regression Loss 2.1098, Avg Classification Loss: 4.4876
+2021-05-21 16:52:20 - Epoch: 0, Step: 520/2573, Avg Loss: 7.7867, Avg Regression Loss 2.9616, Avg Classification Loss: 4.8250
+2021-05-21 16:52:25 - Epoch: 0, Step: 530/2573, Avg Loss: 7.7109, Avg Regression Loss 2.8830, Avg Classification Loss: 4.8279
+2021-05-21 16:52:29 - Epoch: 0, Step: 540/2573, Avg Loss: 8.0679, Avg Regression Loss 3.6529, Avg Classification Loss: 4.4149
+2021-05-21 16:52:45 - Epoch: 0, Step: 550/2573, Avg Loss: 8.6096, Avg Regression Loss 4.1500, Avg Classification Loss: 4.4596
+2021-05-21 16:52:50 - Epoch: 0, Step: 560/2573, Avg Loss: 6.8937, Avg Regression Loss 2.3927, Avg Classification Loss: 4.5010
+2021-05-21 16:52:55 - Epoch: 0, Step: 570/2573, Avg Loss: 7.1631, Avg Regression Loss 2.6177, Avg Classification Loss: 4.5454
+2021-05-21 16:53:04 - Epoch: 0, Step: 580/2573, Avg Loss: 7.1862, Avg Regression Loss 2.5722, Avg Classification Loss: 4.6141
+2021-05-21 16:53:09 - Epoch: 0, Step: 590/2573, Avg Loss: 6.3846, Avg Regression Loss 2.1122, Avg Classification Loss: 4.2724
+2021-05-21 16:53:14 - Epoch: 0, Step: 600/2573, Avg Loss: 6.9235, Avg Regression Loss 2.1596, Avg Classification Loss: 4.7639
+2021-05-21 16:53:18 - Epoch: 0, Step: 610/2573, Avg Loss: 7.0034, Avg Regression Loss 2.4624, Avg Classification Loss: 4.5410
+2021-05-21 16:53:23 - Epoch: 0, Step: 620/2573, Avg Loss: 6.8943, Avg Regression Loss 2.0184, Avg Classification Loss: 4.8760
+2021-05-21 16:53:28 - Epoch: 0, Step: 630/2573, Avg Loss: 8.5617, Avg Regression Loss 3.5446, Avg Classification Loss: 5.0171
+2021-05-21 16:53:32 - Epoch: 0, Step: 640/2573, Avg Loss: 6.5930, Avg Regression Loss 2.1314, Avg Classification Loss: 4.4616
+2021-05-21 16:53:37 - Epoch: 0, Step: 650/2573, Avg Loss: 7.5326, Avg Regression Loss 2.9852, Avg Classification Loss: 4.5474
+2021-05-21 16:53:42 - Epoch: 0, Step: 660/2573, Avg Loss: 6.8058, Avg Regression Loss 2.3680, Avg Classification Loss: 4.4378
+2021-05-21 16:53:46 - Epoch: 0, Step: 670/2573, Avg Loss: 7.0271, Avg Regression Loss 2.7703, Avg Classification Loss: 4.2568
+2021-05-21 16:53:51 - Epoch: 0, Step: 680/2573, Avg Loss: 6.7053, Avg Regression Loss 2.2546, Avg Classification Loss: 4.4507
+2021-05-21 16:53:56 - Epoch: 0, Step: 690/2573, Avg Loss: 8.7027, Avg Regression Loss 4.1819, Avg Classification Loss: 4.5208
+2021-05-21 16:54:00 - Epoch: 0, Step: 700/2573, Avg Loss: 6.6315, Avg Regression Loss 2.0775, Avg Classification Loss: 4.5541
+2021-05-21 16:54:05 - Epoch: 0, Step: 710/2573, Avg Loss: 6.6788, Avg Regression Loss 2.1698, Avg Classification Loss: 4.5091
+2021-05-21 16:54:10 - Epoch: 0, Step: 720/2573, Avg Loss: 6.6433, Avg Regression Loss 2.0491, Avg Classification Loss: 4.5941
+2021-05-21 16:54:15 - Epoch: 0, Step: 730/2573, Avg Loss: 6.1477, Avg Regression Loss 1.7543, Avg Classification Loss: 4.3934
+2021-05-21 16:54:20 - Epoch: 0, Step: 740/2573, Avg Loss: 6.1417, Avg Regression Loss 1.8790, Avg Classification Loss: 4.2627
+2021-05-21 16:54:24 - Epoch: 0, Step: 750/2573, Avg Loss: 6.2203, Avg Regression Loss 1.7759, Avg Classification Loss: 4.4444
+2021-05-21 16:54:30 - Epoch: 0, Step: 760/2573, Avg Loss: 5.9759, Avg Regression Loss 1.6299, Avg Classification Loss: 4.3460
+2021-05-21 16:54:36 - Epoch: 0, Step: 770/2573, Avg Loss: 6.4980, Avg Regression Loss 2.0640, Avg Classification Loss: 4.4340
+2021-05-21 16:54:41 - Epoch: 0, Step: 780/2573, Avg Loss: 6.3550, Avg Regression Loss 1.9148, Avg Classification Loss: 4.4402
+2021-05-21 16:54:46 - Epoch: 0, Step: 790/2573, Avg Loss: 7.3531, Avg Regression Loss 2.9385, Avg Classification Loss: 4.4146
+2021-05-21 16:54:50 - Epoch: 0, Step: 800/2573, Avg Loss: 7.5748, Avg Regression Loss 2.7362, Avg Classification Loss: 4.8387
+2021-05-21 16:54:55 - Epoch: 0, Step: 810/2573, Avg Loss: 6.8131, Avg Regression Loss 2.3077, Avg Classification Loss: 4.5054
+2021-05-21 16:55:00 - Epoch: 0, Step: 820/2573, Avg Loss: 7.8356, Avg Regression Loss 3.1004, Avg Classification Loss: 4.7352
+2021-05-21 16:55:07 - Epoch: 0, Step: 830/2573, Avg Loss: 7.0972, Avg Regression Loss 2.4531, Avg Classification Loss: 4.6441
+2021-05-21 16:55:12 - Epoch: 0, Step: 840/2573, Avg Loss: 6.6150, Avg Regression Loss 2.3187, Avg Classification Loss: 4.2963
+2021-05-21 16:55:16 - Epoch: 0, Step: 850/2573, Avg Loss: 7.4909, Avg Regression Loss 2.8463, Avg Classification Loss: 4.6446
+2021-05-21 16:55:21 - Epoch: 0, Step: 860/2573, Avg Loss: 6.8436, Avg Regression Loss 2.5306, Avg Classification Loss: 4.3130
+2021-05-21 16:55:27 - Epoch: 0, Step: 870/2573, Avg Loss: 7.2555, Avg Regression Loss 3.0671, Avg Classification Loss: 4.1884
+2021-05-21 16:55:31 - Epoch: 0, Step: 880/2573, Avg Loss: 7.3181, Avg Regression Loss 2.8205, Avg Classification Loss: 4.4975
+2021-05-21 16:55:36 - Epoch: 0, Step: 890/2573, Avg Loss: 6.3269, Avg Regression Loss 1.9735, Avg Classification Loss: 4.3533
+2021-05-21 16:55:41 - Epoch: 0, Step: 900/2573, Avg Loss: 6.6454, Avg Regression Loss 2.0242, Avg Classification Loss: 4.6211
+2021-05-21 16:55:45 - Epoch: 0, Step: 910/2573, Avg Loss: 7.0083, Avg Regression Loss 2.6801, Avg Classification Loss: 4.3282
+2021-05-21 16:55:56 - Epoch: 0, Step: 920/2573, Avg Loss: 7.6273, Avg Regression Loss 3.3237, Avg Classification Loss: 4.3036
+2021-05-21 16:56:00 - Epoch: 0, Step: 930/2573, Avg Loss: 6.5910, Avg Regression Loss 2.1628, Avg Classification Loss: 4.4281
+2021-05-21 16:56:05 - Epoch: 0, Step: 940/2573, Avg Loss: 6.1280, Avg Regression Loss 1.9038, Avg Classification Loss: 4.2242
+2021-05-21 16:56:10 - Epoch: 0, Step: 950/2573, Avg Loss: 6.5269, Avg Regression Loss 2.1464, Avg Classification Loss: 4.3806
+2021-05-21 16:56:14 - Epoch: 0, Step: 960/2573, Avg Loss: 6.7350, Avg Regression Loss 2.3462, Avg Classification Loss: 4.3889
+2021-05-21 16:56:19 - Epoch: 0, Step: 970/2573, Avg Loss: 7.2729, Avg Regression Loss 2.5845, Avg Classification Loss: 4.6884
+2021-05-21 16:56:24 - Epoch: 0, Step: 980/2573, Avg Loss: 6.6113, Avg Regression Loss 2.3328, Avg Classification Loss: 4.2785
+2021-05-21 16:56:29 - Epoch: 0, Step: 990/2573, Avg Loss: 6.6807, Avg Regression Loss 2.1731, Avg Classification Loss: 4.5075
+2021-05-21 16:56:33 - Epoch: 0, Step: 1000/2573, Avg Loss: 6.5688, Avg Regression Loss 2.2214, Avg Classification Loss: 4.3474
+2021-05-21 16:56:38 - Epoch: 0, Step: 1010/2573, Avg Loss: 7.6531, Avg Regression Loss 3.1782, Avg Classification Loss: 4.4749
+2021-05-21 16:56:45 - Epoch: 0, Step: 1020/2573, Avg Loss: 8.1825, Avg Regression Loss 3.5872, Avg Classification Loss: 4.5952
+2021-05-21 16:56:50 - Epoch: 0, Step: 1030/2573, Avg Loss: 7.0058, Avg Regression Loss 2.5255, Avg Classification Loss: 4.4803
+2021-05-21 16:56:55 - Epoch: 0, Step: 1040/2573, Avg Loss: 6.3144, Avg Regression Loss 1.9844, Avg Classification Loss: 4.3300
+2021-05-21 16:57:00 - Epoch: 0, Step: 1050/2573, Avg Loss: 8.3908, Avg Regression Loss 4.1018, Avg Classification Loss: 4.2890
+2021-05-21 16:57:10 - Epoch: 0, Step: 1060/2573, Avg Loss: 6.7890, Avg Regression Loss 2.3161, Avg Classification Loss: 4.4729
+2021-05-21 16:57:15 - Epoch: 0, Step: 1070/2573, Avg Loss: 6.6087, Avg Regression Loss 1.9920, Avg Classification Loss: 4.6166
+2021-05-21 16:57:22 - Epoch: 0, Step: 1080/2573, Avg Loss: 7.1224, Avg Regression Loss 2.9115, Avg Classification Loss: 4.2108
+2021-05-21 16:57:27 - Epoch: 0, Step: 1090/2573, Avg Loss: 6.8106, Avg Regression Loss 2.3138, Avg Classification Loss: 4.4968
+2021-05-21 16:57:32 - Epoch: 0, Step: 1100/2573, Avg Loss: 7.4159, Avg Regression Loss 2.7205, Avg Classification Loss: 4.6954
+2021-05-21 16:57:36 - Epoch: 0, Step: 1110/2573, Avg Loss: 6.6193, Avg Regression Loss 2.3586, Avg Classification Loss: 4.2607
+2021-05-21 16:57:41 - Epoch: 0, Step: 1120/2573, Avg Loss: 7.1023, Avg Regression Loss 2.7128, Avg Classification Loss: 4.3896
+2021-05-21 16:57:46 - Epoch: 0, Step: 1130/2573, Avg Loss: 6.9174, Avg Regression Loss 2.5218, Avg Classification Loss: 4.3956
+2021-05-21 16:57:50 - Epoch: 0, Step: 1140/2573, Avg Loss: 6.8928, Avg Regression Loss 2.1936, Avg Classification Loss: 4.6993
+2021-05-21 16:57:55 - Epoch: 0, Step: 1150/2573, Avg Loss: 6.0708, Avg Regression Loss 1.5595, Avg Classification Loss: 4.5114
+2021-05-21 16:58:00 - Epoch: 0, Step: 1160/2573, Avg Loss: 6.9925, Avg Regression Loss 2.4614, Avg Classification Loss: 4.5312
+2021-05-21 16:58:05 - Epoch: 0, Step: 1170/2573, Avg Loss: 6.2249, Avg Regression Loss 1.6741, Avg Classification Loss: 4.5507
+2021-05-21 16:58:09 - Epoch: 0, Step: 1180/2573, Avg Loss: 6.6361, Avg Regression Loss 2.1884, Avg Classification Loss: 4.4477
+2021-05-21 16:58:14 - Epoch: 0, Step: 1190/2573, Avg Loss: 7.0654, Avg Regression Loss 2.6112, Avg Classification Loss: 4.4542
+2021-05-21 16:58:18 - Epoch: 0, Step: 1200/2573, Avg Loss: 6.5059, Avg Regression Loss 2.0011, Avg Classification Loss: 4.5048
+2021-05-21 16:58:23 - Epoch: 0, Step: 1210/2573, Avg Loss: 6.5853, Avg Regression Loss 2.2067, Avg Classification Loss: 4.3786
+2021-05-21 16:58:28 - Epoch: 0, Step: 1220/2573, Avg Loss: 8.1410, Avg Regression Loss 3.3869, Avg Classification Loss: 4.7541
+2021-05-21 16:58:33 - Epoch: 0, Step: 1230/2573, Avg Loss: 7.1084, Avg Regression Loss 2.7566, Avg Classification Loss: 4.3517
+2021-05-21 16:58:37 - Epoch: 0, Step: 1240/2573, Avg Loss: 7.4979, Avg Regression Loss 3.1300, Avg Classification Loss: 4.3679
+2021-05-21 16:58:42 - Epoch: 0, Step: 1250/2573, Avg Loss: 7.5849, Avg Regression Loss 2.8856, Avg Classification Loss: 4.6993
+2021-05-21 16:58:47 - Epoch: 0, Step: 1260/2573, Avg Loss: 6.6585, Avg Regression Loss 2.2310, Avg Classification Loss: 4.4275
+2021-05-21 16:58:51 - Epoch: 0, Step: 1270/2573, Avg Loss: 5.8661, Avg Regression Loss 1.6425, Avg Classification Loss: 4.2236
+2021-05-21 16:59:00 - Epoch: 0, Step: 1280/2573, Avg Loss: 6.1456, Avg Regression Loss 2.0072, Avg Classification Loss: 4.1385
+2021-05-21 16:59:04 - Epoch: 0, Step: 1290/2573, Avg Loss: 6.9365, Avg Regression Loss 2.3706, Avg Classification Loss: 4.5660
+2021-05-21 16:59:09 - Epoch: 0, Step: 1300/2573, Avg Loss: 7.1143, Avg Regression Loss 2.7438, Avg Classification Loss: 4.3705
+2021-05-21 16:59:14 - Epoch: 0, Step: 1310/2573, Avg Loss: 6.3978, Avg Regression Loss 1.9589, Avg Classification Loss: 4.4390
+2021-05-21 16:59:19 - Epoch: 0, Step: 1320/2573, Avg Loss: 7.7873, Avg Regression Loss 3.1993, Avg Classification Loss: 4.5880
+2021-05-21 16:59:24 - Epoch: 0, Step: 1330/2573, Avg Loss: 6.9405, Avg Regression Loss 2.6429, Avg Classification Loss: 4.2976
+2021-05-21 16:59:36 - Epoch: 0, Step: 1340/2573, Avg Loss: 6.2658, Avg Regression Loss 1.8498, Avg Classification Loss: 4.4159
+2021-05-21 16:59:41 - Epoch: 0, Step: 1350/2573, Avg Loss: 6.6159, Avg Regression Loss 2.5131, Avg Classification Loss: 4.1028
+2021-05-21 16:59:45 - Epoch: 0, Step: 1360/2573, Avg Loss: 5.8315, Avg Regression Loss 1.4580, Avg Classification Loss: 4.3735
+2021-05-21 16:59:50 - Epoch: 0, Step: 1370/2573, Avg Loss: 6.5000, Avg Regression Loss 2.2809, Avg Classification Loss: 4.2192
+2021-05-21 16:59:55 - Epoch: 0, Step: 1380/2573, Avg Loss: 7.9187, Avg Regression Loss 3.4618, Avg Classification Loss: 4.4569
+2021-05-21 16:59:59 - Epoch: 0, Step: 1390/2573, Avg Loss: 7.2183, Avg Regression Loss 2.8976, Avg Classification Loss: 4.3207
+2021-05-21 17:00:05 - Epoch: 0, Step: 1400/2573, Avg Loss: 6.8561, Avg Regression Loss 2.5611, Avg Classification Loss: 4.2950
+2021-05-21 17:00:10 - Epoch: 0, Step: 1410/2573, Avg Loss: 5.4597, Avg Regression Loss 1.4194, Avg Classification Loss: 4.0403
+2021-05-21 17:00:14 - Epoch: 0, Step: 1420/2573, Avg Loss: 6.0912, Avg Regression Loss 1.9357, Avg Classification Loss: 4.1555
+2021-05-21 17:00:19 - Epoch: 0, Step: 1430/2573, Avg Loss: 7.0266, Avg Regression Loss 2.5091, Avg Classification Loss: 4.5175
+2021-05-21 17:00:24 - Epoch: 0, Step: 1440/2573, Avg Loss: 8.2782, Avg Regression Loss 3.6627, Avg Classification Loss: 4.6156
+2021-05-21 17:00:29 - Epoch: 0, Step: 1450/2573, Avg Loss: 6.4405, Avg Regression Loss 1.9507, Avg Classification Loss: 4.4898
+2021-05-21 17:00:33 - Epoch: 0, Step: 1460/2573, Avg Loss: 6.5566, Avg Regression Loss 2.1925, Avg Classification Loss: 4.3641
+2021-05-21 17:00:38 - Epoch: 0, Step: 1470/2573, Avg Loss: 6.9843, Avg Regression Loss 2.6441, Avg Classification Loss: 4.3402
+2021-05-21 17:00:46 - Epoch: 0, Step: 1480/2573, Avg Loss: 6.5380, Avg Regression Loss 2.0669, Avg Classification Loss: 4.4711
+2021-05-21 17:00:50 - Epoch: 0, Step: 1490/2573, Avg Loss: 6.8468, Avg Regression Loss 2.5353, Avg Classification Loss: 4.3115
+2021-05-21 17:00:55 - Epoch: 0, Step: 1500/2573, Avg Loss: 6.0843, Avg Regression Loss 1.8884, Avg Classification Loss: 4.1958
+2021-05-21 17:01:00 - Epoch: 0, Step: 1510/2573, Avg Loss: 6.5842, Avg Regression Loss 2.3748, Avg Classification Loss: 4.2094
+2021-05-21 17:01:04 - Epoch: 0, Step: 1520/2573, Avg Loss: 6.2203, Avg Regression Loss 1.8014, Avg Classification Loss: 4.4190
+2021-05-21 17:01:09 - Epoch: 0, Step: 1530/2573, Avg Loss: 6.0317, Avg Regression Loss 1.8398, Avg Classification Loss: 4.1919
+2021-05-21 17:01:14 - Epoch: 0, Step: 1540/2573, Avg Loss: 8.0671, Avg Regression Loss 3.6170, Avg Classification Loss: 4.4502
+2021-05-21 17:01:18 - Epoch: 0, Step: 1550/2573, Avg Loss: 6.1851, Avg Regression Loss 2.0376, Avg Classification Loss: 4.1474
+2021-05-21 17:01:23 - Epoch: 0, Step: 1560/2573, Avg Loss: 5.7291, Avg Regression Loss 1.4836, Avg Classification Loss: 4.2455
+2021-05-21 17:01:28 - Epoch: 0, Step: 1570/2573, Avg Loss: 6.3654, Avg Regression Loss 1.9053, Avg Classification Loss: 4.4601
+2021-05-21 17:01:37 - Epoch: 0, Step: 1580/2573, Avg Loss: 7.1838, Avg Regression Loss 2.7010, Avg Classification Loss: 4.4829
+2021-05-21 17:01:42 - Epoch: 0, Step: 1590/2573, Avg Loss: 6.4874, Avg Regression Loss 2.3521, Avg Classification Loss: 4.1353
+2021-05-21 17:01:46 - Epoch: 0, Step: 1600/2573, Avg Loss: 6.7424, Avg Regression Loss 2.3880, Avg Classification Loss: 4.3544
+2021-05-21 17:01:53 - Epoch: 0, Step: 1610/2573, Avg Loss: 6.0094, Avg Regression Loss 1.8356, Avg Classification Loss: 4.1738
+2021-05-21 17:01:58 - Epoch: 0, Step: 1620/2573, Avg Loss: 6.4089, Avg Regression Loss 2.4205, Avg Classification Loss: 3.9884
+2021-05-21 17:02:02 - Epoch: 0, Step: 1630/2573, Avg Loss: 7.0831, Avg Regression Loss 2.4808, Avg Classification Loss: 4.6024
+2021-05-21 17:02:07 - Epoch: 0, Step: 1640/2573, Avg Loss: 6.8846, Avg Regression Loss 2.4777, Avg Classification Loss: 4.4069
+2021-05-21 17:02:12 - Epoch: 0, Step: 1650/2573, Avg Loss: 6.4106, Avg Regression Loss 2.4901, Avg Classification Loss: 3.9204
+2021-05-21 17:02:17 - Epoch: 0, Step: 1660/2573, Avg Loss: 7.5602, Avg Regression Loss 3.2594, Avg Classification Loss: 4.3008
+2021-05-21 17:02:22 - Epoch: 0, Step: 1670/2573, Avg Loss: 7.6967, Avg Regression Loss 3.0995, Avg Classification Loss: 4.5972
+2021-05-21 17:02:26 - Epoch: 0, Step: 1680/2573, Avg Loss: 7.2363, Avg Regression Loss 2.7546, Avg Classification Loss: 4.4817
+2021-05-21 17:02:32 - Epoch: 0, Step: 1690/2573, Avg Loss: 6.1270, Avg Regression Loss 1.7466, Avg Classification Loss: 4.3804
+2021-05-21 17:02:36 - Epoch: 0, Step: 1700/2573, Avg Loss: 6.0975, Avg Regression Loss 1.8139, Avg Classification Loss: 4.2836
+2021-05-21 17:02:41 - Epoch: 0, Step: 1710/2573, Avg Loss: 7.3933, Avg Regression Loss 2.7568, Avg Classification Loss: 4.6365
+2021-05-21 17:02:46 - Epoch: 0, Step: 1720/2573, Avg Loss: 7.0472, Avg Regression Loss 2.4823, Avg Classification Loss: 4.5650
+2021-05-21 17:02:59 - Epoch: 0, Step: 1730/2573, Avg Loss: 7.9126, Avg Regression Loss 3.7950, Avg Classification Loss: 4.1176
+2021-05-21 17:03:03 - Epoch: 0, Step: 1740/2573, Avg Loss: 7.1798, Avg Regression Loss 2.7971, Avg Classification Loss: 4.3827
+2021-05-21 17:03:10 - Epoch: 0, Step: 1750/2573, Avg Loss: 6.9351, Avg Regression Loss 2.7384, Avg Classification Loss: 4.1967
+2021-05-21 17:03:15 - Epoch: 0, Step: 1760/2573, Avg Loss: 6.0363, Avg Regression Loss 1.7792, Avg Classification Loss: 4.2571
+2021-05-21 17:03:20 - Epoch: 0, Step: 1770/2573, Avg Loss: 5.6371, Avg Regression Loss 1.5580, Avg Classification Loss: 4.0791
+2021-05-21 17:03:24 - Epoch: 0, Step: 1780/2573, Avg Loss: 5.9370, Avg Regression Loss 1.8664, Avg Classification Loss: 4.0707
+2021-05-21 17:03:29 - Epoch: 0, Step: 1790/2573, Avg Loss: 6.3835, Avg Regression Loss 2.1735, Avg Classification Loss: 4.2100
+2021-05-21 17:03:34 - Epoch: 0, Step: 1800/2573, Avg Loss: 7.8753, Avg Regression Loss 3.1805, Avg Classification Loss: 4.6948
+2021-05-21 17:03:38 - Epoch: 0, Step: 1810/2573, Avg Loss: 6.5423, Avg Regression Loss 2.4114, Avg Classification Loss: 4.1309
+2021-05-21 17:03:43 - Epoch: 0, Step: 1820/2573, Avg Loss: 6.5242, Avg Regression Loss 2.1954, Avg Classification Loss: 4.3288
+2021-05-21 17:03:48 - Epoch: 0, Step: 1830/2573, Avg Loss: 6.7412, Avg Regression Loss 2.4020, Avg Classification Loss: 4.3393
+2021-05-21 17:03:53 - Epoch: 0, Step: 1840/2573, Avg Loss: 6.2335, Avg Regression Loss 2.1434, Avg Classification Loss: 4.0901
+2021-05-21 17:03:57 - Epoch: 0, Step: 1850/2573, Avg Loss: 5.4987, Avg Regression Loss 1.5123, Avg Classification Loss: 3.9864
+2021-05-21 17:04:02 - Epoch: 0, Step: 1860/2573, Avg Loss: 6.0637, Avg Regression Loss 1.7101, Avg Classification Loss: 4.3536
+2021-05-21 17:04:07 - Epoch: 0, Step: 1870/2573, Avg Loss: 6.7470, Avg Regression Loss 2.1357, Avg Classification Loss: 4.6112
+2021-05-21 17:04:11 - Epoch: 0, Step: 1880/2573, Avg Loss: 6.7363, Avg Regression Loss 2.3395, Avg Classification Loss: 4.3968
+2021-05-21 17:04:16 - Epoch: 0, Step: 1890/2573, Avg Loss: 6.0997, Avg Regression Loss 1.8335, Avg Classification Loss: 4.2663
+2021-05-21 17:04:21 - Epoch: 0, Step: 1900/2573, Avg Loss: 6.0856, Avg Regression Loss 1.9604, Avg Classification Loss: 4.1252
+2021-05-21 17:04:28 - Epoch: 0, Step: 1910/2573, Avg Loss: 6.7234, Avg Regression Loss 2.6933, Avg Classification Loss: 4.0302
+2021-05-21 17:04:33 - Epoch: 0, Step: 1920/2573, Avg Loss: 7.4316, Avg Regression Loss 3.3801, Avg Classification Loss: 4.0516
+2021-05-21 17:05:18 - Epoch: 0, Step: 1930/2573, Avg Loss: 6.1430, Avg Regression Loss 2.0265, Avg Classification Loss: 4.1165
+2021-05-21 17:05:23 - Epoch: 0, Step: 1940/2573, Avg Loss: 7.2817, Avg Regression Loss 3.0468, Avg Classification Loss: 4.2350
+2021-05-21 17:05:28 - Epoch: 0, Step: 1950/2573, Avg Loss: 7.5560, Avg Regression Loss 3.1289, Avg Classification Loss: 4.4270
+2021-05-21 17:05:32 - Epoch: 0, Step: 1960/2573, Avg Loss: 7.5991, Avg Regression Loss 3.0866, Avg Classification Loss: 4.5125
+2021-05-21 17:05:37 - Epoch: 0, Step: 1970/2573, Avg Loss: 6.7206, Avg Regression Loss 2.2730, Avg Classification Loss: 4.4477
+2021-05-21 17:05:42 - Epoch: 0, Step: 1980/2573, Avg Loss: 6.3576, Avg Regression Loss 1.8781, Avg Classification Loss: 4.4795
+2021-05-21 17:05:46 - Epoch: 0, Step: 1990/2573, Avg Loss: 6.4889, Avg Regression Loss 2.2601, Avg Classification Loss: 4.2288
+2021-05-21 17:05:51 - Epoch: 0, Step: 2000/2573, Avg Loss: 7.6083, Avg Regression Loss 3.2566, Avg Classification Loss: 4.3517
+2021-05-21 17:05:56 - Epoch: 0, Step: 2010/2573, Avg Loss: 6.6289, Avg Regression Loss 2.3967, Avg Classification Loss: 4.2322
+2021-05-21 17:06:00 - Epoch: 0, Step: 2020/2573, Avg Loss: 5.7705, Avg Regression Loss 1.6057, Avg Classification Loss: 4.1648
+2021-05-21 17:06:05 - Epoch: 0, Step: 2030/2573, Avg Loss: 6.2546, Avg Regression Loss 2.1282, Avg Classification Loss: 4.1264
+2021-05-21 17:06:10 - Epoch: 0, Step: 2040/2573, Avg Loss: 6.8186, Avg Regression Loss 2.3681, Avg Classification Loss: 4.4505
+2021-05-21 17:06:14 - Epoch: 0, Step: 2050/2573, Avg Loss: 6.3086, Avg Regression Loss 2.1829, Avg Classification Loss: 4.1257
+2021-05-21 17:06:19 - Epoch: 0, Step: 2060/2573, Avg Loss: 6.4618, Avg Regression Loss 2.2162, Avg Classification Loss: 4.2456
+2021-05-21 17:06:24 - Epoch: 0, Step: 2070/2573, Avg Loss: 5.9401, Avg Regression Loss 1.8716, Avg Classification Loss: 4.0684
+2021-05-21 17:06:41 - Epoch: 0, Step: 2080/2573, Avg Loss: 6.2060, Avg Regression Loss 1.9953, Avg Classification Loss: 4.2107
+2021-05-21 17:06:46 - Epoch: 0, Step: 2090/2573, Avg Loss: 6.4200, Avg Regression Loss 1.7934, Avg Classification Loss: 4.6266
+2021-05-21 17:06:51 - Epoch: 0, Step: 2100/2573, Avg Loss: 6.1105, Avg Regression Loss 1.8190, Avg Classification Loss: 4.2915
+2021-05-21 17:06:55 - Epoch: 0, Step: 2110/2573, Avg Loss: 6.5989, Avg Regression Loss 2.2452, Avg Classification Loss: 4.3537
+2021-05-21 17:07:00 - Epoch: 0, Step: 2120/2573, Avg Loss: 6.6011, Avg Regression Loss 2.2493, Avg Classification Loss: 4.3518
+2021-05-21 17:07:05 - Epoch: 0, Step: 2130/2573, Avg Loss: 6.3471, Avg Regression Loss 2.3109, Avg Classification Loss: 4.0363
+2021-05-21 17:07:09 - Epoch: 0, Step: 2140/2573, Avg Loss: 6.7263, Avg Regression Loss 2.4995, Avg Classification Loss: 4.2268
+2021-05-21 17:07:14 - Epoch: 0, Step: 2150/2573, Avg Loss: 6.1903, Avg Regression Loss 2.0458, Avg Classification Loss: 4.1445
+2021-05-21 17:07:19 - Epoch: 0, Step: 2160/2573, Avg Loss: 6.1023, Avg Regression Loss 1.8410, Avg Classification Loss: 4.2613
+2021-05-21 17:07:23 - Epoch: 0, Step: 2170/2573, Avg Loss: 6.4709, Avg Regression Loss 2.2839, Avg Classification Loss: 4.1869
+2021-05-21 17:07:28 - Epoch: 0, Step: 2180/2573, Avg Loss: 6.1993, Avg Regression Loss 2.1743, Avg Classification Loss: 4.0250
+2021-05-21 17:07:33 - Epoch: 0, Step: 2190/2573, Avg Loss: 6.6123, Avg Regression Loss 2.2495, Avg Classification Loss: 4.3628
+2021-05-21 17:07:37 - Epoch: 0, Step: 2200/2573, Avg Loss: 8.3251, Avg Regression Loss 3.9978, Avg Classification Loss: 4.3273
+2021-05-21 17:07:42 - Epoch: 0, Step: 2210/2573, Avg Loss: 5.6748, Avg Regression Loss 1.6333, Avg Classification Loss: 4.0415
+2021-05-21 17:07:47 - Epoch: 0, Step: 2220/2573, Avg Loss: 6.0337, Avg Regression Loss 1.8524, Avg Classification Loss: 4.1813
+2021-05-21 17:07:51 - Epoch: 0, Step: 2230/2573, Avg Loss: 8.0507, Avg Regression Loss 3.8646, Avg Classification Loss: 4.1861
+2021-05-21 17:07:56 - Epoch: 0, Step: 2240/2573, Avg Loss: 6.1029, Avg Regression Loss 2.0656, Avg Classification Loss: 4.0373
+2021-05-21 17:08:01 - Epoch: 0, Step: 2250/2573, Avg Loss: 6.2249, Avg Regression Loss 1.9988, Avg Classification Loss: 4.2261
+2021-05-21 17:08:06 - Epoch: 0, Step: 2260/2573, Avg Loss: 5.9735, Avg Regression Loss 1.8422, Avg Classification Loss: 4.1313
+2021-05-21 17:08:11 - Epoch: 0, Step: 2270/2573, Avg Loss: 5.9565, Avg Regression Loss 1.7900, Avg Classification Loss: 4.1665
+2021-05-21 17:08:16 - Epoch: 0, Step: 2280/2573, Avg Loss: 6.0588, Avg Regression Loss 2.0683, Avg Classification Loss: 3.9905
+2021-05-21 17:08:20 - Epoch: 0, Step: 2290/2573, Avg Loss: 6.4604, Avg Regression Loss 2.3937, Avg Classification Loss: 4.0667
+2021-05-21 17:08:25 - Epoch: 0, Step: 2300/2573, Avg Loss: 5.4395, Avg Regression Loss 1.3089, Avg Classification Loss: 4.1306
+2021-05-21 17:08:30 - Epoch: 0, Step: 2310/2573, Avg Loss: 7.6511, Avg Regression Loss 3.1697, Avg Classification Loss: 4.4814
+2021-05-21 17:08:34 - Epoch: 0, Step: 2320/2573, Avg Loss: 6.1677, Avg Regression Loss 1.6941, Avg Classification Loss: 4.4735
+2021-05-21 17:08:39 - Epoch: 0, Step: 2330/2573, Avg Loss: 5.8794, Avg Regression Loss 1.8187, Avg Classification Loss: 4.0607
+2021-05-21 17:08:44 - Epoch: 0, Step: 2340/2573, Avg Loss: 6.7922, Avg Regression Loss 2.6858, Avg Classification Loss: 4.1064
+2021-05-21 17:08:48 - Epoch: 0, Step: 2350/2573, Avg Loss: 5.1285, Avg Regression Loss 1.2825, Avg Classification Loss: 3.8460
+2021-05-21 17:08:53 - Epoch: 0, Step: 2360/2573, Avg Loss: 6.0702, Avg Regression Loss 1.8401, Avg Classification Loss: 4.2301
+2021-05-21 17:08:58 - Epoch: 0, Step: 2370/2573, Avg Loss: 7.2268, Avg Regression Loss 3.0992, Avg Classification Loss: 4.1276
+2021-05-21 17:09:02 - Epoch: 0, Step: 2380/2573, Avg Loss: 6.6494, Avg Regression Loss 2.4703, Avg Classification Loss: 4.1791
+2021-05-21 17:09:07 - Epoch: 0, Step: 2390/2573, Avg Loss: 6.0575, Avg Regression Loss 1.7579, Avg Classification Loss: 4.2997
+2021-05-21 17:09:12 - Epoch: 0, Step: 2400/2573, Avg Loss: 6.0932, Avg Regression Loss 1.8491, Avg Classification Loss: 4.2441
+2021-05-21 17:09:17 - Epoch: 0, Step: 2410/2573, Avg Loss: 6.7731, Avg Regression Loss 2.4236, Avg Classification Loss: 4.3495
+2021-05-21 17:09:21 - Epoch: 0, Step: 2420/2573, Avg Loss: 6.3939, Avg Regression Loss 2.3217, Avg Classification Loss: 4.0721
+2021-05-21 17:09:26 - Epoch: 0, Step: 2430/2573, Avg Loss: 6.2613, Avg Regression Loss 2.0858, Avg Classification Loss: 4.1755
+2021-05-21 17:09:31 - Epoch: 0, Step: 2440/2573, Avg Loss: 6.0141, Avg Regression Loss 1.7879, Avg Classification Loss: 4.2262
+2021-05-21 17:09:35 - Epoch: 0, Step: 2450/2573, Avg Loss: 5.7184, Avg Regression Loss 1.5414, Avg Classification Loss: 4.1770
+2021-05-21 17:09:40 - Epoch: 0, Step: 2460/2573, Avg Loss: 5.5615, Avg Regression Loss 1.6016, Avg Classification Loss: 3.9599
+2021-05-21 17:09:46 - Epoch: 0, Step: 2470/2573, Avg Loss: 5.8158, Avg Regression Loss 1.6659, Avg Classification Loss: 4.1499
+2021-05-21 17:09:50 - Epoch: 0, Step: 2480/2573, Avg Loss: 5.9191, Avg Regression Loss 1.7141, Avg Classification Loss: 4.2050
+2021-05-21 17:09:55 - Epoch: 0, Step: 2490/2573, Avg Loss: 5.7101, Avg Regression Loss 1.5812, Avg Classification Loss: 4.1289
+2021-05-21 17:10:00 - Epoch: 0, Step: 2500/2573, Avg Loss: 6.0086, Avg Regression Loss 1.6467, Avg Classification Loss: 4.3619
+2021-05-21 17:10:04 - Epoch: 0, Step: 2510/2573, Avg Loss: 6.1949, Avg Regression Loss 1.9016, Avg Classification Loss: 4.2933
+2021-05-21 17:10:09 - Epoch: 0, Step: 2520/2573, Avg Loss: 6.2330, Avg Regression Loss 2.0227, Avg Classification Loss: 4.2102
+2021-05-21 17:10:14 - Epoch: 0, Step: 2530/2573, Avg Loss: 6.5697, Avg Regression Loss 2.1228, Avg Classification Loss: 4.4468
+2021-05-21 17:10:18 - Epoch: 0, Step: 2540/2573, Avg Loss: 6.1683, Avg Regression Loss 1.9646, Avg Classification Loss: 4.2037
+2021-05-21 17:10:23 - Epoch: 0, Step: 2550/2573, Avg Loss: 5.3420, Avg Regression Loss 1.4784, Avg Classification Loss: 3.8637
+2021-05-21 17:10:28 - Epoch: 0, Step: 2560/2573, Avg Loss: 6.0615, Avg Regression Loss 1.7812, Avg Classification Loss: 4.2802
+2021-05-21 17:10:32 - Epoch: 0, Step: 2570/2573, Avg Loss: 6.2985, Avg Regression Loss 1.9258, Avg Classification Loss: 4.3728
+2021-05-21 17:11:36 - Epoch: 0, Validation Loss: 5.6529, Validation Regression Loss 1.5270, Validation Classification Loss: 4.1259
+2021-05-21 17:11:37 - Saved model models/fruit/mb1-ssd-Epoch-0-Loss-5.652893810374763.pth
+2021-05-21 17:11:37 - Task done, exiting program.
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 
+2021-05-21 17:11:37 - Task done, exiting program.
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# python3 onnx_export.py --model-dir=models/fruit 
+Namespace(batch_size=1, height=300, input='', labels='labels.txt', model_dir='models/fruit', net='ssd-mobilenet', output='', width=300)
+running on device cuda:0
+found best checkpoint with loss 5.652894 (models/fruit/mb1-ssd-Epoch-0-Loss-5.652893810374763.pth)
+creating network:  ssd-mobilenet
+num classes:       9
+loading checkpoint:  models/fruit/mb1-ssd-Epoch-0-Loss-5.652893810374763.pth
+exporting model to ONNX...
+graph(%input_0 : Float(1:270000, 3:90000, 300:300, 300:1),
+      %base_net.0.0.weight : Float(32:27, 3:9, 3:3, 3:1),
+      %base_net.0.1.weight : Float(32:1),
+      %base_net.0.1.bias : Float(32:1),
+      %base_net.0.1.running_mean : Float(32:1),
+      %base_net.0.1.running_var : Float(32:1),
+      %base_net.1.0.weight : Float(32:9, 1:9, 3:3, 3:1),
+      %base_net.1.1.weight : Float(32:1),
+      %base_net.1.1.bias : Float(32:1),
+      %base_net.1.1.running_mean : Float(32:1),
+      %base_net.1.1.running_var : Float(32:1),
+      %base_net.1.3.weight : Float(64:32, 32:1, 1:1, 1:1),
+      %base_net.1.4.weight : Float(64:1),
+      %base_net.1.4.bias : Float(64:1),
+      %base_net.1.4.running_mean : Float(64:1),
+      %base_net.1.4.running_var : Float(64:1),
+      %base_net.2.0.weight : Float(64:9, 1:9, 3:3, 3:1),
+      %base_net.2.1.weight : Float(64:1),
+      %base_net.2.1.bias : Float(64:1),
+      %base_net.2.1.running_mean : Float(64:1),
+      %base_net.2.1.running_var : Float(64:1),
+      %base_net.2.3.weight : Float(128:64, 64:1, 1:1, 1:1),
+      %base_net.2.4.weight : Float(128:1),
+      %base_net.2.4.bias : Float(128:1),
+      %base_net.2.4.running_mean : Float(128:1),
+      %base_net.2.4.running_var : Float(128:1),
+      %base_net.3.0.weight : Float(128:9, 1:9, 3:3, 3:1),
+      %base_net.3.1.weight : Float(128:1),
+      %base_net.3.1.bias : Float(128:1),
+      %base_net.3.1.running_mean : Float(128:1),
+      %base_net.3.1.running_var : Float(128:1),
+      %base_net.3.3.weight : Float(128:128, 128:1, 1:1, 1:1),
+      %base_net.3.4.weight : Float(128:1),
+      %base_net.3.4.bias : Float(128:1),
+      %base_net.3.4.running_mean : Float(128:1),
+      %base_net.3.4.running_var : Float(128:1),
+      %base_net.4.0.weight : Float(128:9, 1:9, 3:3, 3:1),
+      %base_net.4.1.weight : Float(128:1),
+      %base_net.4.1.bias : Float(128:1),
+      %base_net.4.1.running_mean : Float(128:1),
+      %base_net.4.1.running_var : Float(128:1),
+      %base_net.4.3.weight : Float(256:128, 128:1, 1:1, 1:1),
+      %base_net.4.4.weight : Float(256:1),
+      %base_net.4.4.bias : Float(256:1),
+      %base_net.4.4.running_mean : Float(256:1),
+      %base_net.4.4.running_var : Float(256:1),
+      %base_net.5.0.weight : Float(256:9, 1:9, 3:3, 3:1),
+      %base_net.5.1.weight : Float(256:1),
+      %base_net.5.1.bias : Float(256:1),
+      %base_net.5.1.running_mean : Float(256:1),
+      %base_net.5.1.running_var : Float(256:1),
+      %base_net.5.3.weight : Float(256:256, 256:1, 1:1, 1:1),
+      %base_net.5.4.weight : Float(256:1),
+      %base_net.5.4.bias : Float(256:1),
+      %base_net.5.4.running_mean : Float(256:1),
+      %base_net.5.4.running_var : Float(256:1),
+      %base_net.6.0.weight : Float(256:9, 1:9, 3:3, 3:1),
+      %base_net.6.1.weight : Float(256:1),
+      %base_net.6.1.bias : Float(256:1),
+      %base_net.6.1.running_mean : Float(256:1),
+      %base_net.6.1.running_var : Float(256:1),
+      %base_net.6.3.weight : Float(512:256, 256:1, 1:1, 1:1),
+      %base_net.6.4.weight : Float(512:1),
+      %base_net.6.4.bias : Float(512:1),
+      %base_net.6.4.running_mean : Float(512:1),
+      %base_net.6.4.running_var : Float(512:1),
+      %base_net.7.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.7.1.weight : Float(512:1),
+      %base_net.7.1.bias : Float(512:1),
+      %base_net.7.1.running_mean : Float(512:1),
+      %base_net.7.1.running_var : Float(512:1),
+      %base_net.7.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.7.4.weight : Float(512:1),
+      %base_net.7.4.bias : Float(512:1),
+      %base_net.7.4.running_mean : Float(512:1),
+      %base_net.7.4.running_var : Float(512:1),
+      %base_net.8.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.8.1.weight : Float(512:1),
+      %base_net.8.1.bias : Float(512:1),
+      %base_net.8.1.running_mean : Float(512:1),
+      %base_net.8.1.running_var : Float(512:1),
+      %base_net.8.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.8.4.weight : Float(512:1),
+      %base_net.8.4.bias : Float(512:1),
+      %base_net.8.4.running_mean : Float(512:1),
+      %base_net.8.4.running_var : Float(512:1),
+      %base_net.9.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.9.1.weight : Float(512:1),
+      %base_net.9.1.bias : Float(512:1),
+      %base_net.9.1.running_mean : Float(512:1),
+      %base_net.9.1.running_var : Float(512:1),
+      %base_net.9.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.9.4.weight : Float(512:1),
+      %base_net.9.4.bias : Float(512:1),
+      %base_net.9.4.running_mean : Float(512:1),
+      %base_net.9.4.running_var : Float(512:1),
+      %base_net.10.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.10.1.weight : Float(512:1),
+      %base_net.10.1.bias : Float(512:1),
+      %base_net.10.1.running_mean : Float(512:1),
+      %base_net.10.1.running_var : Float(512:1),
+      %base_net.10.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.10.4.weight : Float(512:1),
+      %base_net.10.4.bias : Float(512:1),
+      %base_net.10.4.running_mean : Float(512:1),
+      %base_net.10.4.running_var : Float(512:1),
+      %base_net.11.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.11.1.weight : Float(512:1),
+      %base_net.11.1.bias : Float(512:1),
+      %base_net.11.1.running_mean : Float(512:1),
+      %base_net.11.1.running_var : Float(512:1),
+      %base_net.11.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.11.4.weight : Float(512:1),
+      %base_net.11.4.bias : Float(512:1),
+      %base_net.11.4.running_mean : Float(512:1),
+      %base_net.11.4.running_var : Float(512:1),
+      %base_net.12.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.12.1.weight : Float(512:1),
+      %base_net.12.1.bias : Float(512:1),
+      %base_net.12.1.running_mean : Float(512:1),
+      %base_net.12.1.running_var : Float(512:1),
+      %base_net.12.3.weight : Float(1024:512, 512:1, 1:1, 1:1),
+      %base_net.12.4.weight : Float(1024:1),
+      %base_net.12.4.bias : Float(1024:1),
+      %base_net.12.4.running_mean : Float(1024:1),
+      %base_net.12.4.running_var : Float(1024:1),
+      %base_net.13.0.weight : Float(1024:9, 1:9, 3:3, 3:1),
+      %base_net.13.1.weight : Float(1024:1),
+      %base_net.13.1.bias : Float(1024:1),
+      %base_net.13.1.running_mean : Float(1024:1),
+      %base_net.13.1.running_var : Float(1024:1),
+      %base_net.13.3.weight : Float(1024:1024, 1024:1, 1:1, 1:1),
+      %base_net.13.4.weight : Float(1024:1),
+      %base_net.13.4.bias : Float(1024:1),
+      %base_net.13.4.running_mean : Float(1024:1),
+      %base_net.13.4.running_var : Float(1024:1),
+      %extras.0.0.weight : Float(256:1024, 1024:1, 1:1, 1:1),
+      %extras.0.0.bias : Float(256:1),
+      %extras.0.2.weight : Float(512:2304, 256:9, 3:3, 3:1),
+      %extras.0.2.bias : Float(512:1),
+      %extras.1.0.weight : Float(128:512, 512:1, 1:1, 1:1),
+      %extras.1.0.bias : Float(128:1),
+      %extras.1.2.weight : Float(256:1152, 128:9, 3:3, 3:1),
+      %extras.1.2.bias : Float(256:1),
+      %extras.2.0.weight : Float(128:256, 256:1, 1:1, 1:1),
+      %extras.2.0.bias : Float(128:1),
+      %extras.2.2.weight : Float(256:1152, 128:9, 3:3, 3:1),
+      %extras.2.2.bias : Float(256:1),
+      %extras.3.0.weight : Float(128:256, 256:1, 1:1, 1:1),
+      %extras.3.0.bias : Float(128:1),
+      %extras.3.2.weight : Float(256:1152, 128:9, 3:3, 3:1),
+      %extras.3.2.bias : Float(256:1),
+      %classification_headers.0.weight : Float(54:4608, 512:9, 3:3, 3:1),
+      %classification_headers.0.bias : Float(54:1),
+      %classification_headers.1.weight : Float(54:9216, 1024:9, 3:3, 3:1),
+      %classification_headers.1.bias : Float(54:1),
+      %classification_headers.2.weight : Float(54:4608, 512:9, 3:3, 3:1),
+      %classification_headers.2.bias : Float(54:1),
+      %classification_headers.3.weight : Float(54:2304, 256:9, 3:3, 3:1),
+      %classification_headers.3.bias : Float(54:1),
+      %classification_headers.4.weight : Float(54:2304, 256:9, 3:3, 3:1),
+      %classification_headers.4.bias : Float(54:1),
+      %classification_headers.5.weight : Float(54:2304, 256:9, 3:3, 3:1),
+      %classification_headers.5.bias : Float(54:1),
+      %regression_headers.0.weight : Float(24:4608, 512:9, 3:3, 3:1),
+      %regression_headers.0.bias : Float(24:1),
+      %regression_headers.1.weight : Float(24:9216, 1024:9, 3:3, 3:1),
+      %regression_headers.1.bias : Float(24:1),
+      %regression_headers.2.weight : Float(24:4608, 512:9, 3:3, 3:1),
+      %regression_headers.2.bias : Float(24:1),
+      %regression_headers.3.weight : Float(24:2304, 256:9, 3:3, 3:1),
+      %regression_headers.3.bias : Float(24:1),
+      %regression_headers.4.weight : Float(24:2304, 256:9, 3:3, 3:1),
+      %regression_headers.4.bias : Float(24:1),
+      %regression_headers.5.weight : Float(24:2304, 256:9, 3:3, 3:1),
+      %regression_headers.5.bias : Float(24:1),
+      %472 : Long(1:1),
+      %473 : Long(1:1),
+      %474 : Long(1:1),
+      %475 : Long(1:1),
+      %476 : Long(1:1),
+      %477 : Long(1:1),
+      %478 : Long(1:1),
+      %479 : Long(1:1),
+      %480 : Long(1:1),
+      %481 : Long(1:1),
+      %482 : Long(1:1),
+      %483 : Long(1:1),
+      %484 : Long(1:1),
+      %485 : Long(1:1),
+      %486 : Long(1:1),
+      %487 : Long(1:1),
+      %488 : Long(1:1),
+      %489 : Long(1:1),
+      %490 : Long(1:1),
+      %491 : Long(1:1),
+      %492 : Long(1:1),
+      %493 : Long(1:1),
+      %494 : Long(1:1),
+      %495 : Long(1:1)):
+  %203 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%input_0, %base_net.0.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %204 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%203, %base_net.0.1.weight, %base_net.0.1.bias, %base_net.0.1.running_mean, %base_net.0.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %205 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Relu(%204) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %206 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Conv[dilations=[1, 1], group=32, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%205, %base_net.1.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %207 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%206, %base_net.1.1.weight, %base_net.1.1.bias, %base_net.1.1.running_mean, %base_net.1.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %208 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Relu(%207) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %209 : Float(1:1440000, 64:22500, 150:150, 150:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%208, %base_net.1.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %210 : Float(1:1440000, 64:22500, 150:150, 150:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%209, %base_net.1.4.weight, %base_net.1.4.bias, %base_net.1.4.running_mean, %base_net.1.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %211 : Float(1:1440000, 64:22500, 150:150, 150:1) = onnx::Relu(%210) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %212 : Float(1:360000, 64:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=64, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%211, %base_net.2.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %213 : Float(1:360000, 64:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%212, %base_net.2.1.weight, %base_net.2.1.bias, %base_net.2.1.running_mean, %base_net.2.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %214 : Float(1:360000, 64:5625, 75:75, 75:1) = onnx::Relu(%213) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %215 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%214, %base_net.2.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %216 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%215, %base_net.2.4.weight, %base_net.2.4.bias, %base_net.2.4.running_mean, %base_net.2.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %217 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Relu(%216) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %218 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=128, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%217, %base_net.3.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %219 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%218, %base_net.3.1.weight, %base_net.3.1.bias, %base_net.3.1.running_mean, %base_net.3.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %220 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Relu(%219) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %221 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%220, %base_net.3.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %222 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%221, %base_net.3.4.weight, %base_net.3.4.bias, %base_net.3.4.running_mean, %base_net.3.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %223 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Relu(%222) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %224 : Float(1:184832, 128:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=128, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%223, %base_net.4.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %225 : Float(1:184832, 128:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%224, %base_net.4.1.weight, %base_net.4.1.bias, %base_net.4.1.running_mean, %base_net.4.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %226 : Float(1:184832, 128:1444, 38:38, 38:1) = onnx::Relu(%225) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %227 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%226, %base_net.4.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %228 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%227, %base_net.4.4.weight, %base_net.4.4.bias, %base_net.4.4.running_mean, %base_net.4.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %229 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Relu(%228) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %230 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=256, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%229, %base_net.5.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %231 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%230, %base_net.5.1.weight, %base_net.5.1.bias, %base_net.5.1.running_mean, %base_net.5.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %232 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Relu(%231) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %233 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%232, %base_net.5.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %234 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%233, %base_net.5.4.weight, %base_net.5.4.bias, %base_net.5.4.running_mean, %base_net.5.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %235 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Relu(%234) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %236 : Float(1:92416, 256:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=256, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%235, %base_net.6.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %237 : Float(1:92416, 256:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%236, %base_net.6.1.weight, %base_net.6.1.bias, %base_net.6.1.running_mean, %base_net.6.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %238 : Float(1:92416, 256:361, 19:19, 19:1) = onnx::Relu(%237) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %239 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%238, %base_net.6.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %240 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%239, %base_net.6.4.weight, %base_net.6.4.bias, %base_net.6.4.running_mean, %base_net.6.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %241 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%240) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %242 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%241, %base_net.7.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %243 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%242, %base_net.7.1.weight, %base_net.7.1.bias, %base_net.7.1.running_mean, %base_net.7.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %244 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%243) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %245 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%244, %base_net.7.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %246 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%245, %base_net.7.4.weight, %base_net.7.4.bias, %base_net.7.4.running_mean, %base_net.7.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %247 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%246) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %248 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%247, %base_net.8.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %249 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%248, %base_net.8.1.weight, %base_net.8.1.bias, %base_net.8.1.running_mean, %base_net.8.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %250 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%249) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %251 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%250, %base_net.8.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %252 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%251, %base_net.8.4.weight, %base_net.8.4.bias, %base_net.8.4.running_mean, %base_net.8.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %253 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%252) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %254 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%253, %base_net.9.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %255 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%254, %base_net.9.1.weight, %base_net.9.1.bias, %base_net.9.1.running_mean, %base_net.9.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %256 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%255) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %257 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%256, %base_net.9.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %258 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%257, %base_net.9.4.weight, %base_net.9.4.bias, %base_net.9.4.running_mean, %base_net.9.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %259 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%258) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %260 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%259, %base_net.10.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %261 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%260, %base_net.10.1.weight, %base_net.10.1.bias, %base_net.10.1.running_mean, %base_net.10.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %262 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%261) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %263 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%262, %base_net.10.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %264 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%263, %base_net.10.4.weight, %base_net.10.4.bias, %base_net.10.4.running_mean, %base_net.10.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %265 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%264) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %266 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%265, %base_net.11.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %267 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%266, %base_net.11.1.weight, %base_net.11.1.bias, %base_net.11.1.running_mean, %base_net.11.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %268 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%267) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %269 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%268, %base_net.11.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %270 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%269, %base_net.11.4.weight, %base_net.11.4.bias, %base_net.11.4.running_mean, %base_net.11.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %271 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%270) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %272 : Float(1:19494, 54:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%271, %classification_headers.0.weight, %classification_headers.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %273 : Float(1:19494, 19:1026, 19:54, 54:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%272) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %274 : Tensor = onnx::Shape(%273)
+  %275 : Tensor = onnx::Constant[value={0}]()
+  %276 : Long() = onnx::Gather[axis=0](%274, %275) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %279 : Tensor = onnx::Unsqueeze[axes=[0]](%276)
+  %282 : Tensor = onnx::Concat[axis=0](%279, %472, %473)
+  %283 : Float(1:19494, 2166:9, 9:1) = onnx::Reshape(%273, %282) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %284 : Float(1:8664, 24:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%271, %regression_headers.0.weight, %regression_headers.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %285 : Float(1:8664, 19:456, 19:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%284) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %286 : Tensor = onnx::Shape(%285)
+  %287 : Tensor = onnx::Constant[value={0}]()
+  %288 : Long() = onnx::Gather[axis=0](%286, %287) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %291 : Tensor = onnx::Unsqueeze[axes=[0]](%288)
+  %294 : Tensor = onnx::Concat[axis=0](%291, %474, %475)
+  %295 : Float(1:8664, 2166:4, 4:1) = onnx::Reshape(%285, %294) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %296 : Float(1:51200, 512:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%271, %base_net.12.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %297 : Float(1:51200, 512:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%296, %base_net.12.1.weight, %base_net.12.1.bias, %base_net.12.1.running_mean, %base_net.12.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %298 : Float(1:51200, 512:100, 10:10, 10:1) = onnx::Relu(%297) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %299 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%298, %base_net.12.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %300 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%299, %base_net.12.4.weight, %base_net.12.4.bias, %base_net.12.4.running_mean, %base_net.12.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %301 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Relu(%300) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %302 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1024, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%301, %base_net.13.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %303 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%302, %base_net.13.1.weight, %base_net.13.1.bias, %base_net.13.1.running_mean, %base_net.13.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %304 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Relu(%303) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %305 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%304, %base_net.13.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %306 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%305, %base_net.13.4.weight, %base_net.13.4.bias, %base_net.13.4.running_mean, %base_net.13.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %307 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Relu(%306) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %308 : Float(1:5400, 54:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%307, %classification_headers.1.weight, %classification_headers.1.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %309 : Float(1:5400, 10:540, 10:54, 54:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%308) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %310 : Tensor = onnx::Shape(%309)
+  %311 : Tensor = onnx::Constant[value={0}]()
+  %312 : Long() = onnx::Gather[axis=0](%310, %311) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %315 : Tensor = onnx::Unsqueeze[axes=[0]](%312)
+  %318 : Tensor = onnx::Concat[axis=0](%315, %476, %477)
+  %319 : Float(1:5400, 600:9, 9:1) = onnx::Reshape(%309, %318) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %320 : Float(1:2400, 24:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%307, %regression_headers.1.weight, %regression_headers.1.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %321 : Float(1:2400, 10:240, 10:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%320) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %322 : Tensor = onnx::Shape(%321)
+  %323 : Tensor = onnx::Constant[value={0}]()
+  %324 : Long() = onnx::Gather[axis=0](%322, %323) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %327 : Tensor = onnx::Unsqueeze[axes=[0]](%324)
+  %330 : Tensor = onnx::Concat[axis=0](%327, %478, %479)
+  %331 : Float(1:2400, 600:4, 4:1) = onnx::Reshape(%321, %330) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %332 : Float(1:25600, 256:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%307, %extras.0.0.weight, %extras.0.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %333 : Float(1:25600, 256:100, 10:10, 10:1) = onnx::Relu(%332) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %334 : Float(1:12800, 512:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%333, %extras.0.2.weight, %extras.0.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %335 : Float(1:12800, 512:25, 5:5, 5:1) = onnx::Relu(%334) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %336 : Float(1:1350, 54:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%335, %classification_headers.2.weight, %classification_headers.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %337 : Float(1:1350, 5:270, 5:54, 54:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%336) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %338 : Tensor = onnx::Shape(%337)
+  %339 : Tensor = onnx::Constant[value={0}]()
+  %340 : Long() = onnx::Gather[axis=0](%338, %339) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %343 : Tensor = onnx::Unsqueeze[axes=[0]](%340)
+  %346 : Tensor = onnx::Concat[axis=0](%343, %480, %481)
+  %347 : Float(1:1350, 150:9, 9:1) = onnx::Reshape(%337, %346) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %348 : Float(1:600, 24:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%335, %regression_headers.2.weight, %regression_headers.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %349 : Float(1:600, 5:120, 5:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%348) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %350 : Tensor = onnx::Shape(%349)
+  %351 : Tensor = onnx::Constant[value={0}]()
+  %352 : Long() = onnx::Gather[axis=0](%350, %351) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %355 : Tensor = onnx::Unsqueeze[axes=[0]](%352)
+  %358 : Tensor = onnx::Concat[axis=0](%355, %482, %483)
+  %359 : Float(1:600, 150:4, 4:1) = onnx::Reshape(%349, %358) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %360 : Float(1:3200, 128:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%335, %extras.1.0.weight, %extras.1.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %361 : Float(1:3200, 128:25, 5:5, 5:1) = onnx::Relu(%360) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %362 : Float(1:2304, 256:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%361, %extras.1.2.weight, %extras.1.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %363 : Float(1:2304, 256:9, 3:3, 3:1) = onnx::Relu(%362) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %364 : Float(1:486, 54:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%363, %classification_headers.3.weight, %classification_headers.3.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %365 : Float(1:486, 3:162, 3:54, 54:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%364) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %366 : Tensor = onnx::Shape(%365)
+  %367 : Tensor = onnx::Constant[value={0}]()
+  %368 : Long() = onnx::Gather[axis=0](%366, %367) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %371 : Tensor = onnx::Unsqueeze[axes=[0]](%368)
+  %374 : Tensor = onnx::Concat[axis=0](%371, %484, %485)
+  %375 : Float(1:486, 54:9, 9:1) = onnx::Reshape(%365, %374) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %376 : Float(1:216, 24:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%363, %regression_headers.3.weight, %regression_headers.3.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %377 : Float(1:216, 3:72, 3:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%376) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %378 : Tensor = onnx::Shape(%377)
+  %379 : Tensor = onnx::Constant[value={0}]()
+  %380 : Long() = onnx::Gather[axis=0](%378, %379) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %383 : Tensor = onnx::Unsqueeze[axes=[0]](%380)
+  %386 : Tensor = onnx::Concat[axis=0](%383, %486, %487)
+  %387 : Float(1:216, 54:4, 4:1) = onnx::Reshape(%377, %386) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %388 : Float(1:1152, 128:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%363, %extras.2.0.weight, %extras.2.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %389 : Float(1:1152, 128:9, 3:3, 3:1) = onnx::Relu(%388) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %390 : Float(1:1024, 256:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%389, %extras.2.2.weight, %extras.2.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %391 : Float(1:1024, 256:4, 2:2, 2:1) = onnx::Relu(%390) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %392 : Float(1:216, 54:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%391, %classification_headers.4.weight, %classification_headers.4.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %393 : Float(1:216, 2:108, 2:54, 54:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%392) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %394 : Tensor = onnx::Shape(%393)
+  %395 : Tensor = onnx::Constant[value={0}]()
+  %396 : Long() = onnx::Gather[axis=0](%394, %395) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %399 : Tensor = onnx::Unsqueeze[axes=[0]](%396)
+  %402 : Tensor = onnx::Concat[axis=0](%399, %488, %489)
+  %403 : Float(1:216, 24:9, 9:1) = onnx::Reshape(%393, %402) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %404 : Float(1:96, 24:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%391, %regression_headers.4.weight, %regression_headers.4.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %405 : Float(1:96, 2:48, 2:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%404) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %406 : Tensor = onnx::Shape(%405)
+  %407 : Tensor = onnx::Constant[value={0}]()
+  %408 : Long() = onnx::Gather[axis=0](%406, %407) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %411 : Tensor = onnx::Unsqueeze[axes=[0]](%408)
+  %414 : Tensor = onnx::Concat[axis=0](%411, %490, %491)
+  %415 : Float(1:96, 24:4, 4:1) = onnx::Reshape(%405, %414) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %416 : Float(1:512, 128:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%391, %extras.3.0.weight, %extras.3.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %417 : Float(1:512, 128:4, 2:2, 2:1) = onnx::Relu(%416) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %418 : Float(1:256, 256:1, 1:1, 1:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%417, %extras.3.2.weight, %extras.3.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %419 : Float(1:256, 256:1, 1:1, 1:1) = onnx::Relu(%418) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %420 : Float(1:54, 54:1, 1:1, 1:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%419, %classification_headers.5.weight, %classification_headers.5.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %421 : Float(1:54, 1:1, 1:1, 54:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%420) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %422 : Tensor = onnx::Shape(%421)
+  %423 : Tensor = onnx::Constant[value={0}]()
+  %424 : Long() = onnx::Gather[axis=0](%422, %423) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %427 : Tensor = onnx::Unsqueeze[axes=[0]](%424)
+  %430 : Tensor = onnx::Concat[axis=0](%427, %492, %493)
+  %431 : Float(1:54, 6:9, 9:1) = onnx::Reshape(%421, %430) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %432 : Float(1:24, 24:1, 1:1, 1:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%419, %regression_headers.5.weight, %regression_headers.5.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %433 : Float(1:24, 1:1, 1:1, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%432) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %434 : Tensor = onnx::Shape(%433)
+  %435 : Tensor = onnx::Constant[value={0}]()
+  %436 : Long() = onnx::Gather[axis=0](%434, %435) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %439 : Tensor = onnx::Unsqueeze[axes=[0]](%436)
+  %442 : Tensor = onnx::Concat[axis=0](%439, %494, %495)
+  %443 : Float(1:24, 6:4, 4:1) = onnx::Reshape(%433, %442) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %444 : Float(1:27000, 3000:9, 9:1) = onnx::Concat[axis=1](%283, %319, %347, %375, %403, %431) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:87:0
+  %445 : Float(1:12000, 3000:4, 4:1) = onnx::Concat[axis=1](%295, %331, %359, %387, %415, %443) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:88:0
+  %scores : Float(1:27000, 3000:9, 9:1) = onnx::Softmax[axis=2](%444) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1498:0
+  %447 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[2], starts=[0]](%445) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:104:0
+  %448 : Float() = onnx::Constant[value={0.1}]()
+  %449 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%447, %448)
+  %450 : Float(1:12000, 3000:4, 2:1) = onnx::Constant[value=<Tensor>]()
+  %451 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%449, %450) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:104:0
+  %452 : Float(1:12000, 3000:4, 2:1) = onnx::Constant[value=<Tensor>]()
+  %453 : Float(1:6000, 3000:2, 2:1) = onnx::Add(%451, %452) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:104:0
+  %454 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[9223372036854775807], starts=[2]](%445) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:105:0
+  %455 : Float() = onnx::Constant[value={0.2}]()
+  %456 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%454, %455)
+  %457 : Float(1:6000, 3000:2, 2:1) = onnx::Exp(%456) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:105:0
+  %458 : Float(1:12000, 3000:4, 2:1) = onnx::Constant[value=<Tensor>]()
+  %459 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%457, %458) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:105:0
+  %460 : Float(1:12000, 3000:4, 4:1) = onnx::Concat[axis=2](%453, %459) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:106:0
+  %461 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[2], starts=[0]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:208:0
+  %462 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[9223372036854775807], starts=[2]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:208:0
+  %463 : Float() = onnx::Constant[value={2}]()
+  %464 : Float(1:6000, 3000:2, 2:1) = onnx::Div(%462, %463)
+  %465 : Float(1:6000, 3000:2, 2:1) = onnx::Sub(%461, %464) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:208:0
+  %466 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[2], starts=[0]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  %467 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[9223372036854775807], starts=[2]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  %468 : Float() = onnx::Constant[value={2}]()
+  %469 : Float(1:6000, 3000:2, 2:1) = onnx::Div(%467, %468)
+  %470 : Float(1:6000, 3000:2, 2:1) = onnx::Add(%466, %469) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  %boxes : Float(1:12000, 3000:4, 4:1) = onnx::Concat[axis=2](%465, %470) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  return (%scores, %boxes)
+
+model exported to:  models/fruit/ssd-mobilenet.onnx
+task done, exiting program
+
+

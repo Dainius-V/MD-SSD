@@ -1,0 +1,481 @@
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# python3 onnx_export.py --model-dir=models/smd
+Namespace(batch_size=1, height=300, input='', labels='labels.txt', model_dir='models/smd', net='ssd-mobilenet', output='', width=300)
+running on device cuda:0
+found best checkpoint with loss 2.189755 (models/smd/mb1-ssd-Epoch-42-Loss-2.1897549826246676.pth)
+creating network:  ssd-mobilenet
+num classes:       6
+loading checkpoint:  models/smd/mb1-ssd-Epoch-42-Loss-2.1897549826246676.pth
+exporting model to ONNX...
+graph(%input_0 : Float(1:270000, 3:90000, 300:300, 300:1),
+      %base_net.0.0.weight : Float(32:27, 3:9, 3:3, 3:1),
+      %base_net.0.1.weight : Float(32:1),
+      %base_net.0.1.bias : Float(32:1),
+      %base_net.0.1.running_mean : Float(32:1),
+      %base_net.0.1.running_var : Float(32:1),
+      %base_net.1.0.weight : Float(32:9, 1:9, 3:3, 3:1),
+      %base_net.1.1.weight : Float(32:1),
+      %base_net.1.1.bias : Float(32:1),
+      %base_net.1.1.running_mean : Float(32:1),
+      %base_net.1.1.running_var : Float(32:1),
+      %base_net.1.3.weight : Float(64:32, 32:1, 1:1, 1:1),
+      %base_net.1.4.weight : Float(64:1),
+      %base_net.1.4.bias : Float(64:1),
+      %base_net.1.4.running_mean : Float(64:1),
+      %base_net.1.4.running_var : Float(64:1),
+      %base_net.2.0.weight : Float(64:9, 1:9, 3:3, 3:1),
+      %base_net.2.1.weight : Float(64:1),
+      %base_net.2.1.bias : Float(64:1),
+      %base_net.2.1.running_mean : Float(64:1),
+      %base_net.2.1.running_var : Float(64:1),
+      %base_net.2.3.weight : Float(128:64, 64:1, 1:1, 1:1),
+      %base_net.2.4.weight : Float(128:1),
+      %base_net.2.4.bias : Float(128:1),
+      %base_net.2.4.running_mean : Float(128:1),
+      %base_net.2.4.running_var : Float(128:1),
+      %base_net.3.0.weight : Float(128:9, 1:9, 3:3, 3:1),
+      %base_net.3.1.weight : Float(128:1),
+      %base_net.3.1.bias : Float(128:1),
+      %base_net.3.1.running_mean : Float(128:1),
+      %base_net.3.1.running_var : Float(128:1),
+      %base_net.3.3.weight : Float(128:128, 128:1, 1:1, 1:1),
+      %base_net.3.4.weight : Float(128:1),
+      %base_net.3.4.bias : Float(128:1),
+      %base_net.3.4.running_mean : Float(128:1),
+      %base_net.3.4.running_var : Float(128:1),
+      %base_net.4.0.weight : Float(128:9, 1:9, 3:3, 3:1),
+      %base_net.4.1.weight : Float(128:1),
+      %base_net.4.1.bias : Float(128:1),
+      %base_net.4.1.running_mean : Float(128:1),
+      %base_net.4.1.running_var : Float(128:1),
+      %base_net.4.3.weight : Float(256:128, 128:1, 1:1, 1:1),
+      %base_net.4.4.weight : Float(256:1),
+      %base_net.4.4.bias : Float(256:1),
+      %base_net.4.4.running_mean : Float(256:1),
+      %base_net.4.4.running_var : Float(256:1),
+      %base_net.5.0.weight : Float(256:9, 1:9, 3:3, 3:1),
+      %base_net.5.1.weight : Float(256:1),
+      %base_net.5.1.bias : Float(256:1),
+      %base_net.5.1.running_mean : Float(256:1),
+      %base_net.5.1.running_var : Float(256:1),
+      %base_net.5.3.weight : Float(256:256, 256:1, 1:1, 1:1),
+      %base_net.5.4.weight : Float(256:1),
+      %base_net.5.4.bias : Float(256:1),
+      %base_net.5.4.running_mean : Float(256:1),
+      %base_net.5.4.running_var : Float(256:1),
+      %base_net.6.0.weight : Float(256:9, 1:9, 3:3, 3:1),
+      %base_net.6.1.weight : Float(256:1),
+      %base_net.6.1.bias : Float(256:1),
+      %base_net.6.1.running_mean : Float(256:1),
+      %base_net.6.1.running_var : Float(256:1),
+      %base_net.6.3.weight : Float(512:256, 256:1, 1:1, 1:1),
+      %base_net.6.4.weight : Float(512:1),
+      %base_net.6.4.bias : Float(512:1),
+      %base_net.6.4.running_mean : Float(512:1),
+      %base_net.6.4.running_var : Float(512:1),
+      %base_net.7.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.7.1.weight : Float(512:1),
+      %base_net.7.1.bias : Float(512:1),
+      %base_net.7.1.running_mean : Float(512:1),
+      %base_net.7.1.running_var : Float(512:1),
+      %base_net.7.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.7.4.weight : Float(512:1),
+      %base_net.7.4.bias : Float(512:1),
+      %base_net.7.4.running_mean : Float(512:1),
+      %base_net.7.4.running_var : Float(512:1),
+      %base_net.8.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.8.1.weight : Float(512:1),
+      %base_net.8.1.bias : Float(512:1),
+      %base_net.8.1.running_mean : Float(512:1),
+      %base_net.8.1.running_var : Float(512:1),
+      %base_net.8.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.8.4.weight : Float(512:1),
+      %base_net.8.4.bias : Float(512:1),
+      %base_net.8.4.running_mean : Float(512:1),
+      %base_net.8.4.running_var : Float(512:1),
+      %base_net.9.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.9.1.weight : Float(512:1),
+      %base_net.9.1.bias : Float(512:1),
+      %base_net.9.1.running_mean : Float(512:1),
+      %base_net.9.1.running_var : Float(512:1),
+      %base_net.9.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.9.4.weight : Float(512:1),
+      %base_net.9.4.bias : Float(512:1),
+      %base_net.9.4.running_mean : Float(512:1),
+      %base_net.9.4.running_var : Float(512:1),
+      %base_net.10.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.10.1.weight : Float(512:1),
+      %base_net.10.1.bias : Float(512:1),
+      %base_net.10.1.running_mean : Float(512:1),
+      %base_net.10.1.running_var : Float(512:1),
+      %base_net.10.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.10.4.weight : Float(512:1),
+      %base_net.10.4.bias : Float(512:1),
+      %base_net.10.4.running_mean : Float(512:1),
+      %base_net.10.4.running_var : Float(512:1),
+      %base_net.11.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.11.1.weight : Float(512:1),
+      %base_net.11.1.bias : Float(512:1),
+      %base_net.11.1.running_mean : Float(512:1),
+      %base_net.11.1.running_var : Float(512:1),
+      %base_net.11.3.weight : Float(512:512, 512:1, 1:1, 1:1),
+      %base_net.11.4.weight : Float(512:1),
+      %base_net.11.4.bias : Float(512:1),
+      %base_net.11.4.running_mean : Float(512:1),
+      %base_net.11.4.running_var : Float(512:1),
+      %base_net.12.0.weight : Float(512:9, 1:9, 3:3, 3:1),
+      %base_net.12.1.weight : Float(512:1),
+      %base_net.12.1.bias : Float(512:1),
+      %base_net.12.1.running_mean : Float(512:1),
+      %base_net.12.1.running_var : Float(512:1),
+      %base_net.12.3.weight : Float(1024:512, 512:1, 1:1, 1:1),
+      %base_net.12.4.weight : Float(1024:1),
+      %base_net.12.4.bias : Float(1024:1),
+      %base_net.12.4.running_mean : Float(1024:1),
+      %base_net.12.4.running_var : Float(1024:1),
+      %base_net.13.0.weight : Float(1024:9, 1:9, 3:3, 3:1),
+      %base_net.13.1.weight : Float(1024:1),
+      %base_net.13.1.bias : Float(1024:1),
+      %base_net.13.1.running_mean : Float(1024:1),
+      %base_net.13.1.running_var : Float(1024:1),
+      %base_net.13.3.weight : Float(1024:1024, 1024:1, 1:1, 1:1),
+      %base_net.13.4.weight : Float(1024:1),
+      %base_net.13.4.bias : Float(1024:1),
+      %base_net.13.4.running_mean : Float(1024:1),
+      %base_net.13.4.running_var : Float(1024:1),
+      %extras.0.0.weight : Float(256:1024, 1024:1, 1:1, 1:1),
+      %extras.0.0.bias : Float(256:1),
+      %extras.0.2.weight : Float(512:2304, 256:9, 3:3, 3:1),
+      %extras.0.2.bias : Float(512:1),
+      %extras.1.0.weight : Float(128:512, 512:1, 1:1, 1:1),
+      %extras.1.0.bias : Float(128:1),
+      %extras.1.2.weight : Float(256:1152, 128:9, 3:3, 3:1),
+      %extras.1.2.bias : Float(256:1),
+      %extras.2.0.weight : Float(128:256, 256:1, 1:1, 1:1),
+      %extras.2.0.bias : Float(128:1),
+      %extras.2.2.weight : Float(256:1152, 128:9, 3:3, 3:1),
+      %extras.2.2.bias : Float(256:1),
+      %extras.3.0.weight : Float(128:256, 256:1, 1:1, 1:1),
+      %extras.3.0.bias : Float(128:1),
+      %extras.3.2.weight : Float(256:1152, 128:9, 3:3, 3:1),
+      %extras.3.2.bias : Float(256:1),
+      %classification_headers.0.weight : Float(36:4608, 512:9, 3:3, 3:1),
+      %classification_headers.0.bias : Float(36:1),
+      %classification_headers.1.weight : Float(36:9216, 1024:9, 3:3, 3:1),
+      %classification_headers.1.bias : Float(36:1),
+      %classification_headers.2.weight : Float(36:4608, 512:9, 3:3, 3:1),
+      %classification_headers.2.bias : Float(36:1),
+      %classification_headers.3.weight : Float(36:2304, 256:9, 3:3, 3:1),
+      %classification_headers.3.bias : Float(36:1),
+      %classification_headers.4.weight : Float(36:2304, 256:9, 3:3, 3:1),
+      %classification_headers.4.bias : Float(36:1),
+      %classification_headers.5.weight : Float(36:2304, 256:9, 3:3, 3:1),
+      %classification_headers.5.bias : Float(36:1),
+      %regression_headers.0.weight : Float(24:4608, 512:9, 3:3, 3:1),
+      %regression_headers.0.bias : Float(24:1),
+      %regression_headers.1.weight : Float(24:9216, 1024:9, 3:3, 3:1),
+      %regression_headers.1.bias : Float(24:1),
+      %regression_headers.2.weight : Float(24:4608, 512:9, 3:3, 3:1),
+      %regression_headers.2.bias : Float(24:1),
+      %regression_headers.3.weight : Float(24:2304, 256:9, 3:3, 3:1),
+      %regression_headers.3.bias : Float(24:1),
+      %regression_headers.4.weight : Float(24:2304, 256:9, 3:3, 3:1),
+      %regression_headers.4.bias : Float(24:1),
+      %regression_headers.5.weight : Float(24:2304, 256:9, 3:3, 3:1),
+      %regression_headers.5.bias : Float(24:1),
+      %472 : Long(1:1),
+      %473 : Long(1:1),
+      %474 : Long(1:1),
+      %475 : Long(1:1),
+      %476 : Long(1:1),
+      %477 : Long(1:1),
+      %478 : Long(1:1),
+      %479 : Long(1:1),
+      %480 : Long(1:1),
+      %481 : Long(1:1),
+      %482 : Long(1:1),
+      %483 : Long(1:1),
+      %484 : Long(1:1),
+      %485 : Long(1:1),
+      %486 : Long(1:1),
+      %487 : Long(1:1),
+      %488 : Long(1:1),
+      %489 : Long(1:1),
+      %490 : Long(1:1),
+      %491 : Long(1:1),
+      %492 : Long(1:1),
+      %493 : Long(1:1),
+      %494 : Long(1:1),
+      %495 : Long(1:1)):
+  %203 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%input_0, %base_net.0.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %204 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%203, %base_net.0.1.weight, %base_net.0.1.bias, %base_net.0.1.running_mean, %base_net.0.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %205 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Relu(%204) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %206 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Conv[dilations=[1, 1], group=32, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%205, %base_net.1.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %207 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%206, %base_net.1.1.weight, %base_net.1.1.bias, %base_net.1.1.running_mean, %base_net.1.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %208 : Float(1:720000, 32:22500, 150:150, 150:1) = onnx::Relu(%207) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %209 : Float(1:1440000, 64:22500, 150:150, 150:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%208, %base_net.1.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %210 : Float(1:1440000, 64:22500, 150:150, 150:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%209, %base_net.1.4.weight, %base_net.1.4.bias, %base_net.1.4.running_mean, %base_net.1.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %211 : Float(1:1440000, 64:22500, 150:150, 150:1) = onnx::Relu(%210) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %212 : Float(1:360000, 64:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=64, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%211, %base_net.2.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %213 : Float(1:360000, 64:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%212, %base_net.2.1.weight, %base_net.2.1.bias, %base_net.2.1.running_mean, %base_net.2.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %214 : Float(1:360000, 64:5625, 75:75, 75:1) = onnx::Relu(%213) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %215 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%214, %base_net.2.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %216 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%215, %base_net.2.4.weight, %base_net.2.4.bias, %base_net.2.4.running_mean, %base_net.2.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %217 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Relu(%216) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %218 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=128, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%217, %base_net.3.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %219 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%218, %base_net.3.1.weight, %base_net.3.1.bias, %base_net.3.1.running_mean, %base_net.3.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %220 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Relu(%219) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %221 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%220, %base_net.3.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %222 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%221, %base_net.3.4.weight, %base_net.3.4.bias, %base_net.3.4.running_mean, %base_net.3.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %223 : Float(1:720000, 128:5625, 75:75, 75:1) = onnx::Relu(%222) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %224 : Float(1:184832, 128:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=128, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%223, %base_net.4.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %225 : Float(1:184832, 128:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%224, %base_net.4.1.weight, %base_net.4.1.bias, %base_net.4.1.running_mean, %base_net.4.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %226 : Float(1:184832, 128:1444, 38:38, 38:1) = onnx::Relu(%225) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %227 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%226, %base_net.4.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %228 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%227, %base_net.4.4.weight, %base_net.4.4.bias, %base_net.4.4.running_mean, %base_net.4.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %229 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Relu(%228) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %230 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=256, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%229, %base_net.5.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %231 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%230, %base_net.5.1.weight, %base_net.5.1.bias, %base_net.5.1.running_mean, %base_net.5.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %232 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Relu(%231) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %233 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%232, %base_net.5.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %234 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%233, %base_net.5.4.weight, %base_net.5.4.bias, %base_net.5.4.running_mean, %base_net.5.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %235 : Float(1:369664, 256:1444, 38:38, 38:1) = onnx::Relu(%234) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %236 : Float(1:92416, 256:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=256, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%235, %base_net.6.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %237 : Float(1:92416, 256:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%236, %base_net.6.1.weight, %base_net.6.1.bias, %base_net.6.1.running_mean, %base_net.6.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %238 : Float(1:92416, 256:361, 19:19, 19:1) = onnx::Relu(%237) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %239 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%238, %base_net.6.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %240 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%239, %base_net.6.4.weight, %base_net.6.4.bias, %base_net.6.4.running_mean, %base_net.6.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %241 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%240) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %242 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%241, %base_net.7.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %243 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%242, %base_net.7.1.weight, %base_net.7.1.bias, %base_net.7.1.running_mean, %base_net.7.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %244 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%243) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %245 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%244, %base_net.7.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %246 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%245, %base_net.7.4.weight, %base_net.7.4.bias, %base_net.7.4.running_mean, %base_net.7.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %247 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%246) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %248 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%247, %base_net.8.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %249 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%248, %base_net.8.1.weight, %base_net.8.1.bias, %base_net.8.1.running_mean, %base_net.8.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %250 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%249) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %251 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%250, %base_net.8.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %252 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%251, %base_net.8.4.weight, %base_net.8.4.bias, %base_net.8.4.running_mean, %base_net.8.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %253 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%252) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %254 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%253, %base_net.9.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %255 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%254, %base_net.9.1.weight, %base_net.9.1.bias, %base_net.9.1.running_mean, %base_net.9.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %256 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%255) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %257 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%256, %base_net.9.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %258 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%257, %base_net.9.4.weight, %base_net.9.4.bias, %base_net.9.4.running_mean, %base_net.9.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %259 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%258) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %260 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%259, %base_net.10.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %261 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%260, %base_net.10.1.weight, %base_net.10.1.bias, %base_net.10.1.running_mean, %base_net.10.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %262 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%261) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %263 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%262, %base_net.10.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %264 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%263, %base_net.10.4.weight, %base_net.10.4.bias, %base_net.10.4.running_mean, %base_net.10.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %265 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%264) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %266 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%265, %base_net.11.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %267 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%266, %base_net.11.1.weight, %base_net.11.1.bias, %base_net.11.1.running_mean, %base_net.11.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %268 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%267) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %269 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%268, %base_net.11.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %270 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%269, %base_net.11.4.weight, %base_net.11.4.bias, %base_net.11.4.running_mean, %base_net.11.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %271 : Float(1:184832, 512:361, 19:19, 19:1) = onnx::Relu(%270) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %272 : Float(1:12996, 36:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%271, %classification_headers.0.weight, %classification_headers.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %273 : Float(1:12996, 19:684, 19:36, 36:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%272) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %274 : Tensor = onnx::Shape(%273)
+  %275 : Tensor = onnx::Constant[value={0}]()
+  %276 : Long() = onnx::Gather[axis=0](%274, %275) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %279 : Tensor = onnx::Unsqueeze[axes=[0]](%276)
+  %282 : Tensor = onnx::Concat[axis=0](%279, %472, %473)
+  %283 : Float(1:12996, 2166:6, 6:1) = onnx::Reshape(%273, %282) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %284 : Float(1:8664, 24:361, 19:19, 19:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%271, %regression_headers.0.weight, %regression_headers.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %285 : Float(1:8664, 19:456, 19:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%284) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %286 : Tensor = onnx::Shape(%285)
+  %287 : Tensor = onnx::Constant[value={0}]()
+  %288 : Long() = onnx::Gather[axis=0](%286, %287) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %291 : Tensor = onnx::Unsqueeze[axes=[0]](%288)
+  %294 : Tensor = onnx::Concat[axis=0](%291, %474, %475)
+  %295 : Float(1:8664, 2166:4, 4:1) = onnx::Reshape(%285, %294) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %296 : Float(1:51200, 512:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=512, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%271, %base_net.12.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %297 : Float(1:51200, 512:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%296, %base_net.12.1.weight, %base_net.12.1.bias, %base_net.12.1.running_mean, %base_net.12.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %298 : Float(1:51200, 512:100, 10:10, 10:1) = onnx::Relu(%297) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %299 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%298, %base_net.12.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %300 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%299, %base_net.12.4.weight, %base_net.12.4.bias, %base_net.12.4.running_mean, %base_net.12.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %301 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Relu(%300) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %302 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1024, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%301, %base_net.13.0.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %303 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%302, %base_net.13.1.weight, %base_net.13.1.bias, %base_net.13.1.running_mean, %base_net.13.1.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %304 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Relu(%303) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %305 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%304, %base_net.13.3.weight) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %306 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::BatchNormalization[epsilon=1.0000000000000001e-05, momentum=0.90000000000000002](%305, %base_net.13.4.weight, %base_net.13.4.bias, %base_net.13.4.running_mean, %base_net.13.4.running_var) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:2016:0
+  %307 : Float(1:102400, 1024:100, 10:10, 10:1) = onnx::Relu(%306) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1117:0
+  %308 : Float(1:3600, 36:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%307, %classification_headers.1.weight, %classification_headers.1.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %309 : Float(1:3600, 10:360, 10:36, 36:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%308) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %310 : Tensor = onnx::Shape(%309)
+  %311 : Tensor = onnx::Constant[value={0}]()
+  %312 : Long() = onnx::Gather[axis=0](%310, %311) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %315 : Tensor = onnx::Unsqueeze[axes=[0]](%312)
+  %318 : Tensor = onnx::Concat[axis=0](%315, %476, %477)
+  %319 : Float(1:3600, 600:6, 6:1) = onnx::Reshape(%309, %318) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %320 : Float(1:2400, 24:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%307, %regression_headers.1.weight, %regression_headers.1.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %321 : Float(1:2400, 10:240, 10:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%320) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %322 : Tensor = onnx::Shape(%321)
+  %323 : Tensor = onnx::Constant[value={0}]()
+  %324 : Long() = onnx::Gather[axis=0](%322, %323) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %327 : Tensor = onnx::Unsqueeze[axes=[0]](%324)
+  %330 : Tensor = onnx::Concat[axis=0](%327, %478, %479)
+  %331 : Float(1:2400, 600:4, 4:1) = onnx::Reshape(%321, %330) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %332 : Float(1:25600, 256:100, 10:10, 10:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%307, %extras.0.0.weight, %extras.0.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %333 : Float(1:25600, 256:100, 10:10, 10:1) = onnx::Relu(%332) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %334 : Float(1:12800, 512:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%333, %extras.0.2.weight, %extras.0.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %335 : Float(1:12800, 512:25, 5:5, 5:1) = onnx::Relu(%334) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %336 : Float(1:900, 36:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%335, %classification_headers.2.weight, %classification_headers.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %337 : Float(1:900, 5:180, 5:36, 36:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%336) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %338 : Tensor = onnx::Shape(%337)
+  %339 : Tensor = onnx::Constant[value={0}]()
+  %340 : Long() = onnx::Gather[axis=0](%338, %339) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %343 : Tensor = onnx::Unsqueeze[axes=[0]](%340)
+  %346 : Tensor = onnx::Concat[axis=0](%343, %480, %481)
+  %347 : Float(1:900, 150:6, 6:1) = onnx::Reshape(%337, %346) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %348 : Float(1:600, 24:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%335, %regression_headers.2.weight, %regression_headers.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %349 : Float(1:600, 5:120, 5:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%348) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %350 : Tensor = onnx::Shape(%349)
+  %351 : Tensor = onnx::Constant[value={0}]()
+  %352 : Long() = onnx::Gather[axis=0](%350, %351) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %355 : Tensor = onnx::Unsqueeze[axes=[0]](%352)
+  %358 : Tensor = onnx::Concat[axis=0](%355, %482, %483)
+  %359 : Float(1:600, 150:4, 4:1) = onnx::Reshape(%349, %358) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %360 : Float(1:3200, 128:25, 5:5, 5:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%335, %extras.1.0.weight, %extras.1.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %361 : Float(1:3200, 128:25, 5:5, 5:1) = onnx::Relu(%360) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %362 : Float(1:2304, 256:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%361, %extras.1.2.weight, %extras.1.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %363 : Float(1:2304, 256:9, 3:3, 3:1) = onnx::Relu(%362) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %364 : Float(1:324, 36:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%363, %classification_headers.3.weight, %classification_headers.3.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %365 : Float(1:324, 3:108, 3:36, 36:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%364) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %366 : Tensor = onnx::Shape(%365)
+  %367 : Tensor = onnx::Constant[value={0}]()
+  %368 : Long() = onnx::Gather[axis=0](%366, %367) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %371 : Tensor = onnx::Unsqueeze[axes=[0]](%368)
+  %374 : Tensor = onnx::Concat[axis=0](%371, %484, %485)
+  %375 : Float(1:324, 54:6, 6:1) = onnx::Reshape(%365, %374) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %376 : Float(1:216, 24:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%363, %regression_headers.3.weight, %regression_headers.3.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %377 : Float(1:216, 3:72, 3:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%376) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %378 : Tensor = onnx::Shape(%377)
+  %379 : Tensor = onnx::Constant[value={0}]()
+  %380 : Long() = onnx::Gather[axis=0](%378, %379) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %383 : Tensor = onnx::Unsqueeze[axes=[0]](%380)
+  %386 : Tensor = onnx::Concat[axis=0](%383, %486, %487)
+  %387 : Float(1:216, 54:4, 4:1) = onnx::Reshape(%377, %386) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %388 : Float(1:1152, 128:9, 3:3, 3:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%363, %extras.2.0.weight, %extras.2.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %389 : Float(1:1152, 128:9, 3:3, 3:1) = onnx::Relu(%388) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %390 : Float(1:1024, 256:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%389, %extras.2.2.weight, %extras.2.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %391 : Float(1:1024, 256:4, 2:2, 2:1) = onnx::Relu(%390) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %392 : Float(1:144, 36:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%391, %classification_headers.4.weight, %classification_headers.4.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %393 : Float(1:144, 2:72, 2:36, 36:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%392) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %394 : Tensor = onnx::Shape(%393)
+  %395 : Tensor = onnx::Constant[value={0}]()
+  %396 : Long() = onnx::Gather[axis=0](%394, %395) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %399 : Tensor = onnx::Unsqueeze[axes=[0]](%396)
+  %402 : Tensor = onnx::Concat[axis=0](%399, %488, %489)
+  %403 : Float(1:144, 24:6, 6:1) = onnx::Reshape(%393, %402) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %404 : Float(1:96, 24:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%391, %regression_headers.4.weight, %regression_headers.4.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %405 : Float(1:96, 2:48, 2:24, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%404) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %406 : Tensor = onnx::Shape(%405)
+  %407 : Tensor = onnx::Constant[value={0}]()
+  %408 : Long() = onnx::Gather[axis=0](%406, %407) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %411 : Tensor = onnx::Unsqueeze[axes=[0]](%408)
+  %414 : Tensor = onnx::Concat[axis=0](%411, %490, %491)
+  %415 : Float(1:96, 24:4, 4:1) = onnx::Reshape(%405, %414) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %416 : Float(1:512, 128:4, 2:2, 2:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[1, 1], pads=[0, 0, 0, 0], strides=[1, 1]](%391, %extras.3.0.weight, %extras.3.0.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %417 : Float(1:512, 128:4, 2:2, 2:1) = onnx::Relu(%416) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %418 : Float(1:256, 256:1, 1:1, 1:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[2, 2]](%417, %extras.3.2.weight, %extras.3.2.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %419 : Float(1:256, 256:1, 1:1, 1:1) = onnx::Relu(%418) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1119:0
+  %420 : Float(1:36, 36:1, 1:1, 1:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%419, %classification_headers.5.weight, %classification_headers.5.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %421 : Float(1:36, 1:1, 1:1, 36:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%420) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:102:0
+  %422 : Tensor = onnx::Shape(%421)
+  %423 : Tensor = onnx::Constant[value={0}]()
+  %424 : Long() = onnx::Gather[axis=0](%422, %423) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %427 : Tensor = onnx::Unsqueeze[axes=[0]](%424)
+  %430 : Tensor = onnx::Concat[axis=0](%427, %492, %493)
+  %431 : Float(1:36, 6:6, 6:1) = onnx::Reshape(%421, %430) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:103:0
+  %432 : Float(1:24, 24:1, 1:1, 1:1) = onnx::Conv[dilations=[1, 1], group=1, kernel_shape=[3, 3], pads=[1, 1, 1, 1], strides=[1, 1]](%419, %regression_headers.5.weight, %regression_headers.5.bias) # /usr/local/lib/python3.6/dist-packages/torch/nn/modules/conv.py:416:0
+  %433 : Float(1:24, 1:1, 1:1, 24:1) = onnx::Transpose[perm=[0, 2, 3, 1]](%432) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:106:0
+  %434 : Tensor = onnx::Shape(%433)
+  %435 : Tensor = onnx::Constant[value={0}]()
+  %436 : Long() = onnx::Gather[axis=0](%434, %435) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %439 : Tensor = onnx::Unsqueeze[axes=[0]](%436)
+  %442 : Tensor = onnx::Concat[axis=0](%439, %494, %495)
+  %443 : Float(1:24, 6:4, 4:1) = onnx::Reshape(%433, %442) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:107:0
+  %444 : Float(1:18000, 3000:6, 6:1) = onnx::Concat[axis=1](%283, %319, %347, %375, %403, %431) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:87:0
+  %445 : Float(1:12000, 3000:4, 4:1) = onnx::Concat[axis=1](%295, %331, %359, %387, %415, %443) # /jetson-inference/python/training/detection/ssd/vision/ssd/ssd.py:88:0
+  %scores : Float(1:18000, 3000:6, 6:1) = onnx::Softmax[axis=2](%444) # /usr/local/lib/python3.6/dist-packages/torch/nn/functional.py:1498:0
+  %447 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[2], starts=[0]](%445) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:104:0
+  %448 : Float() = onnx::Constant[value={0.1}]()
+  %449 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%447, %448)
+  %450 : Float(1:12000, 3000:4, 2:1) = onnx::Constant[value=<Tensor>]()
+  %451 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%449, %450) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:104:0
+  %452 : Float(1:12000, 3000:4, 2:1) = onnx::Constant[value=<Tensor>]()
+  %453 : Float(1:6000, 3000:2, 2:1) = onnx::Add(%451, %452) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:104:0
+  %454 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[9223372036854775807], starts=[2]](%445) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:105:0
+  %455 : Float() = onnx::Constant[value={0.2}]()
+  %456 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%454, %455)
+  %457 : Float(1:6000, 3000:2, 2:1) = onnx::Exp(%456) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:105:0
+  %458 : Float(1:12000, 3000:4, 2:1) = onnx::Constant[value=<Tensor>]()
+  %459 : Float(1:6000, 3000:2, 2:1) = onnx::Mul(%457, %458) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:105:0
+  %460 : Float(1:12000, 3000:4, 4:1) = onnx::Concat[axis=2](%453, %459) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:106:0
+  %461 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[2], starts=[0]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:208:0
+  %462 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[9223372036854775807], starts=[2]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:208:0
+  %463 : Float() = onnx::Constant[value={2}]()
+  %464 : Float(1:6000, 3000:2, 2:1) = onnx::Div(%462, %463)
+  %465 : Float(1:6000, 3000:2, 2:1) = onnx::Sub(%461, %464) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:208:0
+  %466 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[2], starts=[0]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  %467 : Float(1:12000, 3000:4, 2:1) = onnx::Slice[axes=[2], ends=[9223372036854775807], starts=[2]](%460) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  %468 : Float() = onnx::Constant[value={2}]()
+  %469 : Float(1:6000, 3000:2, 2:1) = onnx::Div(%467, %468)
+  %470 : Float(1:6000, 3000:2, 2:1) = onnx::Add(%466, %469) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  %boxes : Float(1:12000, 3000:4, 4:1) = onnx::Concat[axis=2](%465, %470) # /jetson-inference/python/training/detection/ssd/vision/utils/box_utils.py:209:0
+  return (%scores, %boxes)
+
+model exported to:  models/smd/ssd-mobilenet.onnx
+task done, exiting program
+
+
+mb1-ssd-Epoch-0-Loss-5.676019477591274.pth
+mb1-ssd-Epoch-1-Loss-4.6990503147046825.pth
+mb1-ssd-Epoch-10-Loss-3.502759838689227.pth
+mb1-ssd-Epoch-11-Loss-3.2609427101732247.pth
+mb1-ssd-Epoch-12-Loss-3.298850999586778.pth
+mb1-ssd-Epoch-13-Loss-2.9934345142278493.pth
+mb1-ssd-Epoch-14-Loss-3.222836759109396.pth
+mb1-ssd-Epoch-15-Loss-3.1651931027597713.pth
+mb1-ssd-Epoch-16-Loss-3.116286209312611.pth
+mb1-ssd-Epoch-17-Loss-2.96777096410487.pth
+mb1-ssd-Epoch-18-Loss-2.996637411712019.pth
+mb1-ssd-Epoch-19-Loss-2.9215710701060233.pth
+mb1-ssd-Epoch-2-Loss-4.441103902672583.pth
+mb1-ssd-Epoch-20-Loss-2.874666529364232.pth
+mb1-ssd-Epoch-21-Loss-2.7195308599176395.pth
+mb1-ssd-Epoch-22-Loss-2.9128440213772597.pth
+mb1-ssd-Epoch-23-Loss-2.580693297621742.pth
+mb1-ssd-Epoch-24-Loss-2.5818302169718854.pth
+mb1-ssd-Epoch-25-Loss-2.6521828530914586.pth
+mb1-ssd-Epoch-26-Loss-2.5893342346150616.pth
+mb1-ssd-Epoch-27-Loss-2.559517620492045.pth
+mb1-ssd-Epoch-28-Loss-2.7055033002078375.pth
+mb1-ssd-Epoch-29-Loss-2.598004422548279.pth
+mb1-ssd-Epoch-3-Loss-4.7180873463893755.pth
+mb1-ssd-Epoch-30-Loss-2.381281489659526.pth
+mb1-ssd-Epoch-31-Loss-2.520071482073407.pth
+mb1-ssd-Epoch-32-Loss-2.492110886628337.pth
+mb1-ssd-Epoch-33-Loss-2.345467963984696.pth
+mb1-ssd-Epoch-34-Loss-2.4050874815221173.pth
+mb1-ssd-Epoch-35-Loss-2.380620375690631.pth
+mb1-ssd-Epoch-36-Loss-2.4604983166136853.pth
+mb1-ssd-Epoch-37-Loss-2.3091527456788232.pth
+mb1-ssd-Epoch-38-Loss-2.4773566464767534.pth
+mb1-ssd-Epoch-39-Loss-2.268765538733265.pth
+mb1-ssd-Epoch-4-Loss-4.088665974393131.pth
+mb1-ssd-Epoch-40-Loss-2.2683254440243426.pth
+mb1-ssd-Epoch-41-Loss-2.24031593211845.pth
+mb1-ssd-Epoch-42-Loss-2.1897549826246676.pth
+mb1-ssd-Epoch-43-Loss-2.2115245379052997.pth
+mb1-ssd-Epoch-44-Loss-2.2699897444809465.pth
+mb1-ssd-Epoch-5-Loss-3.9867536582111995.pth
+mb1-ssd-Epoch-6-Loss-3.827962499793708.pth
+mb1-ssd-Epoch-7-Loss-3.7054855145257095.pth
+mb1-ssd-Epoch-8-Loss-3.528835095603523.pth
+mb1-ssd-Epoch-9-Loss-3.525955967308672.pth
+

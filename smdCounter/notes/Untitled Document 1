@@ -1,0 +1,28 @@
+python3 train_ssd.py --dataset-type=voc --data=data/smd --model-dir=models/smd --batch-size=2 --workers=1 --epochs=15
+
+detectnet --model=models/smd/ssd-mobilenet.onnx --labels=models/smd/labels.txt --input-blob=input_0 --output-cvg=scores --output-bbox=boxes csi://0
+
+python3 onnx_export.py --model-dir=models/smd
+
+sudo rm
+
+detectnet --model=models/smdsmall/ssd-mobilenet.onnx --labels=models/smdsmall/labels.txt --input-blobl=input_0 --output-cvg=scores --output-bbox=boxes "/jetson-inference/python/training/detection/ssd/data/smdsmall/JPEGImages/20210520-******.jpg" /jetson-inference/data/images/test/smdtest_%i.jpg
+
+detectnet --model=models/smd/ssd-mobilenet.onnx --labels=models/smd/labels.txt --input-blob=input_0 --output-cvg=scores --output-bbox=boxes "/jetson-inference/python/training/detection/ssd/data/smdsmall/JPEGImages/20210520-******.jpg" /jetson-inference/data/images/test/smd_%i.jpg
+
+1003 starting
+319 - single resistor
+1322
+337 - single condensator
+1659
+491 - single diode
+2150
+328 - trio
+2478
+157 - resistor pack
+2635
+157 - condensator pack
+2739
+208 - diode pack
+2947
+3005

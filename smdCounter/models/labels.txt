@@ -1,0 +1,6 @@
+BACKGROUND
+Condensator
+Resistor
+Diode
+Inductor
+Transistor

@@ -1,0 +1,535 @@
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# python3 train_ssd.py --dataset-type=voc --data=data/smdsmall --model-dir=models/smdsmall --batch-size=2 --workers=1 --epochs=30
+2021-05-21 18:05:09 - Using CUDA...
+2021-05-21 18:05:09 - Namespace(balance_data=False, base_net=None, base_net_lr=0.001, batch_size=2, checkpoint_folder='models/smdsmall', dataset_type='voc', datasets=['data/smdsmall'], debug_steps=10, extra_layers_lr=None, freeze_base_net=False, freeze_net=False, gamma=0.1, lr=0.01, mb2_width_mult=1.0, milestones='80,100', momentum=0.9, net='mb1-ssd', num_epochs=30, num_workers=1, pretrained_ssd='models/mobilenet-v1-ssd-mp-0_675.pth', resume=None, scheduler='cosine', t_max=100, use_cuda=True, validation_epochs=1, weight_decay=0.0005)
+2021-05-21 18:05:09 - Prepare training datasets.
+2021-05-21 18:05:09 - VOC Labels read from file: ('BACKGROUND', 'Condensator', 'Resistor', 'Diode')
+2021-05-21 18:05:09 - Stored labels into file models/smdsmall/labels.txt.
+2021-05-21 18:05:09 - Train dataset size: 303
+2021-05-21 18:05:09 - Prepare Validation datasets.
+2021-05-21 18:05:09 - VOC Labels read from file: ('BACKGROUND', 'Condensator', 'Resistor', 'Diode')
+2021-05-21 18:05:09 - Validation dataset size: 303
+2021-05-21 18:05:09 - Build network.
+2021-05-21 18:05:10 - Init from pretrained ssd models/mobilenet-v1-ssd-mp-0_675.pth
+2021-05-21 18:05:10 - Took 0.49 seconds to load the model.
+2021-05-21 18:05:23 - Learning rate: 0.01, Base net learning rate: 0.001, Extra Layers learning rate: 0.01.
+2021-05-21 18:05:23 - Uses CosineAnnealingLR scheduler.
+2021-05-21 18:05:23 - Start training from epoch 0.
+/usr/local/lib/python3.6/dist-packages/torch/optim/lr_scheduler.py:123: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  "https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate", UserWarning)
+/usr/local/lib/python3.6/dist-packages/torch/nn/_reduction.py:44: UserWarning: size_average and reduce args will be deprecated, please use reduction='sum' instead.
+  warnings.warn(warning.format(ret))
+2021-05-21 18:05:50 - Epoch: 0, Step: 10/152, Avg Loss: 22.0440, Avg Regression Loss 7.6356, Avg Classification Loss: 14.4084
+2021-05-21 18:06:02 - Epoch: 0, Step: 20/152, Avg Loss: 16.2994, Avg Regression Loss 7.2182, Avg Classification Loss: 9.0812
+2021-05-21 18:06:07 - Epoch: 0, Step: 30/152, Avg Loss: 12.4247, Avg Regression Loss 5.0451, Avg Classification Loss: 7.3796
+2021-05-21 18:06:17 - Epoch: 0, Step: 40/152, Avg Loss: 13.3831, Avg Regression Loss 7.8195, Avg Classification Loss: 5.5636
+2021-05-21 18:06:26 - Epoch: 0, Step: 50/152, Avg Loss: 13.3499, Avg Regression Loss 7.4365, Avg Classification Loss: 5.9134
+2021-05-21 18:06:40 - Epoch: 0, Step: 60/152, Avg Loss: 11.4572, Avg Regression Loss 6.6264, Avg Classification Loss: 4.8308
+2021-05-21 18:06:46 - Epoch: 0, Step: 70/152, Avg Loss: 12.9228, Avg Regression Loss 7.2285, Avg Classification Loss: 5.6943
+2021-05-21 18:06:51 - Epoch: 0, Step: 80/152, Avg Loss: 8.8170, Avg Regression Loss 4.5658, Avg Classification Loss: 4.2512
+2021-05-21 18:06:56 - Epoch: 0, Step: 90/152, Avg Loss: 10.1285, Avg Regression Loss 5.3824, Avg Classification Loss: 4.7461
+2021-05-21 18:07:01 - Epoch: 0, Step: 100/152, Avg Loss: 10.3485, Avg Regression Loss 5.1880, Avg Classification Loss: 5.1605
+2021-05-21 18:07:07 - Epoch: 0, Step: 110/152, Avg Loss: 8.8211, Avg Regression Loss 3.9828, Avg Classification Loss: 4.8383
+2021-05-21 18:07:13 - Epoch: 0, Step: 120/152, Avg Loss: 8.8178, Avg Regression Loss 4.7474, Avg Classification Loss: 4.0704
+2021-05-21 18:07:18 - Epoch: 0, Step: 130/152, Avg Loss: 6.3977, Avg Regression Loss 2.5312, Avg Classification Loss: 3.8666
+2021-05-21 18:07:24 - Epoch: 0, Step: 140/152, Avg Loss: 8.8012, Avg Regression Loss 4.7633, Avg Classification Loss: 4.0379
+2021-05-21 18:07:28 - Epoch: 0, Step: 150/152, Avg Loss: 10.3221, Avg Regression Loss 6.0406, Avg Classification Loss: 4.2815
+2021-05-21 18:07:50 - Epoch: 0, Validation Loss: 8.2229, Validation Regression Loss 4.0122, Validation Classification Loss: 4.2107
+2021-05-21 18:07:50 - Saved model models/smdsmall/mb1-ssd-Epoch-0-Loss-8.222914943569585.pth
+2021-05-21 18:08:02 - Epoch: 1, Step: 10/152, Avg Loss: 7.9627, Avg Regression Loss 3.6459, Avg Classification Loss: 4.3168
+2021-05-21 18:08:09 - Epoch: 1, Step: 20/152, Avg Loss: 8.1763, Avg Regression Loss 4.0135, Avg Classification Loss: 4.1628
+2021-05-21 18:08:18 - Epoch: 1, Step: 30/152, Avg Loss: 7.4106, Avg Regression Loss 3.4021, Avg Classification Loss: 4.0086
+2021-05-21 18:08:28 - Epoch: 1, Step: 40/152, Avg Loss: 8.4639, Avg Regression Loss 4.2261, Avg Classification Loss: 4.2378
+2021-05-21 18:08:33 - Epoch: 1, Step: 50/152, Avg Loss: 8.3408, Avg Regression Loss 4.2052, Avg Classification Loss: 4.1357
+2021-05-21 18:08:39 - Epoch: 1, Step: 60/152, Avg Loss: 14.5862, Avg Regression Loss 6.9846, Avg Classification Loss: 7.6016
+2021-05-21 18:08:44 - Epoch: 1, Step: 70/152, Avg Loss: 9.7506, Avg Regression Loss 5.5349, Avg Classification Loss: 4.2156
+2021-05-21 18:08:49 - Epoch: 1, Step: 80/152, Avg Loss: 8.1904, Avg Regression Loss 3.6821, Avg Classification Loss: 4.5082
+2021-05-21 18:08:53 - Epoch: 1, Step: 90/152, Avg Loss: 8.0575, Avg Regression Loss 3.9232, Avg Classification Loss: 4.1343
+2021-05-21 18:08:58 - Epoch: 1, Step: 100/152, Avg Loss: 7.9772, Avg Regression Loss 4.1714, Avg Classification Loss: 3.8057
+2021-05-21 18:09:03 - Epoch: 1, Step: 110/152, Avg Loss: 8.5823, Avg Regression Loss 4.4831, Avg Classification Loss: 4.0992
+2021-05-21 18:09:08 - Epoch: 1, Step: 120/152, Avg Loss: 8.4431, Avg Regression Loss 4.7450, Avg Classification Loss: 3.6982
+2021-05-21 18:09:14 - Epoch: 1, Step: 130/152, Avg Loss: 8.1576, Avg Regression Loss 4.3639, Avg Classification Loss: 3.7937
+2021-05-21 18:09:19 - Epoch: 1, Step: 140/152, Avg Loss: 7.8265, Avg Regression Loss 3.7619, Avg Classification Loss: 4.0646
+2021-05-21 18:09:27 - Epoch: 1, Step: 150/152, Avg Loss: 8.8987, Avg Regression Loss 4.6465, Avg Classification Loss: 4.2522
+2021-05-21 18:09:45 - Epoch: 1, Validation Loss: 6.0667, Validation Regression Loss 2.1069, Validation Classification Loss: 3.9597
+2021-05-21 18:09:45 - Saved model models/smdsmall/mb1-ssd-Epoch-1-Loss-6.066684544086456.pth
+2021-05-21 18:09:50 - Epoch: 2, Step: 10/152, Avg Loss: 7.9929, Avg Regression Loss 3.5547, Avg Classification Loss: 4.4382
+2021-05-21 18:09:55 - Epoch: 2, Step: 20/152, Avg Loss: 7.9714, Avg Regression Loss 4.1322, Avg Classification Loss: 3.8392
+2021-05-21 18:10:00 - Epoch: 2, Step: 30/152, Avg Loss: 7.3909, Avg Regression Loss 3.4524, Avg Classification Loss: 3.9385
+2021-05-21 18:10:18 - Epoch: 2, Step: 40/152, Avg Loss: 7.2863, Avg Regression Loss 3.4097, Avg Classification Loss: 3.8767
+2021-05-21 18:10:23 - Epoch: 2, Step: 50/152, Avg Loss: 9.6429, Avg Regression Loss 5.1346, Avg Classification Loss: 4.5083
+2021-05-21 18:10:28 - Epoch: 2, Step: 60/152, Avg Loss: 8.2267, Avg Regression Loss 4.3951, Avg Classification Loss: 3.8317
+2021-05-21 18:10:34 - Epoch: 2, Step: 70/152, Avg Loss: 6.6512, Avg Regression Loss 3.1001, Avg Classification Loss: 3.5511
+2021-05-21 18:10:40 - Epoch: 2, Step: 80/152, Avg Loss: 7.3187, Avg Regression Loss 3.5875, Avg Classification Loss: 3.7312
+2021-05-21 18:10:44 - Epoch: 2, Step: 90/152, Avg Loss: 6.5117, Avg Regression Loss 2.7679, Avg Classification Loss: 3.7438
+2021-05-21 18:10:49 - Epoch: 2, Step: 100/152, Avg Loss: 6.9674, Avg Regression Loss 3.2376, Avg Classification Loss: 3.7297
+2021-05-21 18:10:54 - Epoch: 2, Step: 110/152, Avg Loss: 7.8169, Avg Regression Loss 4.1210, Avg Classification Loss: 3.6959
+2021-05-21 18:10:59 - Epoch: 2, Step: 120/152, Avg Loss: 5.8798, Avg Regression Loss 2.2756, Avg Classification Loss: 3.6042
+2021-05-21 18:11:11 - Epoch: 2, Step: 130/152, Avg Loss: 7.6193, Avg Regression Loss 4.0395, Avg Classification Loss: 3.5798
+2021-05-21 18:11:16 - Epoch: 2, Step: 140/152, Avg Loss: 8.4927, Avg Regression Loss 4.4549, Avg Classification Loss: 4.0377
+2021-05-21 18:11:21 - Epoch: 2, Step: 150/152, Avg Loss: 6.7350, Avg Regression Loss 2.9924, Avg Classification Loss: 3.7426
+2021-05-21 18:11:38 - Epoch: 2, Validation Loss: 5.4676, Validation Regression Loss 1.9849, Validation Classification Loss: 3.4827
+2021-05-21 18:11:38 - Saved model models/smdsmall/mb1-ssd-Epoch-2-Loss-5.467595685469477.pth
+2021-05-21 18:11:44 - Epoch: 3, Step: 10/152, Avg Loss: 7.2283, Avg Regression Loss 3.2291, Avg Classification Loss: 3.9993
+2021-05-21 18:11:53 - Epoch: 3, Step: 20/152, Avg Loss: 6.5552, Avg Regression Loss 2.5371, Avg Classification Loss: 4.0181
+2021-05-21 18:11:58 - Epoch: 3, Step: 30/152, Avg Loss: 6.7299, Avg Regression Loss 3.1063, Avg Classification Loss: 3.6236
+2021-05-21 18:12:02 - Epoch: 3, Step: 40/152, Avg Loss: 8.6698, Avg Regression Loss 4.6551, Avg Classification Loss: 4.0147
+2021-05-21 18:12:09 - Epoch: 3, Step: 50/152, Avg Loss: 6.9975, Avg Regression Loss 3.2253, Avg Classification Loss: 3.7722
+2021-05-21 18:12:14 - Epoch: 3, Step: 60/152, Avg Loss: 8.5091, Avg Regression Loss 4.7667, Avg Classification Loss: 3.7425
+2021-05-21 18:12:20 - Epoch: 3, Step: 70/152, Avg Loss: 6.8239, Avg Regression Loss 2.8939, Avg Classification Loss: 3.9300
+2021-05-21 18:12:25 - Epoch: 3, Step: 80/152, Avg Loss: 6.7788, Avg Regression Loss 3.2133, Avg Classification Loss: 3.5655
+2021-05-21 18:12:29 - Epoch: 3, Step: 90/152, Avg Loss: 7.1446, Avg Regression Loss 3.4300, Avg Classification Loss: 3.7146
+2021-05-21 18:12:34 - Epoch: 3, Step: 100/152, Avg Loss: 6.4450, Avg Regression Loss 2.7068, Avg Classification Loss: 3.7382
+2021-05-21 18:12:38 - Epoch: 3, Step: 110/152, Avg Loss: 6.4437, Avg Regression Loss 2.7635, Avg Classification Loss: 3.6802
+2021-05-21 18:12:43 - Epoch: 3, Step: 120/152, Avg Loss: 6.7756, Avg Regression Loss 3.1490, Avg Classification Loss: 3.6266
+2021-05-21 18:12:51 - Epoch: 3, Step: 130/152, Avg Loss: 6.6327, Avg Regression Loss 2.7512, Avg Classification Loss: 3.8815
+2021-05-21 18:12:55 - Epoch: 3, Step: 140/152, Avg Loss: 6.4072, Avg Regression Loss 2.7281, Avg Classification Loss: 3.6792
+2021-05-21 18:13:00 - Epoch: 3, Step: 150/152, Avg Loss: 6.6369, Avg Regression Loss 2.8601, Avg Classification Loss: 3.7768
+2021-05-21 18:13:17 - Epoch: 3, Validation Loss: 6.5980, Validation Regression Loss 3.0089, Validation Classification Loss: 3.5891
+2021-05-21 18:13:18 - Saved model models/smdsmall/mb1-ssd-Epoch-3-Loss-6.597972038545106.pth
+2021-05-21 18:13:23 - Epoch: 4, Step: 10/152, Avg Loss: 7.9682, Avg Regression Loss 3.8078, Avg Classification Loss: 4.1604
+2021-05-21 18:13:28 - Epoch: 4, Step: 20/152, Avg Loss: 6.5720, Avg Regression Loss 2.7570, Avg Classification Loss: 3.8150
+2021-05-21 18:13:35 - Epoch: 4, Step: 30/152, Avg Loss: 7.0824, Avg Regression Loss 3.2357, Avg Classification Loss: 3.8467
+2021-05-21 18:13:42 - Epoch: 4, Step: 40/152, Avg Loss: 6.5368, Avg Regression Loss 2.6919, Avg Classification Loss: 3.8450
+2021-05-21 18:13:51 - Epoch: 4, Step: 50/152, Avg Loss: 6.3285, Avg Regression Loss 2.5829, Avg Classification Loss: 3.7455
+2021-05-21 18:13:56 - Epoch: 4, Step: 60/152, Avg Loss: 7.2656, Avg Regression Loss 3.5309, Avg Classification Loss: 3.7347
+2021-05-21 18:14:01 - Epoch: 4, Step: 70/152, Avg Loss: 7.4738, Avg Regression Loss 3.4708, Avg Classification Loss: 4.0030
+2021-05-21 18:14:05 - Epoch: 4, Step: 80/152, Avg Loss: 6.7409, Avg Regression Loss 3.0892, Avg Classification Loss: 3.6517
+2021-05-21 18:14:10 - Epoch: 4, Step: 90/152, Avg Loss: 5.6840, Avg Regression Loss 2.1106, Avg Classification Loss: 3.5733
+2021-05-21 18:14:15 - Epoch: 4, Step: 100/152, Avg Loss: 6.5597, Avg Regression Loss 2.8684, Avg Classification Loss: 3.6914
+2021-05-21 18:14:19 - Epoch: 4, Step: 110/152, Avg Loss: 6.6033, Avg Regression Loss 2.9268, Avg Classification Loss: 3.6765
+2021-05-21 18:14:24 - Epoch: 4, Step: 120/152, Avg Loss: 5.5671, Avg Regression Loss 2.0762, Avg Classification Loss: 3.4909
+2021-05-21 18:14:28 - Epoch: 4, Step: 130/152, Avg Loss: 5.0977, Avg Regression Loss 1.6778, Avg Classification Loss: 3.4198
+2021-05-21 18:14:33 - Epoch: 4, Step: 140/152, Avg Loss: 6.0605, Avg Regression Loss 2.6178, Avg Classification Loss: 3.4427
+2021-05-21 18:14:38 - Epoch: 4, Step: 150/152, Avg Loss: 7.1124, Avg Regression Loss 3.3362, Avg Classification Loss: 3.7762
+2021-05-21 18:14:55 - Epoch: 4, Validation Loss: 5.9390, Validation Regression Loss 2.3057, Validation Classification Loss: 3.6333
+2021-05-21 18:14:55 - Saved model models/smdsmall/mb1-ssd-Epoch-4-Loss-5.938971972779224.pth
+2021-05-21 18:15:01 - Epoch: 5, Step: 10/152, Avg Loss: 7.6093, Avg Regression Loss 3.5328, Avg Classification Loss: 4.0765
+2021-05-21 18:15:06 - Epoch: 5, Step: 20/152, Avg Loss: 6.0135, Avg Regression Loss 2.3114, Avg Classification Loss: 3.7022
+2021-05-21 18:15:13 - Epoch: 5, Step: 30/152, Avg Loss: 5.9579, Avg Regression Loss 2.3897, Avg Classification Loss: 3.5681
+2021-05-21 18:15:18 - Epoch: 5, Step: 40/152, Avg Loss: 6.0279, Avg Regression Loss 2.6537, Avg Classification Loss: 3.3742
+2021-05-21 18:15:22 - Epoch: 5, Step: 50/152, Avg Loss: 6.9006, Avg Regression Loss 3.2914, Avg Classification Loss: 3.6091
+2021-05-21 18:15:27 - Epoch: 5, Step: 60/152, Avg Loss: 6.3301, Avg Regression Loss 2.6930, Avg Classification Loss: 3.6371
+2021-05-21 18:15:32 - Epoch: 5, Step: 70/152, Avg Loss: 6.6595, Avg Regression Loss 2.7388, Avg Classification Loss: 3.9208
+2021-05-21 18:15:37 - Epoch: 5, Step: 80/152, Avg Loss: 6.7506, Avg Regression Loss 3.1671, Avg Classification Loss: 3.5834
+2021-05-21 18:15:41 - Epoch: 5, Step: 90/152, Avg Loss: 6.6422, Avg Regression Loss 2.8192, Avg Classification Loss: 3.8230
+2021-05-21 18:15:46 - Epoch: 5, Step: 100/152, Avg Loss: 6.1271, Avg Regression Loss 2.6149, Avg Classification Loss: 3.5122
+2021-05-21 18:15:51 - Epoch: 5, Step: 110/152, Avg Loss: 6.5806, Avg Regression Loss 2.9378, Avg Classification Loss: 3.6428
+2021-05-21 18:15:56 - Epoch: 5, Step: 120/152, Avg Loss: 7.2874, Avg Regression Loss 3.6668, Avg Classification Loss: 3.6206
+2021-05-21 18:16:02 - Epoch: 5, Step: 130/152, Avg Loss: 6.5958, Avg Regression Loss 2.8006, Avg Classification Loss: 3.7952
+2021-05-21 18:16:09 - Epoch: 5, Step: 140/152, Avg Loss: 7.0528, Avg Regression Loss 3.3073, Avg Classification Loss: 3.7456
+2021-05-21 18:16:13 - Epoch: 5, Step: 150/152, Avg Loss: 5.8886, Avg Regression Loss 2.2567, Avg Classification Loss: 3.6319
+2021-05-21 18:16:31 - Epoch: 5, Validation Loss: 5.2816, Validation Regression Loss 1.7177, Validation Classification Loss: 3.5639
+2021-05-21 18:16:31 - Saved model models/smdsmall/mb1-ssd-Epoch-5-Loss-5.281595212848563.pth
+2021-05-21 18:16:37 - Epoch: 6, Step: 10/152, Avg Loss: 8.1559, Avg Regression Loss 4.1081, Avg Classification Loss: 4.0477
+2021-05-21 18:16:41 - Epoch: 6, Step: 20/152, Avg Loss: 5.6513, Avg Regression Loss 2.1583, Avg Classification Loss: 3.4930
+2021-05-21 18:16:51 - Epoch: 6, Step: 30/152, Avg Loss: 6.1011, Avg Regression Loss 2.5363, Avg Classification Loss: 3.5648
+2021-05-21 18:16:56 - Epoch: 6, Step: 40/152, Avg Loss: 6.1565, Avg Regression Loss 2.4045, Avg Classification Loss: 3.7519
+2021-05-21 18:17:01 - Epoch: 6, Step: 50/152, Avg Loss: 6.0797, Avg Regression Loss 2.6205, Avg Classification Loss: 3.4592
+2021-05-21 18:17:06 - Epoch: 6, Step: 60/152, Avg Loss: 5.5791, Avg Regression Loss 2.2161, Avg Classification Loss: 3.3629
+2021-05-21 18:17:11 - Epoch: 6, Step: 70/152, Avg Loss: 6.4587, Avg Regression Loss 2.7934, Avg Classification Loss: 3.6653
+2021-05-21 18:17:15 - Epoch: 6, Step: 80/152, Avg Loss: 5.0636, Avg Regression Loss 1.5852, Avg Classification Loss: 3.4784
+2021-05-21 18:17:20 - Epoch: 6, Step: 90/152, Avg Loss: 5.8086, Avg Regression Loss 2.1123, Avg Classification Loss: 3.6963
+2021-05-21 18:17:24 - Epoch: 6, Step: 100/152, Avg Loss: 5.0083, Avg Regression Loss 1.5984, Avg Classification Loss: 3.4099
+2021-05-21 18:17:29 - Epoch: 6, Step: 110/152, Avg Loss: 6.1091, Avg Regression Loss 2.5870, Avg Classification Loss: 3.5221
+2021-05-21 18:17:33 - Epoch: 6, Step: 120/152, Avg Loss: 6.4580, Avg Regression Loss 2.9420, Avg Classification Loss: 3.5160
+2021-05-21 18:17:38 - Epoch: 6, Step: 130/152, Avg Loss: 5.9150, Avg Regression Loss 2.2470, Avg Classification Loss: 3.6681
+2021-05-21 18:17:43 - Epoch: 6, Step: 140/152, Avg Loss: 6.0084, Avg Regression Loss 2.4945, Avg Classification Loss: 3.5139
+2021-05-21 18:17:48 - Epoch: 6, Step: 150/152, Avg Loss: 6.4014, Avg Regression Loss 2.5602, Avg Classification Loss: 3.8411
+2021-05-21 18:18:05 - Epoch: 6, Validation Loss: 4.8699, Validation Regression Loss 1.4078, Validation Classification Loss: 3.4621
+2021-05-21 18:18:06 - Saved model models/smdsmall/mb1-ssd-Epoch-6-Loss-4.86987956730943.pth
+2021-05-21 18:18:15 - Epoch: 7, Step: 10/152, Avg Loss: 6.6220, Avg Regression Loss 2.7365, Avg Classification Loss: 3.8855
+2021-05-21 18:18:20 - Epoch: 7, Step: 20/152, Avg Loss: 6.1048, Avg Regression Loss 2.5526, Avg Classification Loss: 3.5521
+2021-05-21 18:18:27 - Epoch: 7, Step: 30/152, Avg Loss: 6.0914, Avg Regression Loss 2.4782, Avg Classification Loss: 3.6132
+2021-05-21 18:18:31 - Epoch: 7, Step: 40/152, Avg Loss: 6.5058, Avg Regression Loss 2.7123, Avg Classification Loss: 3.7936
+2021-05-21 18:18:36 - Epoch: 7, Step: 50/152, Avg Loss: 5.4250, Avg Regression Loss 1.9205, Avg Classification Loss: 3.5045
+2021-05-21 18:18:41 - Epoch: 7, Step: 60/152, Avg Loss: 5.6320, Avg Regression Loss 1.9206, Avg Classification Loss: 3.7114
+2021-05-21 18:18:46 - Epoch: 7, Step: 70/152, Avg Loss: 5.7644, Avg Regression Loss 2.1990, Avg Classification Loss: 3.5655
+2021-05-21 18:18:51 - Epoch: 7, Step: 80/152, Avg Loss: 5.3449, Avg Regression Loss 1.7271, Avg Classification Loss: 3.6178
+2021-05-21 18:18:55 - Epoch: 7, Step: 90/152, Avg Loss: 5.5371, Avg Regression Loss 2.0492, Avg Classification Loss: 3.4878
+2021-05-21 18:19:00 - Epoch: 7, Step: 100/152, Avg Loss: 5.2615, Avg Regression Loss 1.6652, Avg Classification Loss: 3.5963
+2021-05-21 18:19:04 - Epoch: 7, Step: 110/152, Avg Loss: 5.4664, Avg Regression Loss 2.1914, Avg Classification Loss: 3.2750
+2021-05-21 18:19:09 - Epoch: 7, Step: 120/152, Avg Loss: 6.1034, Avg Regression Loss 2.6407, Avg Classification Loss: 3.4627
+2021-05-21 18:19:14 - Epoch: 7, Step: 130/152, Avg Loss: 6.3662, Avg Regression Loss 2.9250, Avg Classification Loss: 3.4412
+2021-05-21 18:19:19 - Epoch: 7, Step: 140/152, Avg Loss: 5.5501, Avg Regression Loss 2.0023, Avg Classification Loss: 3.5478
+2021-05-21 18:19:24 - Epoch: 7, Step: 150/152, Avg Loss: 6.0717, Avg Regression Loss 2.4454, Avg Classification Loss: 3.6263
+2021-05-21 18:19:41 - Epoch: 7, Validation Loss: 5.9065, Validation Regression Loss 2.3040, Validation Classification Loss: 3.6026
+2021-05-21 18:19:41 - Saved model models/smdsmall/mb1-ssd-Epoch-7-Loss-5.906546807602832.pth
+2021-05-21 18:19:47 - Epoch: 8, Step: 10/152, Avg Loss: 5.6034, Avg Regression Loss 1.7953, Avg Classification Loss: 3.8081
+2021-05-21 18:19:51 - Epoch: 8, Step: 20/152, Avg Loss: 6.1942, Avg Regression Loss 2.3822, Avg Classification Loss: 3.8120
+2021-05-21 18:19:56 - Epoch: 8, Step: 30/152, Avg Loss: 6.4444, Avg Regression Loss 2.6494, Avg Classification Loss: 3.7950
+2021-05-21 18:20:01 - Epoch: 8, Step: 40/152, Avg Loss: 5.4121, Avg Regression Loss 1.8220, Avg Classification Loss: 3.5901
+2021-05-21 18:20:13 - Epoch: 8, Step: 50/152, Avg Loss: 6.0795, Avg Regression Loss 2.6012, Avg Classification Loss: 3.4782
+2021-05-21 18:20:18 - Epoch: 8, Step: 60/152, Avg Loss: 5.7665, Avg Regression Loss 2.2110, Avg Classification Loss: 3.5555
+2021-05-21 18:20:22 - Epoch: 8, Step: 70/152, Avg Loss: 5.6387, Avg Regression Loss 2.0399, Avg Classification Loss: 3.5987
+2021-05-21 18:20:27 - Epoch: 8, Step: 80/152, Avg Loss: 5.5439, Avg Regression Loss 2.0673, Avg Classification Loss: 3.4766
+2021-05-21 18:20:31 - Epoch: 8, Step: 90/152, Avg Loss: 5.3628, Avg Regression Loss 1.6142, Avg Classification Loss: 3.7486
+2021-05-21 18:20:36 - Epoch: 8, Step: 100/152, Avg Loss: 4.9739, Avg Regression Loss 1.4656, Avg Classification Loss: 3.5084
+2021-05-21 18:20:40 - Epoch: 8, Step: 110/152, Avg Loss: 5.5545, Avg Regression Loss 1.9484, Avg Classification Loss: 3.6061
+2021-05-21 18:20:45 - Epoch: 8, Step: 120/152, Avg Loss: 6.2304, Avg Regression Loss 2.6006, Avg Classification Loss: 3.6298
+2021-05-21 18:20:50 - Epoch: 8, Step: 130/152, Avg Loss: 6.9475, Avg Regression Loss 3.3501, Avg Classification Loss: 3.5975
+2021-05-21 18:20:54 - Epoch: 8, Step: 140/152, Avg Loss: 5.9360, Avg Regression Loss 2.4098, Avg Classification Loss: 3.5261
+2021-05-21 18:20:59 - Epoch: 8, Step: 150/152, Avg Loss: 6.1343, Avg Regression Loss 2.5151, Avg Classification Loss: 3.6192
+2021-05-21 18:21:16 - Epoch: 8, Validation Loss: 5.1899, Validation Regression Loss 1.7534, Validation Classification Loss: 3.4365
+2021-05-21 18:21:16 - Saved model models/smdsmall/mb1-ssd-Epoch-8-Loss-5.189923416627081.pth
+2021-05-21 18:21:24 - Epoch: 9, Step: 10/152, Avg Loss: 6.8411, Avg Regression Loss 2.8827, Avg Classification Loss: 3.9584
+2021-05-21 18:21:28 - Epoch: 9, Step: 20/152, Avg Loss: 5.6515, Avg Regression Loss 2.1870, Avg Classification Loss: 3.4645
+2021-05-21 18:21:33 - Epoch: 9, Step: 30/152, Avg Loss: 5.2941, Avg Regression Loss 1.9075, Avg Classification Loss: 3.3866
+2021-05-21 18:21:37 - Epoch: 9, Step: 40/152, Avg Loss: 6.0139, Avg Regression Loss 2.4239, Avg Classification Loss: 3.5900
+2021-05-21 18:21:45 - Epoch: 9, Step: 50/152, Avg Loss: 6.3937, Avg Regression Loss 2.8856, Avg Classification Loss: 3.5081
+2021-05-21 18:21:52 - Epoch: 9, Step: 60/152, Avg Loss: 5.3038, Avg Regression Loss 2.0312, Avg Classification Loss: 3.2726
+2021-05-21 18:21:57 - Epoch: 9, Step: 70/152, Avg Loss: 5.5067, Avg Regression Loss 1.8492, Avg Classification Loss: 3.6576
+2021-05-21 18:22:02 - Epoch: 9, Step: 80/152, Avg Loss: 5.6021, Avg Regression Loss 2.0981, Avg Classification Loss: 3.5040
+2021-05-21 18:22:06 - Epoch: 9, Step: 90/152, Avg Loss: 5.3212, Avg Regression Loss 1.8006, Avg Classification Loss: 3.5206
+2021-05-21 18:22:11 - Epoch: 9, Step: 100/152, Avg Loss: 4.9951, Avg Regression Loss 1.6614, Avg Classification Loss: 3.3337
+2021-05-21 18:22:15 - Epoch: 9, Step: 110/152, Avg Loss: 5.9384, Avg Regression Loss 2.2975, Avg Classification Loss: 3.6409
+2021-05-21 18:22:23 - Epoch: 9, Step: 120/152, Avg Loss: 5.7567, Avg Regression Loss 2.0955, Avg Classification Loss: 3.6611
+2021-05-21 18:22:27 - Epoch: 9, Step: 130/152, Avg Loss: 5.5202, Avg Regression Loss 1.9352, Avg Classification Loss: 3.5850
+2021-05-21 18:22:32 - Epoch: 9, Step: 140/152, Avg Loss: 6.1759, Avg Regression Loss 2.7351, Avg Classification Loss: 3.4408
+2021-05-21 18:22:37 - Epoch: 9, Step: 150/152, Avg Loss: 5.0944, Avg Regression Loss 1.5934, Avg Classification Loss: 3.5010
+2021-05-21 18:22:54 - Epoch: 9, Validation Loss: 5.5807, Validation Regression Loss 2.1816, Validation Classification Loss: 3.3992
+2021-05-21 18:22:54 - Saved model models/smdsmall/mb1-ssd-Epoch-9-Loss-5.580723840939371.pth
+2021-05-21 18:23:00 - Epoch: 10, Step: 10/152, Avg Loss: 5.5404, Avg Regression Loss 1.7138, Avg Classification Loss: 3.8266
+2021-05-21 18:23:04 - Epoch: 10, Step: 20/152, Avg Loss: 5.8775, Avg Regression Loss 2.3471, Avg Classification Loss: 3.5304
+2021-05-21 18:23:15 - Epoch: 10, Step: 30/152, Avg Loss: 5.4093, Avg Regression Loss 1.9958, Avg Classification Loss: 3.4136
+2021-05-21 18:23:19 - Epoch: 10, Step: 40/152, Avg Loss: 5.5815, Avg Regression Loss 2.0838, Avg Classification Loss: 3.4977
+2021-05-21 18:23:24 - Epoch: 10, Step: 50/152, Avg Loss: 6.8323, Avg Regression Loss 3.1169, Avg Classification Loss: 3.7153
+2021-05-21 18:23:29 - Epoch: 10, Step: 60/152, Avg Loss: 5.4817, Avg Regression Loss 1.9897, Avg Classification Loss: 3.4920
+2021-05-21 18:23:33 - Epoch: 10, Step: 70/152, Avg Loss: 5.4649, Avg Regression Loss 1.8879, Avg Classification Loss: 3.5770
+2021-05-21 18:23:38 - Epoch: 10, Step: 80/152, Avg Loss: 4.9451, Avg Regression Loss 1.5958, Avg Classification Loss: 3.3494
+2021-05-21 18:23:42 - Epoch: 10, Step: 90/152, Avg Loss: 5.2904, Avg Regression Loss 1.8142, Avg Classification Loss: 3.4761
+2021-05-21 18:23:47 - Epoch: 10, Step: 100/152, Avg Loss: 5.8037, Avg Regression Loss 2.1461, Avg Classification Loss: 3.6576
+2021-05-21 18:23:52 - Epoch: 10, Step: 110/152, Avg Loss: 6.0013, Avg Regression Loss 2.4969, Avg Classification Loss: 3.5044
+2021-05-21 18:23:56 - Epoch: 10, Step: 120/152, Avg Loss: 5.4870, Avg Regression Loss 1.9983, Avg Classification Loss: 3.4887
+2021-05-21 18:24:02 - Epoch: 10, Step: 130/152, Avg Loss: 6.3372, Avg Regression Loss 2.7021, Avg Classification Loss: 3.6350
+2021-05-21 18:24:06 - Epoch: 10, Step: 140/152, Avg Loss: 5.0428, Avg Regression Loss 1.5390, Avg Classification Loss: 3.5039
+2021-05-21 18:24:11 - Epoch: 10, Step: 150/152, Avg Loss: 6.2718, Avg Regression Loss 2.9561, Avg Classification Loss: 3.3157
+2021-05-21 18:24:29 - Epoch: 10, Validation Loss: 4.6249, Validation Regression Loss 1.2649, Validation Classification Loss: 3.3600
+2021-05-21 18:24:29 - Saved model models/smdsmall/mb1-ssd-Epoch-10-Loss-4.624854876806862.pth
+2021-05-21 18:24:34 - Epoch: 11, Step: 10/152, Avg Loss: 5.9033, Avg Regression Loss 2.0605, Avg Classification Loss: 3.8428
+2021-05-21 18:24:39 - Epoch: 11, Step: 20/152, Avg Loss: 5.0595, Avg Regression Loss 1.6583, Avg Classification Loss: 3.4013
+2021-05-21 18:24:43 - Epoch: 11, Step: 30/152, Avg Loss: 5.2668, Avg Regression Loss 1.7599, Avg Classification Loss: 3.5069
+2021-05-21 18:24:48 - Epoch: 11, Step: 40/152, Avg Loss: 4.9112, Avg Regression Loss 1.3541, Avg Classification Loss: 3.5571
+2021-05-21 18:24:53 - Epoch: 11, Step: 50/152, Avg Loss: 5.3515, Avg Regression Loss 1.9527, Avg Classification Loss: 3.3988
+2021-05-21 18:24:57 - Epoch: 11, Step: 60/152, Avg Loss: 4.8947, Avg Regression Loss 1.3381, Avg Classification Loss: 3.5565
+2021-05-21 18:25:02 - Epoch: 11, Step: 70/152, Avg Loss: 4.8572, Avg Regression Loss 1.4579, Avg Classification Loss: 3.3993
+2021-05-21 18:25:06 - Epoch: 11, Step: 80/152, Avg Loss: 4.9139, Avg Regression Loss 1.4961, Avg Classification Loss: 3.4178
+2021-05-21 18:25:11 - Epoch: 11, Step: 90/152, Avg Loss: 5.8408, Avg Regression Loss 2.0645, Avg Classification Loss: 3.7763
+2021-05-21 18:25:15 - Epoch: 11, Step: 100/152, Avg Loss: 4.9250, Avg Regression Loss 1.5174, Avg Classification Loss: 3.4077
+2021-05-21 18:25:20 - Epoch: 11, Step: 110/152, Avg Loss: 5.7911, Avg Regression Loss 2.0742, Avg Classification Loss: 3.7169
+2021-05-21 18:25:25 - Epoch: 11, Step: 120/152, Avg Loss: 5.5946, Avg Regression Loss 1.9285, Avg Classification Loss: 3.6662
+2021-05-21 18:25:29 - Epoch: 11, Step: 130/152, Avg Loss: 5.5617, Avg Regression Loss 2.0676, Avg Classification Loss: 3.4941
+2021-05-21 18:25:34 - Epoch: 11, Step: 140/152, Avg Loss: 4.7378, Avg Regression Loss 1.1860, Avg Classification Loss: 3.5517
+2021-05-21 18:25:39 - Epoch: 11, Step: 150/152, Avg Loss: 5.4852, Avg Regression Loss 1.9579, Avg Classification Loss: 3.5273
+2021-05-21 18:25:56 - Epoch: 11, Validation Loss: 5.5488, Validation Regression Loss 2.1986, Validation Classification Loss: 3.3501
+2021-05-21 18:25:56 - Saved model models/smdsmall/mb1-ssd-Epoch-11-Loss-5.548771378241088.pth
+2021-05-21 18:26:02 - Epoch: 12, Step: 10/152, Avg Loss: 6.3953, Avg Regression Loss 2.4740, Avg Classification Loss: 3.9212
+2021-05-21 18:26:08 - Epoch: 12, Step: 20/152, Avg Loss: 6.1691, Avg Regression Loss 2.6721, Avg Classification Loss: 3.4970
+2021-05-21 18:26:16 - Epoch: 12, Step: 30/152, Avg Loss: 5.4504, Avg Regression Loss 1.9559, Avg Classification Loss: 3.4945
+2021-05-21 18:26:20 - Epoch: 12, Step: 40/152, Avg Loss: 6.0967, Avg Regression Loss 2.5886, Avg Classification Loss: 3.5081
+2021-05-21 18:26:26 - Epoch: 12, Step: 50/152, Avg Loss: 5.8548, Avg Regression Loss 2.5146, Avg Classification Loss: 3.3402
+2021-05-21 18:26:30 - Epoch: 12, Step: 60/152, Avg Loss: 5.3973, Avg Regression Loss 2.0129, Avg Classification Loss: 3.3845
+2021-05-21 18:26:35 - Epoch: 12, Step: 70/152, Avg Loss: 5.3297, Avg Regression Loss 1.7147, Avg Classification Loss: 3.6150
+2021-05-21 18:26:40 - Epoch: 12, Step: 80/152, Avg Loss: 4.6910, Avg Regression Loss 1.3119, Avg Classification Loss: 3.3791
+2021-05-21 18:26:44 - Epoch: 12, Step: 90/152, Avg Loss: 5.2963, Avg Regression Loss 1.7637, Avg Classification Loss: 3.5326
+2021-05-21 18:26:49 - Epoch: 12, Step: 100/152, Avg Loss: 5.6356, Avg Regression Loss 1.9269, Avg Classification Loss: 3.7087
+2021-05-21 18:26:54 - Epoch: 12, Step: 110/152, Avg Loss: 5.3370, Avg Regression Loss 2.0651, Avg Classification Loss: 3.2719
+2021-05-21 18:26:58 - Epoch: 12, Step: 120/152, Avg Loss: 5.3735, Avg Regression Loss 1.9219, Avg Classification Loss: 3.4516
+2021-05-21 18:27:03 - Epoch: 12, Step: 130/152, Avg Loss: 5.4305, Avg Regression Loss 1.8395, Avg Classification Loss: 3.5909
+2021-05-21 18:27:08 - Epoch: 12, Step: 140/152, Avg Loss: 5.6314, Avg Regression Loss 1.9887, Avg Classification Loss: 3.6427
+2021-05-21 18:27:13 - Epoch: 12, Step: 150/152, Avg Loss: 5.1860, Avg Regression Loss 1.7299, Avg Classification Loss: 3.4561
+2021-05-21 18:27:30 - Epoch: 12, Validation Loss: 5.5664, Validation Regression Loss 2.1018, Validation Classification Loss: 3.4645
+2021-05-21 18:27:30 - Saved model models/smdsmall/mb1-ssd-Epoch-12-Loss-5.56636389305717.pth
+2021-05-21 18:27:36 - Epoch: 13, Step: 10/152, Avg Loss: 6.2638, Avg Regression Loss 2.4284, Avg Classification Loss: 3.8354
+2021-05-21 18:27:41 - Epoch: 13, Step: 20/152, Avg Loss: 6.6813, Avg Regression Loss 3.3121, Avg Classification Loss: 3.3692
+2021-05-21 18:27:49 - Epoch: 13, Step: 30/152, Avg Loss: 5.7921, Avg Regression Loss 2.0177, Avg Classification Loss: 3.7744
+2021-05-21 18:27:54 - Epoch: 13, Step: 40/152, Avg Loss: 5.7574, Avg Regression Loss 2.3901, Avg Classification Loss: 3.3673
+2021-05-21 18:27:59 - Epoch: 13, Step: 50/152, Avg Loss: 5.3969, Avg Regression Loss 1.6984, Avg Classification Loss: 3.6985
+2021-05-21 18:28:04 - Epoch: 13, Step: 60/152, Avg Loss: 6.9139, Avg Regression Loss 3.4227, Avg Classification Loss: 3.4912
+2021-05-21 18:28:09 - Epoch: 13, Step: 70/152, Avg Loss: 6.2039, Avg Regression Loss 2.6938, Avg Classification Loss: 3.5101
+2021-05-21 18:28:14 - Epoch: 13, Step: 80/152, Avg Loss: 5.0683, Avg Regression Loss 1.7316, Avg Classification Loss: 3.3367
+2021-05-21 18:28:18 - Epoch: 13, Step: 90/152, Avg Loss: 5.9620, Avg Regression Loss 2.4377, Avg Classification Loss: 3.5243
+2021-05-21 18:28:23 - Epoch: 13, Step: 100/152, Avg Loss: 5.4469, Avg Regression Loss 1.9536, Avg Classification Loss: 3.4933
+2021-05-21 18:28:27 - Epoch: 13, Step: 110/152, Avg Loss: 5.8035, Avg Regression Loss 2.2219, Avg Classification Loss: 3.5817
+2021-05-21 18:28:32 - Epoch: 13, Step: 120/152, Avg Loss: 5.2217, Avg Regression Loss 1.8841, Avg Classification Loss: 3.3376
+2021-05-21 18:28:36 - Epoch: 13, Step: 130/152, Avg Loss: 5.5018, Avg Regression Loss 1.9419, Avg Classification Loss: 3.5599
+2021-05-21 18:28:41 - Epoch: 13, Step: 140/152, Avg Loss: 5.4190, Avg Regression Loss 1.9825, Avg Classification Loss: 3.4365
+2021-05-21 18:28:46 - Epoch: 13, Step: 150/152, Avg Loss: 6.7757, Avg Regression Loss 3.1591, Avg Classification Loss: 3.6167
+2021-05-21 18:29:03 - Epoch: 13, Validation Loss: 5.1599, Validation Regression Loss 1.7477, Validation Classification Loss: 3.4122
+2021-05-21 18:29:03 - Saved model models/smdsmall/mb1-ssd-Epoch-13-Loss-5.159924969861382.pth
+2021-05-21 18:29:09 - Epoch: 14, Step: 10/152, Avg Loss: 6.5735, Avg Regression Loss 2.8422, Avg Classification Loss: 3.7313
+2021-05-21 18:29:13 - Epoch: 14, Step: 20/152, Avg Loss: 5.7390, Avg Regression Loss 2.1292, Avg Classification Loss: 3.6098
+2021-05-21 18:29:18 - Epoch: 14, Step: 30/152, Avg Loss: 5.1648, Avg Regression Loss 1.6611, Avg Classification Loss: 3.5037
+2021-05-21 18:29:22 - Epoch: 14, Step: 40/152, Avg Loss: 5.0446, Avg Regression Loss 1.6707, Avg Classification Loss: 3.3739
+2021-05-21 18:29:30 - Epoch: 14, Step: 50/152, Avg Loss: 5.3763, Avg Regression Loss 1.8957, Avg Classification Loss: 3.4807
+2021-05-21 18:29:35 - Epoch: 14, Step: 60/152, Avg Loss: 6.0502, Avg Regression Loss 2.5933, Avg Classification Loss: 3.4569
+2021-05-21 18:29:40 - Epoch: 14, Step: 70/152, Avg Loss: 5.6589, Avg Regression Loss 2.2636, Avg Classification Loss: 3.3953
+2021-05-21 18:29:45 - Epoch: 14, Step: 80/152, Avg Loss: 4.9668, Avg Regression Loss 1.6403, Avg Classification Loss: 3.3265
+2021-05-21 18:29:49 - Epoch: 14, Step: 90/152, Avg Loss: 5.5836, Avg Regression Loss 2.0751, Avg Classification Loss: 3.5086
+2021-05-21 18:29:54 - Epoch: 14, Step: 100/152, Avg Loss: 5.1749, Avg Regression Loss 1.4644, Avg Classification Loss: 3.7105
+2021-05-21 18:29:58 - Epoch: 14, Step: 110/152, Avg Loss: 4.8360, Avg Regression Loss 1.3694, Avg Classification Loss: 3.4665
+2021-05-21 18:30:03 - Epoch: 14, Step: 120/152, Avg Loss: 4.7916, Avg Regression Loss 1.3266, Avg Classification Loss: 3.4650
+2021-05-21 18:30:08 - Epoch: 14, Step: 130/152, Avg Loss: 5.0056, Avg Regression Loss 1.3876, Avg Classification Loss: 3.6180
+2021-05-21 18:30:13 - Epoch: 14, Step: 140/152, Avg Loss: 4.7964, Avg Regression Loss 1.3753, Avg Classification Loss: 3.4211
+2021-05-21 18:30:17 - Epoch: 14, Step: 150/152, Avg Loss: 5.4375, Avg Regression Loss 1.9069, Avg Classification Loss: 3.5306
+2021-05-21 18:30:35 - Epoch: 14, Validation Loss: 4.2993, Validation Regression Loss 0.9797, Validation Classification Loss: 3.3196
+2021-05-21 18:30:35 - Saved model models/smdsmall/mb1-ssd-Epoch-14-Loss-4.299321823998501.pth
+2021-05-21 18:30:40 - Epoch: 15, Step: 10/152, Avg Loss: 5.5831, Avg Regression Loss 1.9091, Avg Classification Loss: 3.6740
+2021-05-21 18:30:45 - Epoch: 15, Step: 20/152, Avg Loss: 5.3264, Avg Regression Loss 1.7932, Avg Classification Loss: 3.5333
+2021-05-21 18:30:55 - Epoch: 15, Step: 30/152, Avg Loss: 5.3410, Avg Regression Loss 1.9133, Avg Classification Loss: 3.4277
+2021-05-21 18:31:00 - Epoch: 15, Step: 40/152, Avg Loss: 5.1693, Avg Regression Loss 1.7438, Avg Classification Loss: 3.4255
+2021-05-21 18:31:05 - Epoch: 15, Step: 50/152, Avg Loss: 5.2682, Avg Regression Loss 1.6885, Avg Classification Loss: 3.5797
+2021-05-21 18:31:10 - Epoch: 15, Step: 60/152, Avg Loss: 4.9190, Avg Regression Loss 1.3474, Avg Classification Loss: 3.5716
+2021-05-21 18:31:14 - Epoch: 15, Step: 70/152, Avg Loss: 4.6478, Avg Regression Loss 1.3762, Avg Classification Loss: 3.2716
+2021-05-21 18:31:19 - Epoch: 15, Step: 80/152, Avg Loss: 4.3385, Avg Regression Loss 0.9931, Avg Classification Loss: 3.3454
+2021-05-21 18:31:23 - Epoch: 15, Step: 90/152, Avg Loss: 5.4353, Avg Regression Loss 1.9186, Avg Classification Loss: 3.5166
+2021-05-21 18:31:28 - Epoch: 15, Step: 100/152, Avg Loss: 5.7834, Avg Regression Loss 2.4807, Avg Classification Loss: 3.3027
+2021-05-21 18:31:33 - Epoch: 15, Step: 110/152, Avg Loss: 5.1657, Avg Regression Loss 1.7663, Avg Classification Loss: 3.3994
+2021-05-21 18:31:37 - Epoch: 15, Step: 120/152, Avg Loss: 5.0226, Avg Regression Loss 1.5249, Avg Classification Loss: 3.4977
+2021-05-21 18:31:42 - Epoch: 15, Step: 130/152, Avg Loss: 5.4480, Avg Regression Loss 2.0886, Avg Classification Loss: 3.3594
+2021-05-21 18:31:48 - Epoch: 15, Step: 140/152, Avg Loss: 5.1043, Avg Regression Loss 1.7253, Avg Classification Loss: 3.3790
+2021-05-21 18:31:52 - Epoch: 15, Step: 150/152, Avg Loss: 5.0436, Avg Regression Loss 1.6142, Avg Classification Loss: 3.4294
+2021-05-21 18:32:10 - Epoch: 15, Validation Loss: 5.3406, Validation Regression Loss 1.9757, Validation Classification Loss: 3.3649
+2021-05-21 18:32:10 - Saved model models/smdsmall/mb1-ssd-Epoch-15-Loss-5.340617553183907.pth
+2021-05-21 18:32:15 - Epoch: 16, Step: 10/152, Avg Loss: 5.1215, Avg Regression Loss 1.4750, Avg Classification Loss: 3.6465
+2021-05-21 18:32:20 - Epoch: 16, Step: 20/152, Avg Loss: 5.4339, Avg Regression Loss 2.0682, Avg Classification Loss: 3.3657
+2021-05-21 18:32:29 - Epoch: 16, Step: 30/152, Avg Loss: 5.0219, Avg Regression Loss 1.7956, Avg Classification Loss: 3.2264
+2021-05-21 18:32:34 - Epoch: 16, Step: 40/152, Avg Loss: 5.4531, Avg Regression Loss 1.9517, Avg Classification Loss: 3.5014
+2021-05-21 18:32:39 - Epoch: 16, Step: 50/152, Avg Loss: 4.9443, Avg Regression Loss 1.5191, Avg Classification Loss: 3.4252
+2021-05-21 18:32:44 - Epoch: 16, Step: 60/152, Avg Loss: 5.1337, Avg Regression Loss 1.7295, Avg Classification Loss: 3.4042
+2021-05-21 18:32:49 - Epoch: 16, Step: 70/152, Avg Loss: 5.2923, Avg Regression Loss 1.9135, Avg Classification Loss: 3.3789
+2021-05-21 18:32:53 - Epoch: 16, Step: 80/152, Avg Loss: 5.1552, Avg Regression Loss 1.6579, Avg Classification Loss: 3.4973
+2021-05-21 18:32:58 - Epoch: 16, Step: 90/152, Avg Loss: 5.3120, Avg Regression Loss 1.9152, Avg Classification Loss: 3.3968
+2021-05-21 18:33:02 - Epoch: 16, Step: 100/152, Avg Loss: 5.1303, Avg Regression Loss 1.5180, Avg Classification Loss: 3.6123
+2021-05-21 18:33:07 - Epoch: 16, Step: 110/152, Avg Loss: 5.0439, Avg Regression Loss 1.4488, Avg Classification Loss: 3.5950
+2021-05-21 18:33:12 - Epoch: 16, Step: 120/152, Avg Loss: 4.8464, Avg Regression Loss 1.6154, Avg Classification Loss: 3.2310
+2021-05-21 18:33:20 - Epoch: 16, Step: 130/152, Avg Loss: 5.7455, Avg Regression Loss 2.1541, Avg Classification Loss: 3.5915
+2021-05-21 18:33:24 - Epoch: 16, Step: 140/152, Avg Loss: 5.1150, Avg Regression Loss 1.6760, Avg Classification Loss: 3.4390
+2021-05-21 18:33:29 - Epoch: 16, Step: 150/152, Avg Loss: 4.8358, Avg Regression Loss 1.4506, Avg Classification Loss: 3.3852
+2021-05-21 18:33:46 - Epoch: 16, Validation Loss: 5.1009, Validation Regression Loss 1.7097, Validation Classification Loss: 3.3912
+2021-05-21 18:33:47 - Saved model models/smdsmall/mb1-ssd-Epoch-16-Loss-5.1009422948485925.pth
+2021-05-21 18:33:53 - Epoch: 17, Step: 10/152, Avg Loss: 5.7269, Avg Regression Loss 1.8201, Avg Classification Loss: 3.9068
+2021-05-21 18:33:58 - Epoch: 17, Step: 20/152, Avg Loss: 5.5500, Avg Regression Loss 2.0980, Avg Classification Loss: 3.4520
+2021-05-21 18:34:02 - Epoch: 17, Step: 30/152, Avg Loss: 5.1930, Avg Regression Loss 1.6767, Avg Classification Loss: 3.5164
+2021-05-21 18:34:07 - Epoch: 17, Step: 40/152, Avg Loss: 5.2915, Avg Regression Loss 1.8370, Avg Classification Loss: 3.4545
+2021-05-21 18:34:13 - Epoch: 17, Step: 50/152, Avg Loss: 5.4025, Avg Regression Loss 1.8752, Avg Classification Loss: 3.5273
+2021-05-21 18:34:18 - Epoch: 17, Step: 60/152, Avg Loss: 4.7099, Avg Regression Loss 1.4814, Avg Classification Loss: 3.2285
+2021-05-21 18:34:22 - Epoch: 17, Step: 70/152, Avg Loss: 5.3583, Avg Regression Loss 1.9401, Avg Classification Loss: 3.4181
+2021-05-21 18:34:27 - Epoch: 17, Step: 80/152, Avg Loss: 4.7671, Avg Regression Loss 1.5308, Avg Classification Loss: 3.2363
+2021-05-21 18:34:31 - Epoch: 17, Step: 90/152, Avg Loss: 4.9924, Avg Regression Loss 1.5168, Avg Classification Loss: 3.4757
+2021-05-21 18:34:36 - Epoch: 17, Step: 100/152, Avg Loss: 5.4266, Avg Regression Loss 1.9302, Avg Classification Loss: 3.4965
+2021-05-21 18:34:40 - Epoch: 17, Step: 110/152, Avg Loss: 4.8601, Avg Regression Loss 1.7051, Avg Classification Loss: 3.1550
+2021-05-21 18:34:45 - Epoch: 17, Step: 120/152, Avg Loss: 4.5055, Avg Regression Loss 1.3958, Avg Classification Loss: 3.1097
+2021-05-21 18:34:54 - Epoch: 17, Step: 130/152, Avg Loss: 5.4000, Avg Regression Loss 1.9447, Avg Classification Loss: 3.4553
+2021-05-21 18:34:59 - Epoch: 17, Step: 140/152, Avg Loss: 5.1397, Avg Regression Loss 1.7588, Avg Classification Loss: 3.3810
+2021-05-21 18:35:04 - Epoch: 17, Step: 150/152, Avg Loss: 5.3339, Avg Regression Loss 1.8218, Avg Classification Loss: 3.5121
+2021-05-21 18:35:21 - Epoch: 17, Validation Loss: 4.3425, Validation Regression Loss 1.0427, Validation Classification Loss: 3.2998
+2021-05-21 18:35:21 - Saved model models/smdsmall/mb1-ssd-Epoch-17-Loss-4.342546444190176.pth
+2021-05-21 18:35:27 - Epoch: 18, Step: 10/152, Avg Loss: 5.4938, Avg Regression Loss 1.7917, Avg Classification Loss: 3.7021
+2021-05-21 18:35:31 - Epoch: 18, Step: 20/152, Avg Loss: 5.6378, Avg Regression Loss 1.9741, Avg Classification Loss: 3.6637
+2021-05-21 18:35:36 - Epoch: 18, Step: 30/152, Avg Loss: 5.1045, Avg Regression Loss 1.7620, Avg Classification Loss: 3.3425
+2021-05-21 18:35:41 - Epoch: 18, Step: 40/152, Avg Loss: 5.0564, Avg Regression Loss 1.5495, Avg Classification Loss: 3.5068
+2021-05-21 18:35:46 - Epoch: 18, Step: 50/152, Avg Loss: 5.5699, Avg Regression Loss 1.8903, Avg Classification Loss: 3.6796
+2021-05-21 18:35:51 - Epoch: 18, Step: 60/152, Avg Loss: 5.2122, Avg Regression Loss 1.9805, Avg Classification Loss: 3.2317
+2021-05-21 18:35:56 - Epoch: 18, Step: 70/152, Avg Loss: 4.7442, Avg Regression Loss 1.6036, Avg Classification Loss: 3.1406
+2021-05-21 18:36:00 - Epoch: 18, Step: 80/152, Avg Loss: 4.5565, Avg Regression Loss 1.0775, Avg Classification Loss: 3.4789
+2021-05-21 18:36:05 - Epoch: 18, Step: 90/152, Avg Loss: 4.6116, Avg Regression Loss 1.3364, Avg Classification Loss: 3.2752
+2021-05-21 18:36:09 - Epoch: 18, Step: 100/152, Avg Loss: 5.6062, Avg Regression Loss 2.2284, Avg Classification Loss: 3.3777
+2021-05-21 18:36:14 - Epoch: 18, Step: 110/152, Avg Loss: 5.1115, Avg Regression Loss 1.8577, Avg Classification Loss: 3.2538
+2021-05-21 18:36:19 - Epoch: 18, Step: 120/152, Avg Loss: 5.3107, Avg Regression Loss 2.0093, Avg Classification Loss: 3.3015
+2021-05-21 18:36:23 - Epoch: 18, Step: 130/152, Avg Loss: 4.7945, Avg Regression Loss 1.3497, Avg Classification Loss: 3.4448
+2021-05-21 18:36:28 - Epoch: 18, Step: 140/152, Avg Loss: 5.1195, Avg Regression Loss 1.4897, Avg Classification Loss: 3.6298
+2021-05-21 18:36:33 - Epoch: 18, Step: 150/152, Avg Loss: 5.0759, Avg Regression Loss 1.6404, Avg Classification Loss: 3.4354
+2021-05-21 18:36:50 - Epoch: 18, Validation Loss: 4.4386, Validation Regression Loss 1.2433, Validation Classification Loss: 3.1953
+2021-05-21 18:36:51 - Saved model models/smdsmall/mb1-ssd-Epoch-18-Loss-4.438640503506911.pth
+2021-05-21 18:36:56 - Epoch: 19, Step: 10/152, Avg Loss: 5.0426, Avg Regression Loss 1.4612, Avg Classification Loss: 3.5814
+2021-05-21 18:37:01 - Epoch: 19, Step: 20/152, Avg Loss: 5.4992, Avg Regression Loss 2.0902, Avg Classification Loss: 3.4089
+2021-05-21 18:37:08 - Epoch: 19, Step: 30/152, Avg Loss: 4.9262, Avg Regression Loss 1.4623, Avg Classification Loss: 3.4639
+2021-05-21 18:37:13 - Epoch: 19, Step: 40/152, Avg Loss: 4.4655, Avg Regression Loss 1.2134, Avg Classification Loss: 3.2521
+2021-05-21 18:37:18 - Epoch: 19, Step: 50/152, Avg Loss: 5.3498, Avg Regression Loss 2.0871, Avg Classification Loss: 3.2628
+2021-05-21 18:37:22 - Epoch: 19, Step: 60/152, Avg Loss: 4.6223, Avg Regression Loss 1.3596, Avg Classification Loss: 3.2627
+2021-05-21 18:37:27 - Epoch: 19, Step: 70/152, Avg Loss: 4.4953, Avg Regression Loss 1.2562, Avg Classification Loss: 3.2392
+2021-05-21 18:37:31 - Epoch: 19, Step: 80/152, Avg Loss: 4.3998, Avg Regression Loss 1.0639, Avg Classification Loss: 3.3359
+2021-05-21 18:37:36 - Epoch: 19, Step: 90/152, Avg Loss: 4.8224, Avg Regression Loss 1.2923, Avg Classification Loss: 3.5301
+2021-05-21 18:37:41 - Epoch: 19, Step: 100/152, Avg Loss: 5.3019, Avg Regression Loss 1.7798, Avg Classification Loss: 3.5221
+2021-05-21 18:37:45 - Epoch: 19, Step: 110/152, Avg Loss: 5.0350, Avg Regression Loss 1.6156, Avg Classification Loss: 3.4194
+2021-05-21 18:37:50 - Epoch: 19, Step: 120/152, Avg Loss: 4.5253, Avg Regression Loss 1.3309, Avg Classification Loss: 3.1944
+2021-05-21 18:37:55 - Epoch: 19, Step: 130/152, Avg Loss: 5.2858, Avg Regression Loss 1.9417, Avg Classification Loss: 3.3442
+2021-05-21 18:38:00 - Epoch: 19, Step: 140/152, Avg Loss: 5.0792, Avg Regression Loss 1.4899, Avg Classification Loss: 3.5893
+2021-05-21 18:38:05 - Epoch: 19, Step: 150/152, Avg Loss: 4.8306, Avg Regression Loss 1.4478, Avg Classification Loss: 3.3828
+2021-05-21 18:38:23 - Epoch: 19, Validation Loss: 4.7232, Validation Regression Loss 1.4245, Validation Classification Loss: 3.2987
+2021-05-21 18:38:23 - Saved model models/smdsmall/mb1-ssd-Epoch-19-Loss-4.7232225694154435.pth
+2021-05-21 18:38:28 - Epoch: 20, Step: 10/152, Avg Loss: 5.2210, Avg Regression Loss 1.5322, Avg Classification Loss: 3.6888
+2021-05-21 18:38:34 - Epoch: 20, Step: 20/152, Avg Loss: 5.0284, Avg Regression Loss 1.5526, Avg Classification Loss: 3.4758
+2021-05-21 18:38:38 - Epoch: 20, Step: 30/152, Avg Loss: 4.9480, Avg Regression Loss 1.6630, Avg Classification Loss: 3.2850
+2021-05-21 18:38:45 - Epoch: 20, Step: 40/152, Avg Loss: 4.5293, Avg Regression Loss 1.2001, Avg Classification Loss: 3.3292
+2021-05-21 18:38:49 - Epoch: 20, Step: 50/152, Avg Loss: 4.6685, Avg Regression Loss 1.2813, Avg Classification Loss: 3.3871
+2021-05-21 18:38:54 - Epoch: 20, Step: 60/152, Avg Loss: 5.4181, Avg Regression Loss 1.9120, Avg Classification Loss: 3.5062
+2021-05-21 18:38:59 - Epoch: 20, Step: 70/152, Avg Loss: 5.3058, Avg Regression Loss 1.9003, Avg Classification Loss: 3.4055
+2021-05-21 18:39:03 - Epoch: 20, Step: 80/152, Avg Loss: 5.1890, Avg Regression Loss 1.8781, Avg Classification Loss: 3.3108
+2021-05-21 18:39:08 - Epoch: 20, Step: 90/152, Avg Loss: 5.3973, Avg Regression Loss 1.7424, Avg Classification Loss: 3.6549
+2021-05-21 18:39:12 - Epoch: 20, Step: 100/152, Avg Loss: 5.1622, Avg Regression Loss 1.8205, Avg Classification Loss: 3.3416
+2021-05-21 18:39:17 - Epoch: 20, Step: 110/152, Avg Loss: 5.4672, Avg Regression Loss 1.9877, Avg Classification Loss: 3.4795
+2021-05-21 18:39:22 - Epoch: 20, Step: 120/152, Avg Loss: 5.3669, Avg Regression Loss 1.7420, Avg Classification Loss: 3.6249
+2021-05-21 18:39:27 - Epoch: 20, Step: 130/152, Avg Loss: 5.5374, Avg Regression Loss 2.0565, Avg Classification Loss: 3.4810
+2021-05-21 18:39:31 - Epoch: 20, Step: 140/152, Avg Loss: 4.3254, Avg Regression Loss 1.1440, Avg Classification Loss: 3.1814
+2021-05-21 18:39:36 - Epoch: 20, Step: 150/152, Avg Loss: 5.1275, Avg Regression Loss 1.7958, Avg Classification Loss: 3.3318
+2021-05-21 18:39:53 - Epoch: 20, Validation Loss: 4.3844, Validation Regression Loss 1.1883, Validation Classification Loss: 3.1961
+2021-05-21 18:39:53 - Saved model models/smdsmall/mb1-ssd-Epoch-20-Loss-4.3843794904257125.pth
+2021-05-21 18:40:00 - Epoch: 21, Step: 10/152, Avg Loss: 6.5200, Avg Regression Loss 2.7218, Avg Classification Loss: 3.7982
+2021-05-21 18:40:05 - Epoch: 21, Step: 20/152, Avg Loss: 5.5139, Avg Regression Loss 2.0919, Avg Classification Loss: 3.4219
+2021-05-21 18:40:09 - Epoch: 21, Step: 30/152, Avg Loss: 5.7116, Avg Regression Loss 2.4104, Avg Classification Loss: 3.3013
+2021-05-21 18:40:14 - Epoch: 21, Step: 40/152, Avg Loss: 5.2373, Avg Regression Loss 1.7026, Avg Classification Loss: 3.5347
+2021-05-21 18:40:19 - Epoch: 21, Step: 50/152, Avg Loss: 5.1893, Avg Regression Loss 1.5311, Avg Classification Loss: 3.6582
+2021-05-21 18:40:23 - Epoch: 21, Step: 60/152, Avg Loss: 5.2307, Avg Regression Loss 1.7016, Avg Classification Loss: 3.5291
+2021-05-21 18:40:28 - Epoch: 21, Step: 70/152, Avg Loss: 4.7168, Avg Regression Loss 1.2304, Avg Classification Loss: 3.4864
+2021-05-21 18:40:33 - Epoch: 21, Step: 80/152, Avg Loss: 4.7304, Avg Regression Loss 1.1823, Avg Classification Loss: 3.5481
+2021-05-21 18:40:37 - Epoch: 21, Step: 90/152, Avg Loss: 4.9659, Avg Regression Loss 1.6069, Avg Classification Loss: 3.3591
+2021-05-21 18:40:42 - Epoch: 21, Step: 100/152, Avg Loss: 5.1010, Avg Regression Loss 1.6953, Avg Classification Loss: 3.4057
+2021-05-21 18:40:47 - Epoch: 21, Step: 110/152, Avg Loss: 5.3884, Avg Regression Loss 1.9013, Avg Classification Loss: 3.4870
+2021-05-21 18:40:51 - Epoch: 21, Step: 120/152, Avg Loss: 4.9558, Avg Regression Loss 1.5588, Avg Classification Loss: 3.3970
+2021-05-21 18:40:56 - Epoch: 21, Step: 130/152, Avg Loss: 4.3410, Avg Regression Loss 0.9628, Avg Classification Loss: 3.3782
+2021-05-21 18:41:01 - Epoch: 21, Step: 140/152, Avg Loss: 5.1041, Avg Regression Loss 1.8030, Avg Classification Loss: 3.3011
+2021-05-21 18:41:06 - Epoch: 21, Step: 150/152, Avg Loss: 5.1175, Avg Regression Loss 1.6661, Avg Classification Loss: 3.4514
+2021-05-21 18:41:23 - Epoch: 21, Validation Loss: 4.4225, Validation Regression Loss 1.1706, Validation Classification Loss: 3.2520
+2021-05-21 18:41:24 - Saved model models/smdsmall/mb1-ssd-Epoch-21-Loss-4.4225283939587445.pth
+2021-05-21 18:41:30 - Epoch: 22, Step: 10/152, Avg Loss: 5.5065, Avg Regression Loss 1.7916, Avg Classification Loss: 3.7149
+2021-05-21 18:41:34 - Epoch: 22, Step: 20/152, Avg Loss: 4.9285, Avg Regression Loss 1.4299, Avg Classification Loss: 3.4986
+2021-05-21 18:41:39 - Epoch: 22, Step: 30/152, Avg Loss: 4.5803, Avg Regression Loss 1.2805, Avg Classification Loss: 3.2999
+2021-05-21 18:41:43 - Epoch: 22, Step: 40/152, Avg Loss: 5.2973, Avg Regression Loss 2.0762, Avg Classification Loss: 3.2211
+2021-05-21 18:41:49 - Epoch: 22, Step: 50/152, Avg Loss: 5.3329, Avg Regression Loss 1.6860, Avg Classification Loss: 3.6469
+2021-05-21 18:41:53 - Epoch: 22, Step: 60/152, Avg Loss: 4.7388, Avg Regression Loss 1.3687, Avg Classification Loss: 3.3701
+2021-05-21 18:41:58 - Epoch: 22, Step: 70/152, Avg Loss: 5.3142, Avg Regression Loss 1.9259, Avg Classification Loss: 3.3884
+2021-05-21 18:42:03 - Epoch: 22, Step: 80/152, Avg Loss: 4.8697, Avg Regression Loss 1.4762, Avg Classification Loss: 3.3935
+2021-05-21 18:42:08 - Epoch: 22, Step: 90/152, Avg Loss: 4.8794, Avg Regression Loss 1.4575, Avg Classification Loss: 3.4219
+2021-05-21 18:42:12 - Epoch: 22, Step: 100/152, Avg Loss: 4.2065, Avg Regression Loss 0.8728, Avg Classification Loss: 3.3337
+2021-05-21 18:42:17 - Epoch: 22, Step: 110/152, Avg Loss: 5.4827, Avg Regression Loss 2.3662, Avg Classification Loss: 3.1166
+2021-05-21 18:42:21 - Epoch: 22, Step: 120/152, Avg Loss: 5.2573, Avg Regression Loss 1.7490, Avg Classification Loss: 3.5083
+2021-05-21 18:42:26 - Epoch: 22, Step: 130/152, Avg Loss: 4.6822, Avg Regression Loss 1.2614, Avg Classification Loss: 3.4209
+2021-05-21 18:42:32 - Epoch: 22, Step: 140/152, Avg Loss: 5.0711, Avg Regression Loss 1.7022, Avg Classification Loss: 3.3689
+2021-05-21 18:42:36 - Epoch: 22, Step: 150/152, Avg Loss: 5.2032, Avg Regression Loss 1.8245, Avg Classification Loss: 3.3787
+2021-05-21 18:42:54 - Epoch: 22, Validation Loss: 4.2787, Validation Regression Loss 1.0799, Validation Classification Loss: 3.1988
+2021-05-21 18:42:54 - Saved model models/smdsmall/mb1-ssd-Epoch-22-Loss-4.278687190068395.pth
+2021-05-21 18:42:59 - Epoch: 23, Step: 10/152, Avg Loss: 4.5754, Avg Regression Loss 1.1397, Avg Classification Loss: 3.4357
+2021-05-21 18:43:04 - Epoch: 23, Step: 20/152, Avg Loss: 4.8156, Avg Regression Loss 1.3608, Avg Classification Loss: 3.4548
+2021-05-21 18:43:09 - Epoch: 23, Step: 30/152, Avg Loss: 4.7119, Avg Regression Loss 1.5442, Avg Classification Loss: 3.1677
+2021-05-21 18:43:13 - Epoch: 23, Step: 40/152, Avg Loss: 5.3225, Avg Regression Loss 1.8432, Avg Classification Loss: 3.4793
+2021-05-21 18:43:18 - Epoch: 23, Step: 50/152, Avg Loss: 5.0434, Avg Regression Loss 1.5076, Avg Classification Loss: 3.5357
+2021-05-21 18:43:24 - Epoch: 23, Step: 60/152, Avg Loss: 4.5321, Avg Regression Loss 1.1807, Avg Classification Loss: 3.3514
+2021-05-21 18:43:28 - Epoch: 23, Step: 70/152, Avg Loss: 4.7517, Avg Regression Loss 1.2742, Avg Classification Loss: 3.4775
+2021-05-21 18:43:33 - Epoch: 23, Step: 80/152, Avg Loss: 4.7827, Avg Regression Loss 1.4301, Avg Classification Loss: 3.3526
+2021-05-21 18:43:39 - Epoch: 23, Step: 90/152, Avg Loss: 5.2702, Avg Regression Loss 1.8491, Avg Classification Loss: 3.4211
+2021-05-21 18:43:44 - Epoch: 23, Step: 100/152, Avg Loss: 4.7715, Avg Regression Loss 1.5675, Avg Classification Loss: 3.2041
+2021-05-21 18:43:48 - Epoch: 23, Step: 110/152, Avg Loss: 4.3557, Avg Regression Loss 1.1219, Avg Classification Loss: 3.2337
+2021-05-21 18:43:53 - Epoch: 23, Step: 120/152, Avg Loss: 4.9046, Avg Regression Loss 1.5663, Avg Classification Loss: 3.3383
+2021-05-21 18:43:57 - Epoch: 23, Step: 130/152, Avg Loss: 4.8554, Avg Regression Loss 1.4928, Avg Classification Loss: 3.3626
+2021-05-21 18:44:02 - Epoch: 23, Step: 140/152, Avg Loss: 4.5850, Avg Regression Loss 1.1871, Avg Classification Loss: 3.3979
+2021-05-21 18:44:07 - Epoch: 23, Step: 150/152, Avg Loss: 4.9965, Avg Regression Loss 1.5994, Avg Classification Loss: 3.3971
+2021-05-21 18:44:24 - Epoch: 23, Validation Loss: 4.0570, Validation Regression Loss 0.8397, Validation Classification Loss: 3.2172
+2021-05-21 18:44:24 - Saved model models/smdsmall/mb1-ssd-Epoch-23-Loss-4.056957213502181.pth
+2021-05-21 18:44:30 - Epoch: 24, Step: 10/152, Avg Loss: 5.1790, Avg Regression Loss 1.5768, Avg Classification Loss: 3.6022
+2021-05-21 18:44:34 - Epoch: 24, Step: 20/152, Avg Loss: 4.4762, Avg Regression Loss 1.2114, Avg Classification Loss: 3.2648
+2021-05-21 18:44:39 - Epoch: 24, Step: 30/152, Avg Loss: 4.5700, Avg Regression Loss 1.4224, Avg Classification Loss: 3.1476
+2021-05-21 18:44:43 - Epoch: 24, Step: 40/152, Avg Loss: 4.4850, Avg Regression Loss 1.3777, Avg Classification Loss: 3.1073
+2021-05-21 18:44:50 - Epoch: 24, Step: 50/152, Avg Loss: 5.0922, Avg Regression Loss 1.6595, Avg Classification Loss: 3.4327
+2021-05-21 18:44:55 - Epoch: 24, Step: 60/152, Avg Loss: 4.7277, Avg Regression Loss 1.3903, Avg Classification Loss: 3.3374
+2021-05-21 18:45:00 - Epoch: 24, Step: 70/152, Avg Loss: 5.1501, Avg Regression Loss 1.8618, Avg Classification Loss: 3.2883
+2021-05-21 18:45:05 - Epoch: 24, Step: 80/152, Avg Loss: 4.7904, Avg Regression Loss 1.4606, Avg Classification Loss: 3.3298
+2021-05-21 18:45:09 - Epoch: 24, Step: 90/152, Avg Loss: 4.6494, Avg Regression Loss 1.3988, Avg Classification Loss: 3.2506
+2021-05-21 18:45:14 - Epoch: 24, Step: 100/152, Avg Loss: 4.6479, Avg Regression Loss 1.2749, Avg Classification Loss: 3.3730
+2021-05-21 18:45:18 - Epoch: 24, Step: 110/152, Avg Loss: 4.4374, Avg Regression Loss 0.9978, Avg Classification Loss: 3.4396
+2021-05-21 18:45:23 - Epoch: 24, Step: 120/152, Avg Loss: 4.4252, Avg Regression Loss 1.0728, Avg Classification Loss: 3.3525
+2021-05-21 18:45:27 - Epoch: 24, Step: 130/152, Avg Loss: 4.7366, Avg Regression Loss 1.3463, Avg Classification Loss: 3.3903
+2021-05-21 18:45:33 - Epoch: 24, Step: 140/152, Avg Loss: 4.6482, Avg Regression Loss 1.2535, Avg Classification Loss: 3.3947
+2021-05-21 18:45:38 - Epoch: 24, Step: 150/152, Avg Loss: 4.9709, Avg Regression Loss 1.5208, Avg Classification Loss: 3.4501
+2021-05-21 18:45:55 - Epoch: 24, Validation Loss: 3.9685, Validation Regression Loss 0.7977, Validation Classification Loss: 3.1709
+2021-05-21 18:45:55 - Saved model models/smdsmall/mb1-ssd-Epoch-24-Loss-3.9685451670696863.pth
+2021-05-21 18:46:01 - Epoch: 25, Step: 10/152, Avg Loss: 5.5213, Avg Regression Loss 1.8603, Avg Classification Loss: 3.6610
+2021-05-21 18:46:06 - Epoch: 25, Step: 20/152, Avg Loss: 5.0298, Avg Regression Loss 1.4320, Avg Classification Loss: 3.5978
+2021-05-21 18:46:13 - Epoch: 25, Step: 30/152, Avg Loss: 5.7792, Avg Regression Loss 2.4935, Avg Classification Loss: 3.2856
+2021-05-21 18:46:18 - Epoch: 25, Step: 40/152, Avg Loss: 4.4939, Avg Regression Loss 1.3793, Avg Classification Loss: 3.1147
+2021-05-21 18:46:22 - Epoch: 25, Step: 50/152, Avg Loss: 4.0247, Avg Regression Loss 0.7854, Avg Classification Loss: 3.2393
+2021-05-21 18:46:27 - Epoch: 25, Step: 60/152, Avg Loss: 5.2079, Avg Regression Loss 1.6896, Avg Classification Loss: 3.5183
+2021-05-21 18:46:32 - Epoch: 25, Step: 70/152, Avg Loss: 5.2670, Avg Regression Loss 2.0153, Avg Classification Loss: 3.2517
+2021-05-21 18:46:37 - Epoch: 25, Step: 80/152, Avg Loss: 4.2977, Avg Regression Loss 1.1059, Avg Classification Loss: 3.1918
+2021-05-21 18:46:41 - Epoch: 25, Step: 90/152, Avg Loss: 4.8213, Avg Regression Loss 1.5018, Avg Classification Loss: 3.3195
+2021-05-21 18:46:46 - Epoch: 25, Step: 100/152, Avg Loss: 5.3334, Avg Regression Loss 1.6497, Avg Classification Loss: 3.6837
+2021-05-21 18:46:50 - Epoch: 25, Step: 110/152, Avg Loss: 4.7907, Avg Regression Loss 1.3857, Avg Classification Loss: 3.4050
+2021-05-21 18:46:58 - Epoch: 25, Step: 120/152, Avg Loss: 4.8665, Avg Regression Loss 1.4685, Avg Classification Loss: 3.3980
+2021-05-21 18:47:02 - Epoch: 25, Step: 130/152, Avg Loss: 5.0373, Avg Regression Loss 1.6491, Avg Classification Loss: 3.3882
+2021-05-21 18:47:07 - Epoch: 25, Step: 140/152, Avg Loss: 4.9163, Avg Regression Loss 1.4072, Avg Classification Loss: 3.5091
+2021-05-21 18:47:12 - Epoch: 25, Step: 150/152, Avg Loss: 4.1519, Avg Regression Loss 1.0335, Avg Classification Loss: 3.1184
+2021-05-21 18:47:29 - Epoch: 25, Validation Loss: 4.0019, Validation Regression Loss 0.8594, Validation Classification Loss: 3.1425
+2021-05-21 18:47:29 - Saved model models/smdsmall/mb1-ssd-Epoch-25-Loss-4.00191392082917.pth
+2021-05-21 18:47:35 - Epoch: 26, Step: 10/152, Avg Loss: 5.3647, Avg Regression Loss 1.8049, Avg Classification Loss: 3.5598
+2021-05-21 18:47:39 - Epoch: 26, Step: 20/152, Avg Loss: 4.7768, Avg Regression Loss 1.4998, Avg Classification Loss: 3.2769
+2021-05-21 18:47:47 - Epoch: 26, Step: 30/152, Avg Loss: 4.5366, Avg Regression Loss 1.1796, Avg Classification Loss: 3.3571
+2021-05-21 18:47:52 - Epoch: 26, Step: 40/152, Avg Loss: 4.4763, Avg Regression Loss 1.2594, Avg Classification Loss: 3.2168
+2021-05-21 18:47:57 - Epoch: 26, Step: 50/152, Avg Loss: 4.5540, Avg Regression Loss 1.2101, Avg Classification Loss: 3.3438
+2021-05-21 18:48:02 - Epoch: 26, Step: 60/152, Avg Loss: 5.6934, Avg Regression Loss 2.3359, Avg Classification Loss: 3.3575
+2021-05-21 18:48:07 - Epoch: 26, Step: 70/152, Avg Loss: 4.4766, Avg Regression Loss 1.3163, Avg Classification Loss: 3.1602
+2021-05-21 18:48:12 - Epoch: 26, Step: 80/152, Avg Loss: 4.5317, Avg Regression Loss 1.3966, Avg Classification Loss: 3.1350
+2021-05-21 18:48:16 - Epoch: 26, Step: 90/152, Avg Loss: 4.3113, Avg Regression Loss 1.2303, Avg Classification Loss: 3.0810
+2021-05-21 18:48:21 - Epoch: 26, Step: 100/152, Avg Loss: 4.3205, Avg Regression Loss 0.9547, Avg Classification Loss: 3.3658
+2021-05-21 18:48:25 - Epoch: 26, Step: 110/152, Avg Loss: 4.9119, Avg Regression Loss 1.5034, Avg Classification Loss: 3.4086
+2021-05-21 18:48:30 - Epoch: 26, Step: 120/152, Avg Loss: 5.6310, Avg Regression Loss 2.1290, Avg Classification Loss: 3.5020
+2021-05-21 18:48:34 - Epoch: 26, Step: 130/152, Avg Loss: 4.4010, Avg Regression Loss 1.2494, Avg Classification Loss: 3.1516
+2021-05-21 18:48:39 - Epoch: 26, Step: 140/152, Avg Loss: 5.0532, Avg Regression Loss 1.7794, Avg Classification Loss: 3.2738
+2021-05-21 18:48:44 - Epoch: 26, Step: 150/152, Avg Loss: 4.4063, Avg Regression Loss 1.3820, Avg Classification Loss: 3.0243
+2021-05-21 18:49:01 - Epoch: 26, Validation Loss: 3.9933, Validation Regression Loss 0.8044, Validation Classification Loss: 3.1889
+2021-05-21 18:49:01 - Saved model models/smdsmall/mb1-ssd-Epoch-26-Loss-3.993285252859718.pth
+2021-05-21 18:49:07 - Epoch: 27, Step: 10/152, Avg Loss: 4.8970, Avg Regression Loss 1.2735, Avg Classification Loss: 3.6235
+2021-05-21 18:49:11 - Epoch: 27, Step: 20/152, Avg Loss: 4.0712, Avg Regression Loss 0.8970, Avg Classification Loss: 3.1742
+2021-05-21 18:49:16 - Epoch: 27, Step: 30/152, Avg Loss: 4.7504, Avg Regression Loss 1.5154, Avg Classification Loss: 3.2351
+2021-05-21 18:49:20 - Epoch: 27, Step: 40/152, Avg Loss: 4.3540, Avg Regression Loss 1.2755, Avg Classification Loss: 3.0785
+2021-05-21 18:49:26 - Epoch: 27, Step: 50/152, Avg Loss: 5.1301, Avg Regression Loss 1.5461, Avg Classification Loss: 3.5840
+2021-05-21 18:49:31 - Epoch: 27, Step: 60/152, Avg Loss: 4.4991, Avg Regression Loss 1.2096, Avg Classification Loss: 3.2895
+2021-05-21 18:49:36 - Epoch: 27, Step: 70/152, Avg Loss: 3.8765, Avg Regression Loss 0.9412, Avg Classification Loss: 2.9353
+2021-05-21 18:49:40 - Epoch: 27, Step: 80/152, Avg Loss: 4.7438, Avg Regression Loss 1.2301, Avg Classification Loss: 3.5137
+2021-05-21 18:49:45 - Epoch: 27, Step: 90/152, Avg Loss: 4.6392, Avg Regression Loss 1.1775, Avg Classification Loss: 3.4617
+2021-05-21 18:49:49 - Epoch: 27, Step: 100/152, Avg Loss: 4.9257, Avg Regression Loss 1.5618, Avg Classification Loss: 3.3639
+2021-05-21 18:49:54 - Epoch: 27, Step: 110/152, Avg Loss: 4.4209, Avg Regression Loss 1.1077, Avg Classification Loss: 3.3132
+2021-05-21 18:50:01 - Epoch: 27, Step: 120/152, Avg Loss: 4.5259, Avg Regression Loss 1.3317, Avg Classification Loss: 3.1942
+2021-05-21 18:50:05 - Epoch: 27, Step: 130/152, Avg Loss: 5.2579, Avg Regression Loss 1.8603, Avg Classification Loss: 3.3976
+2021-05-21 18:50:10 - Epoch: 27, Step: 140/152, Avg Loss: 4.5485, Avg Regression Loss 1.2251, Avg Classification Loss: 3.3233
+2021-05-21 18:50:15 - Epoch: 27, Step: 150/152, Avg Loss: 4.3201, Avg Regression Loss 0.9621, Avg Classification Loss: 3.3580
+2021-05-21 18:50:32 - Epoch: 27, Validation Loss: 3.8208, Validation Regression Loss 0.6952, Validation Classification Loss: 3.1256
+2021-05-21 18:50:32 - Saved model models/smdsmall/mb1-ssd-Epoch-27-Loss-3.820779794140866.pth
+2021-05-21 18:50:38 - Epoch: 28, Step: 10/152, Avg Loss: 5.2379, Avg Regression Loss 1.5385, Avg Classification Loss: 3.6994
+2021-05-21 18:50:43 - Epoch: 28, Step: 20/152, Avg Loss: 4.9232, Avg Regression Loss 1.4090, Avg Classification Loss: 3.5141
+2021-05-21 18:50:51 - Epoch: 28, Step: 30/152, Avg Loss: 5.0642, Avg Regression Loss 1.7841, Avg Classification Loss: 3.2801
+2021-05-21 18:50:55 - Epoch: 28, Step: 40/152, Avg Loss: 4.4729, Avg Regression Loss 1.1020, Avg Classification Loss: 3.3709
+2021-05-21 18:51:00 - Epoch: 28, Step: 50/152, Avg Loss: 4.6518, Avg Regression Loss 1.1975, Avg Classification Loss: 3.4544
+2021-05-21 18:51:04 - Epoch: 28, Step: 60/152, Avg Loss: 4.2498, Avg Regression Loss 0.9975, Avg Classification Loss: 3.2523
+2021-05-21 18:51:09 - Epoch: 28, Step: 70/152, Avg Loss: 4.7730, Avg Regression Loss 1.4261, Avg Classification Loss: 3.3469
+2021-05-21 18:51:14 - Epoch: 28, Step: 80/152, Avg Loss: 4.4207, Avg Regression Loss 1.2529, Avg Classification Loss: 3.1678
+2021-05-21 18:51:18 - Epoch: 28, Step: 90/152, Avg Loss: 4.7307, Avg Regression Loss 1.3666, Avg Classification Loss: 3.3641
+2021-05-21 18:51:23 - Epoch: 28, Step: 100/152, Avg Loss: 5.5223, Avg Regression Loss 1.9845, Avg Classification Loss: 3.5378
+2021-05-21 18:51:28 - Epoch: 28, Step: 110/152, Avg Loss: 4.4343, Avg Regression Loss 1.1774, Avg Classification Loss: 3.2569
+2021-05-21 18:51:32 - Epoch: 28, Step: 120/152, Avg Loss: 5.1087, Avg Regression Loss 1.5911, Avg Classification Loss: 3.5176
+2021-05-21 18:51:37 - Epoch: 28, Step: 130/152, Avg Loss: 4.4630, Avg Regression Loss 1.2470, Avg Classification Loss: 3.2159
+2021-05-21 18:51:42 - Epoch: 28, Step: 140/152, Avg Loss: 4.4925, Avg Regression Loss 1.3872, Avg Classification Loss: 3.1053
+2021-05-21 18:51:46 - Epoch: 28, Step: 150/152, Avg Loss: 5.4011, Avg Regression Loss 2.0000, Avg Classification Loss: 3.4012
+2021-05-21 18:52:04 - Epoch: 28, Validation Loss: 3.8643, Validation Regression Loss 0.7544, Validation Classification Loss: 3.1099
+2021-05-21 18:52:04 - Saved model models/smdsmall/mb1-ssd-Epoch-28-Loss-3.8643012282095457.pth
+2021-05-21 18:52:09 - Epoch: 29, Step: 10/152, Avg Loss: 5.3436, Avg Regression Loss 1.7526, Avg Classification Loss: 3.5911
+2021-05-21 18:52:14 - Epoch: 29, Step: 20/152, Avg Loss: 4.3958, Avg Regression Loss 1.0628, Avg Classification Loss: 3.3330
+2021-05-21 18:52:18 - Epoch: 29, Step: 30/152, Avg Loss: 4.2149, Avg Regression Loss 1.1185, Avg Classification Loss: 3.0964
+2021-05-21 18:52:23 - Epoch: 29, Step: 40/152, Avg Loss: 4.9384, Avg Regression Loss 1.7565, Avg Classification Loss: 3.1819
+2021-05-21 18:52:28 - Epoch: 29, Step: 50/152, Avg Loss: 4.2718, Avg Regression Loss 1.1030, Avg Classification Loss: 3.1688
+2021-05-21 18:52:33 - Epoch: 29, Step: 60/152, Avg Loss: 4.7818, Avg Regression Loss 1.5474, Avg Classification Loss: 3.2344
+2021-05-21 18:52:38 - Epoch: 29, Step: 70/152, Avg Loss: 4.7629, Avg Regression Loss 1.2542, Avg Classification Loss: 3.5087
+2021-05-21 18:52:43 - Epoch: 29, Step: 80/152, Avg Loss: 4.3833, Avg Regression Loss 1.1833, Avg Classification Loss: 3.2000
+2021-05-21 18:52:47 - Epoch: 29, Step: 90/152, Avg Loss: 4.6680, Avg Regression Loss 1.4139, Avg Classification Loss: 3.2540
+2021-05-21 18:52:52 - Epoch: 29, Step: 100/152, Avg Loss: 4.4484, Avg Regression Loss 1.4035, Avg Classification Loss: 3.0449
+2021-05-21 18:52:57 - Epoch: 29, Step: 110/152, Avg Loss: 4.7593, Avg Regression Loss 1.4609, Avg Classification Loss: 3.2984
+2021-05-21 18:53:01 - Epoch: 29, Step: 120/152, Avg Loss: 4.3608, Avg Regression Loss 1.0962, Avg Classification Loss: 3.2646
+2021-05-21 18:53:06 - Epoch: 29, Step: 130/152, Avg Loss: 4.2842, Avg Regression Loss 0.9948, Avg Classification Loss: 3.2894
+2021-05-21 18:53:11 - Epoch: 29, Step: 140/152, Avg Loss: 4.2110, Avg Regression Loss 1.1363, Avg Classification Loss: 3.0747
+2021-05-21 18:53:16 - Epoch: 29, Step: 150/152, Avg Loss: 5.3326, Avg Regression Loss 2.0487, Avg Classification Loss: 3.2839
+2021-05-21 18:53:33 - Epoch: 29, Validation Loss: 4.2980, Validation Regression Loss 1.1099, Validation Classification Loss: 3.1881
+2021-05-21 18:53:33 - Saved model models/smdsmall/mb1-ssd-Epoch-29-Loss-4.298039257526398.pth
+2021-05-21 18:53:33 - Task done, exiting program.
+root@MT-desktop:/jetson-inference/python/training/detection/ssd# 
+
+
+
