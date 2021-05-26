@@ -1,6 +1,5 @@
-#
-# train an SSD model on Pascal VOC or Open Images datasets
-#
+#SSD-Mobilenet tinklo apmokymas su Pascal VOC duomenu rinkiniu
+#Ikeliamos bibliotekos
 import os
 import sys
 import logging
@@ -10,7 +9,7 @@ import torch
 
 from torch.utils.data import DataLoader, ConcatDataset
 from torch.optim.lr_scheduler import CosineAnnealingLR, MultiStepLR
-
+#Ikeliame SSD-300 ir mobilenet pagrindu bibliotekas
 from vision.utils.misc import str2bool, Timer, freeze_net_layers, store_labels
 from vision.ssd.ssd import MatchPrior
 from vision.ssd.vgg_ssd import create_vgg_ssd
@@ -29,14 +28,14 @@ from vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
 parser = argparse.ArgumentParser(
     description='Single Shot MultiBox Detector Training With PyTorch')
 
-# Params for datasets
+# Parametrai duomenu rinkiniui
 parser.add_argument("--dataset-type", default="open_images", type=str,
                     help='Specify dataset type. Currently supports voc and open_images.')
 parser.add_argument('--datasets', '--data', nargs='+', default=["data"], help='Dataset directory path')
 parser.add_argument('--balance-data', action='store_true',
                     help="Balance training data by down-sampling more frequent labels.")
 
-# Params for network
+# Parametrai tinklui
 parser.add_argument('--net', default="mb1-ssd",
                     help="The network architecture, it can be mb1-ssd, mb1-lite-ssd, mb2-ssd-lite or vgg16-ssd.")
 parser.add_argument('--freeze-base-net', action='store_true',
@@ -46,13 +45,13 @@ parser.add_argument('--freeze-net', action='store_true',
 parser.add_argument('--mb2-width-mult', default=1.0, type=float,
                     help='Width Multiplifier for MobilenetV2')
 
-# Params for loading pretrained basenet or checkpoints.
+# Parametrai apmokyto tinklo ikelimui arba issaugotam zingsniui
 parser.add_argument('--base-net', help='Pretrained base model')
 parser.add_argument('--pretrained-ssd', default='models/mobilenet-v1-ssd-mp-0_675.pth', type=str, help='Pre-trained base model')
 parser.add_argument('--resume', default=None, type=str,
                     help='Checkpoint state_dict file to resume training from')
 
-# Params for SGD
+# Parametrai Stochastinis gradiento nusileidimas (angl. Stochastic Gradient Descent)
 parser.add_argument('--lr', '--learning-rate', default=0.01, type=float,
                     help='initial learning rate')
 parser.add_argument('--momentum', default=0.9, type=float,
@@ -66,19 +65,19 @@ parser.add_argument('--base-net-lr', default=0.001, type=float,
 parser.add_argument('--extra-layers-lr', default=None, type=float,
                     help='initial learning rate for the layers not in base net and prediction heads.')
 
-# Scheduler
+# Parametras planuokliui
 parser.add_argument('--scheduler', default="cosine", type=str,
                     help="Scheduler for SGD. It can one of multi-step and cosine")
 
-# Params for Multi-step Scheduler
+# Parametrai multi pakopiui planuokliui
 parser.add_argument('--milestones', default="80,100", type=str,
                     help="milestones for MultiStepLR")
 
-# Params for Cosine Annealing
+# Parametrai kosinuso atkaitinimui (angl. Cosine Annealing)
 parser.add_argument('--t-max', default=100, type=float,
                     help='T_max value for Cosine Annealing Scheduler.')
 
-# Train params
+# Apmokymo parametrai
 parser.add_argument('--batch-size', default=4, type=int,
                     help='Batch size for training')
 parser.add_argument('--num-epochs', '--epochs', default=30, type=int,
@@ -94,90 +93,108 @@ parser.add_argument('--use-cuda', default=True, type=str2bool,
 parser.add_argument('--checkpoint-folder', '--model-dir', default='models/',
                     help='Directory for saving checkpoint models')
 
+# Spausdinimo konfiguracija
 logging.basicConfig(stream=sys.stdout, level=logging.INFO,
                     format='%(asctime)s - %(message)s', datefmt="%Y-%m-%d %H:%M:%S")
-                    
+
+# Issaugome pasirinktus parametrus
 args = parser.parse_args()
+# Naudojame GPU jeigu yra cuda, kitu atveju CPU
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() and args.use_cuda else "cpu")
 
 if args.use_cuda and torch.cuda.is_available():
     torch.backends.cudnn.benchmark = True
     logging.info("Using CUDA...")
 
-
+    
+# Apmokymo funkcija
 def train(loader, net, criterion, optimizer, device, debug_steps=100, epoch=-1):
-    net.train(True)
-    running_loss = 0.0
+    net.train(True)                     # Paleidziame apmokyma
+    running_loss = 0.0                  # Sukuriame nuostolio vertems kintamuosius
     running_regression_loss = 0.0
     running_classification_loss = 0.0
+    # Paleidziame cikla duomenu_kiekis/batch_size kartu
     for i, data in enumerate(loader):
-        images, boxes, labels = data
+        images, boxes, labels = data # Iskeliame is apmokymo duomenu, paveikslelius, zymejimus ir zymeklius
+        # Duomenis perduodame i irengini
         images = images.to(device)
         boxes = boxes.to(device)
         labels = labels.to(device)
-
+        # Optimizuojame programa
         optimizer.zero_grad()
+        # Pasiemame apskaiciuotas tikslumo ir pozicijos vertes is apmokymo
         confidence, locations = net(images)
+        # Apskaiciuojame regresijos ir klasifikavimo nuostoli
         regression_loss, classification_loss = criterion(confidence, locations, labels, boxes)  # TODO CHANGE BOXES
-        loss = regression_loss + classification_loss
-        loss.backward()
-        optimizer.step()
-
+        loss = regression_loss + classification_loss # Sudedame nuostuolius
+        loss.backward() # Apskaiciuojame nuostolio gradienta
+        optimizer.step() # optimizuojame
+        # Pridedame nuostolius
         running_loss += loss.item()
         running_regression_loss += regression_loss.item()
         running_classification_loss += classification_loss.item()
         if i and i % debug_steps == 0:
+            # Apskaiciuojame vidutinius nuostolius
             avg_loss = running_loss / debug_steps
             avg_reg_loss = running_regression_loss / debug_steps
             avg_clf_loss = running_classification_loss / debug_steps
+            # Isspausdiname rezultatus
             logging.info(
                 f"Epoch: {epoch}, Step: {i}/{len(loader)}, " +
                 f"Avg Loss: {avg_loss:.4f}, " +
                 f"Avg Regression Loss {avg_reg_loss:.4f}, " +
                 f"Avg Classification Loss: {avg_clf_loss:.4f}"
             )
+            # Isnuliname nuostolius
             running_loss = 0.0
             running_regression_loss = 0.0
             running_classification_loss = 0.0
 
 
+# Tinklo mokymo patikrinimo funkcija
 def test(loader, net, criterion, device):
+    # Pranesame visiems sluoksniams, kad eval rezimas
     net.eval()
+    # Paruosiame kintamuosius nuostoliam
     running_loss = 0.0
     running_regression_loss = 0.0
     running_classification_loss = 0.0
     num = 0
+    # Paleidziame cikla mokymo duomenu kiekis/batch_size kartu
     for _, data in enumerate(loader):
-        images, boxes, labels = data
+        images, boxes, labels = data # Iskeliame is apmokymo duomenu, paveikslelius, zymejimus ir zymeklius
+        # Duomenis perduodame i irengini
         images = images.to(device)
         boxes = boxes.to(device)
         labels = labels.to(device)
         num += 1
 
         with torch.no_grad():
-            confidence, locations = net(images)
+            confidence, locations = net(images) # Apskaiciuojame tikslumo ir pozicijos parametrus
+            # Apskaiciuojame regresijos ir klasifikavimo nuostolius
             regression_loss, classification_loss = criterion(confidence, locations, labels, boxes)
-            loss = regression_loss + classification_loss
-
+            loss = regression_loss + classification_loss # Susumuojame nuostolius
+        # Pridedame nuostolius
         running_loss += loss.item()
         running_regression_loss += regression_loss.item()
         running_classification_loss += classification_loss.item()
+    # Graziname gauta nuostoli
     return running_loss / num, running_regression_loss / num, running_classification_loss / num
 
 
 if __name__ == '__main__':
-    timer = Timer()
+    timer = Timer() # Inicializuojame laikmati
 
-    logging.info(args)
+    logging.info(args) # Pasiemame duotus parametrus
     
-    # make sure that the checkpoint output dir exists
+    # Patikriname ar issaugo zingsnio direktorija egzistuoja
     if args.checkpoint_folder:
         args.checkpoint_folder = os.path.expanduser(args.checkpoint_folder)
-
+        # jei ne klaida
         if not os.path.exists(args.checkpoint_folder):
             os.mkdir(args.checkpoint_folder)
             
-    # select the network architecture and config     
+    # Pasirenkame tinklo modeli    
     if args.net == 'vgg16-ssd':
         create_net = create_vgg_ssd
         config = vgg_ssd_config
@@ -198,14 +215,14 @@ if __name__ == '__main__':
         parser.print_help(sys.stderr)
         sys.exit(1)
         
-    # create data transforms for train/test/val
+    # Sukuriame duomenu transformacija mokymam/bandymam/patikrinimui
     train_transform = TrainAugmentation(config.image_size, config.image_mean, config.image_std)
     target_transform = MatchPrior(config.priors, config.center_variance,
                                   config.size_variance, 0.5)
 
     test_transform = TestTransform(config.image_size, config.image_mean, config.image_std)
 
-    # load datasets (could be multiple)
+    # ikeliame duomenu rinkini
     logging.info("Prepare training datasets.")
     datasets = []
     for dataset_path in args.datasets:
@@ -228,7 +245,7 @@ if __name__ == '__main__':
             raise ValueError(f"Dataset type {args.dataset_type} is not supported.")
         datasets.append(dataset)
         
-    # create training dataset
+    # Inicializuojame mokymo duomenu rinkini
     logging.info(f"Stored labels into file {label_file}.")
     train_dataset = ConcatDataset(datasets)
     logging.info("Train dataset size: {}".format(len(train_dataset)))
@@ -236,7 +253,7 @@ if __name__ == '__main__':
                               num_workers=args.num_workers,
                               shuffle=True)
                            
-    # create validation dataset                           
+    # Inicializuojame patvirtinimo duomenu rinkini                           
     logging.info("Prepare Validation datasets.")
     if args.dataset_type == "voc":
         val_dataset = VOCDataset(dataset_path, transform=test_transform,
@@ -252,13 +269,13 @@ if __name__ == '__main__':
                             num_workers=args.num_workers,
                             shuffle=False)
                             
-    # create the network
+    # Inicializuojame tinkla
     logging.info("Build network.")
     net = create_net(num_classes)
     min_loss = -10000.0
     last_epoch = -1
 
-    # freeze certain layers (if requested)
+    # Uzsaldome pasirinktus sluoksnius (jei duoti parametrai)
     base_net_lr = args.base_net_lr if args.base_net_lr is not None else args.lr
     extra_layers_lr = args.extra_layers_lr if args.extra_layers_lr is not None else args.lr
     
@@ -296,8 +313,8 @@ if __name__ == '__main__':
             )}
         ]
 
-    # load a previous model checkpoint (if requested)
-    timer.start("Load Model")
+    # Ikeliame praeito modelio zingsni (jei duoti parametrai)
+    timer.start("Load Model") # Paleidziame laikmati modelio ikelimo laikui gauti
     if args.resume:
         logging.info(f"Resume from the model {args.resume}")
         net.load(args.resume)
@@ -309,10 +326,10 @@ if __name__ == '__main__':
         net.init_from_pretrained_ssd(args.pretrained_ssd)
     logging.info(f'Took {timer.end("Load Model"):.2f} seconds to load the model.')
 
-    # move the model to GPU
+    # Inicializuojame irenginio GPU, jei neturi CPU
     net.to(DEVICE)
 
-    # define loss function and optimizer
+    # Aprasome nuostolio funkcija ir optimizavimo
     criterion = MultiboxLoss(config.priors, iou_threshold=0.5, neg_pos_ratio=3,
                              center_variance=0.1, size_variance=0.2, device=DEVICE)
     optimizer = torch.optim.SGD(params, lr=args.lr, momentum=args.momentum,
@@ -320,7 +337,7 @@ if __name__ == '__main__':
     logging.info(f"Learning rate: {args.lr}, Base net learning rate: {base_net_lr}, "
                  + f"Extra Layers learning rate: {extra_layers_lr}.")
 
-    # set learning rate policy
+    # Nustatome pasirinkta mokymo zingsnio metodika
     if args.scheduler == 'multi-step':
         logging.info("Uses MultiStepLR scheduler.")
         milestones = [int(v.strip()) for v in args.milestones.split(",")]
@@ -334,14 +351,15 @@ if __name__ == '__main__':
         parser.print_help(sys.stderr)
         sys.exit(1)
 
-    # train for the desired number of epochs
     logging.info(f"Start training from epoch {last_epoch + 1}.")
-    
+    # Inicializuojame mokyma norimam epochu skaiciui
     for epoch in range(last_epoch + 1, args.num_epochs):
+        # Koreguojame hiperparametrą mokymosi greičio modelyje
         scheduler.step()
+        # Iskvieciame apmokymo funkcija, duodami turimus parametrus
         train(train_loader, net, criterion, optimizer,
               device=DEVICE, debug_steps=args.debug_steps, epoch=epoch)
-        
+        # Isspausdiname apmokyto tinklo epochos gautus rezultatus
         if epoch % args.validation_epochs == 0 or epoch == args.num_epochs - 1:
             val_loss, val_regression_loss, val_classification_loss = test(val_loader, net, criterion, DEVICE)
             logging.info(
@@ -350,8 +368,9 @@ if __name__ == '__main__':
                 f"Validation Regression Loss {val_regression_loss:.4f}, " +
                 f"Validation Classification Loss: {val_classification_loss:.4f}"
             )
+            # Sukuriame apmokytos epochos faila
             model_path = os.path.join(args.checkpoint_folder, f"{args.net}-Epoch-{epoch}-Loss-{val_loss}.pth")
-            net.save(model_path)
+            net.save(model_path)    # Issaugome apmokyta modeli i sukurta epochos faila
             logging.info(f"Saved model {model_path}")
 
     logging.info("Task done, exiting program.")
