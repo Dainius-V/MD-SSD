@@ -1,4 +1,7 @@
+# Tinklo ivertinimas
+# Ikeliame apmokymui naudota biblioteka PyTorch
 import torch
+# Ikeliame pagrindus SSD-300 ir Mobilenet
 from vision.ssd.vgg_ssd import create_vgg_ssd, create_vgg_ssd_predictor
 from vision.ssd.mobilenetv1_ssd import create_mobilenetv1_ssd, create_mobilenetv1_ssd_predictor
 from vision.ssd.mobilenetv1_ssd_lite import create_mobilenetv1_ssd_lite, create_mobilenetv1_ssd_lite_predictor
@@ -7,6 +10,7 @@ from vision.datasets.voc_dataset import VOCDataset
 from vision.datasets.open_images import OpenImagesDataset
 from vision.utils import box_utils, measurements
 from vision.utils.misc import str2bool, Timer
+# Ikeliame kitas bibliotekas
 import argparse
 import pathlib
 import numpy as np
@@ -14,12 +18,12 @@ import logging
 import sys
 from vision.ssd.mobilenet_v2_ssd_lite import create_mobilenetv2_ssd_lite, create_mobilenetv2_ssd_lite_predictor
 
-
+# Parametrai tinklo modeliui
 parser = argparse.ArgumentParser(description="SSD Evaluation on VOC Dataset.")
 parser.add_argument('--net', default="vgg16-ssd",
                     help="The network architecture, it should be of mb1-ssd, mb1-ssd-lite, mb2-ssd-lite or vgg16-ssd.")
 parser.add_argument("--trained_model", type=str)
-
+# Parametrai duomenu rinkiniui
 parser.add_argument("--dataset_type", default="voc", type=str,
                     help='Specify dataset type. Currently support voc and open_images.')
 parser.add_argument("--dataset", type=str, help="The root directory of the VOC dataset or Open Images dataset.")
@@ -31,10 +35,13 @@ parser.add_argument("--iou_threshold", type=float, default=0.5, help="The thresh
 parser.add_argument("--eval_dir", default="eval_results", type=str, help="The directory to store evaluation results.")
 parser.add_argument('--mb2_width_mult', default=1.0, type=float,
                     help='Width Multiplifier for MobilenetV2')
+# Issaugome pasirinktus parametrus
 args = parser.parse_args()
+# Naudojame GPU jeigu yra cuda, kitu atveju CPU
 DEVICE = torch.device("cuda:0" if torch.cuda.is_available() and args.use_cuda else "cpu")
 
 
+# Funkcija anotacijoms per klase
 def group_annotation_by_class(dataset):
     true_case_stat = {}
     all_gt_boxes = {}
@@ -69,6 +76,7 @@ def group_annotation_by_class(dataset):
     return true_case_stat, all_gt_boxes, all_difficult_cases
 
 
+# Funkcija apskaiciuoti vidutini tiksluma per klase
 def compute_average_precision_per_class(num_true_cases, gt_boxes, difficult_cases,
                                         prediction_file, iou_threshold, use_2007_metric):
     with open(prediction_file) as f:
@@ -124,13 +132,15 @@ if __name__ == '__main__':
     eval_path.mkdir(exist_ok=True)
     timer = Timer()
     class_names = [name.strip() for name in open(args.label_file).readlines()]
-
+	
+	# Nustatome konfiguracija pasirinkto duomenu rinkinio
     if args.dataset_type == "voc":
         dataset = VOCDataset(args.dataset, is_test=True)
     elif args.dataset_type == 'open_images':
         dataset = OpenImagesDataset(args.dataset, dataset_type="test")
 
     true_case_stat, all_gb_boxes, all_difficult_cases = group_annotation_by_class(dataset)
+	# Nustatome konfiguracija pasirinkto tinklo
     if args.net == 'vgg16-ssd':
         net = create_vgg_ssd(len(class_names), is_test=True)
     elif args.net == 'mb1-ssd':
@@ -145,7 +155,8 @@ if __name__ == '__main__':
         logging.fatal("The net type is wrong. It should be one of vgg16-ssd, mb1-ssd and mb1-ssd-lite.")
         parser.print_help(sys.stderr)
         sys.exit(1)  
-
+	
+	# Ikeliame apmokyta modeli
     timer.start("Load Model")
     net.load(args.trained_model)
     net = net.to(DEVICE)
