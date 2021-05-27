@@ -1,0 +1,27 @@
+<annotation>
+    <filename>20210520-053111.jpg</filename>
+    <folder>smd_small</folder>
+    <source>
+        <database>smd_small</database>
+        <annotation>custom</annotation>
+        <image>custom</image>
+    </source>
+    <size>
+        <width>1280</width>
+        <height>720</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>Condensator</name>
+        <pose>unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>186</xmin>
+            <ymin>203</ymin>
+            <xmax>283</xmax>
+            <ymax>291</ymax>
+        </bndbox>
+    </object>
+</annotation>

@@ -3,7 +3,7 @@ import jetson.utils
 import argparse
 import sys
 
-net = jetson.inference.detectNet(argv=["--model=models/ssd-mobilenet.onnx","--labels=models/labels.txt","--input-blob=input_0","--output-cvg=scores","--output-bbox=boxes"],threshold=0.5)
+net = jetson.inference.detectNet(argv=["--model=models/ssd-mobilenet.onnx","--labels=models/labels.txt","--input-blob=input_0","--output-cvg=scores","--output-bbox=boxes"],threshold=0.3)
 
 camera = jetson.utils.videoSource("csi://0")
 

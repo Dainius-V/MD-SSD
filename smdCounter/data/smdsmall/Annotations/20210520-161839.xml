@@ -1,0 +1,27 @@
+<annotation>
+    <filename>20210520-161839.jpg</filename>
+    <folder>smd_small</folder>
+    <source>
+        <database>smd_small</database>
+        <annotation>custom</annotation>
+        <image>custom</image>
+    </source>
+    <size>
+        <width>1280</width>
+        <height>720</height>
+        <depth>3</depth>
+    </size>
+    <segmented>0</segmented>
+    <object>
+        <name>Diode</name>
+        <pose>unspecified</pose>
+        <truncated>0</truncated>
+        <difficult>0</difficult>
+        <bndbox>
+            <xmin>269</xmin>
+            <ymin>477</ymin>
+            <xmax>327</xmax>
+            <ymax>563</ymax>
+        </bndbox>
+    </object>
+</annotation>

@@ -1,0 +1,5 @@
+Condensator
+Resistor
+Diode
+Inductor
+Transistor
